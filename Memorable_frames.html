@@ -1,0 +1,4365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memorable Frames — Bikin Kenangan Lucu Lewat Foto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================
+   MEMORABLE FRAMES — design tokens
+   cream base, blush/lavender/mint/sunny accents, plum ink
+=========================================================== */
+:root{
+  /* vintage warm palette: paper cream + terracotta + olive + mustard + coffee ink */
+  --cream: #FBF2E3;
+  --cream-deep: #F1DFC0;
+  --pink: #C97B5E;          /* terracotta */
+  --pink-dark: #A8583D;     /* deep terracotta */
+  --lavender: #A9A47A;      /* muted olive */
+  --lavender-deep: #7C7852; /* deep olive */
+  --mint: #9FAE86;          /* sage green */
+  --mint-deep: #6E8058;     /* deep sage */
+  --yellow: #E1A94D;        /* mustard */
+  --plum: #4A3524;          /* coffee ink */
+  --plum-soft: #8A7358;     /* warm taupe */
+  --brown: #6E4A30;         /* leather brown */
+  --navy: #2E2015;          /* espresso */
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Quicksand', system-ui, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-hand: 'Caveat', cursive;
+
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 10px;
+  --shadow-soft: 0 18px 40px -12px rgba(74, 53, 36, 0.28);
+  --shadow-card: 0 10px 24px -10px rgba(74, 53, 36, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+*{ box-sizing: border-box; margin:0; padding:0; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  font-family: var(--font-body);
+  background:
+    radial-gradient(rgba(74,53,36,0.05) 1px, transparent 1px) 0 0/22px 22px,
+    var(--cream);
+  color: var(--plum);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+img, video, canvas{ display:block; max-width:100%; }
+
+h1,h2,h3{ font-family: var(--font-display); color: var(--plum); font-weight: 600; line-height: 1.18; letter-spacing: -0.01em; }
+
+.hidden{ display:none !important; }
+
+button{ font: inherit; cursor:pointer; border:none; background:none; color:inherit; margin:0; padding:0; text-align:inherit; }
+a{ text-decoration:none; color:inherit; }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 999px;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.btn:focus-visible{ outline: 3px solid var(--lavender-deep); outline-offset: 3px; }
+
+.btn-primary{
+  background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-card);
+}
+.btn-primary:hover{ transform: translateY(-3px); box-shadow: 0 16px 30px -10px rgba(255,143,168,0.55); }
+.btn-primary:disabled{
+  background: #E4DCEA; color: #a89bb0; box-shadow:none; cursor:not-allowed; transform:none;
+}
+
+.btn-ghost{
+  background: transparent;
+  color: var(--plum);
+  border: 2px solid var(--plum);
+}
+.btn-ghost:hover{ background: var(--plum); color: #fff; transform: translateY(-2px); }
+
+.btn-small{ padding: 9px 18px; font-size: 0.85rem; }
+
+/* ---------- nav ---------- */
+.nav{
+  position: sticky; top:0; z-index: 40;
+  background: rgba(251,242,227,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(74,53,36,0.12);
+}
+.nav-inner{
+  max-width: 1160px; margin:0 auto; padding: 16px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo{ display:flex; align-items:center; gap:8px; font-family: var(--font-display); font-size: 1.2rem; font-weight:700;}
+.logo-mark{ font-size: 1.25rem; }
+.logo-text em{ font-style: italic; color: var(--pink-dark); }
+.nav-links{ display:flex; align-items:center; gap: 30px; font-weight:600; }
+.nav-links button{ font-size: 0.95rem; color: var(--plum-soft); transition: color .15s; display:flex; align-items:center; gap:6px; background:none; }
+.nav-links button:hover{ color: var(--pink-dark); }
+.nav-icon{ font-size: 0.85em; opacity: 0.85; font-variant-emoji: text; font-family: system-ui, sans-serif; }
+
+@media (max-width: 720px){
+  .nav-inner{ flex-wrap: wrap; row-gap: 10px; }
+  .nav-links{ gap: 16px; }
+  .nav-links button{ font-size: 0.85rem; }
+}
+@media (max-width: 440px){
+  .nav-links{ gap: 12px; width: 100%; justify-content: space-between; }
+  .nav-links .nav-label{ display:none; }
+  .nav-icon{ font-size: 1.15rem; }
+}
+
+/* ---------- hero ---------- */
+.hero{ max-width: 1160px; margin: 0 auto; padding: 72px 24px 56px; position: relative; overflow: visible; }
+.hero-inner{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  max-width: 720px; margin: 0 auto; position:relative; z-index: 2;
+}
+.eyebrow{
+  font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em;
+  color: var(--pink-dark); margin-bottom: 16px; text-transform: uppercase;
+}
+.hero h1{ font-size: clamp(2.3rem, 4.4vw, 3.5rem); margin-bottom: 20px; }
+.highlight{ color: var(--pink-dark); position:relative; font-style: italic; }
+.hero-sub{ font-size: 1.08rem; color: var(--plum-soft); max-width: 520px; margin: 0 auto 32px; }
+.hero-actions{ display:flex; gap: 16px; flex-wrap:wrap; justify-content:center; margin-bottom: 30px; }
+
+.frame-note{
+  display:inline-flex; align-items:center; gap: 10px;
+  font-family: var(--font-mono); font-size: 0.8rem; color: var(--plum-soft);
+  background: rgba(255,255,255,0.6); border: 1px dashed var(--lavender-deep);
+  padding: 10px 20px; border-radius: 999px;
+}
+.frame-note strong{ color: var(--pink-dark); font-family: var(--font-body); font-weight:700; }
+
+/* ---------- floating decorations around hero (no boxed frame) ---------- */
+.hero-deco{
+  position:absolute; z-index: 1; pointer-events:none;
+  animation: floaty 5s ease-in-out infinite;
+  filter: drop-shadow(0 6px 10px rgba(74,53,36,0.15));
+}
+.deco-bear{ top: 8%; left: 4%; font-size: 3.4rem; animation-delay: .1s; transform: rotate(-8deg); }
+.deco-flower-1{ top: 4%; right: 9%; font-size: 2.6rem; animation-delay: .5s; color: var(--mint-deep); }
+.deco-flower-2{ bottom: 10%; left: 10%; font-size: 2.1rem; animation-delay: 1.3s; color: var(--pink-dark); }
+.deco-star{ top: 18%; right: 2%; font-size: 1.8rem; animation-delay: .8s; color: var(--yellow); }
+.deco-heart{ bottom: 4%; right: 14%; font-size: 1.9rem; animation-delay: 1.6s; color: var(--pink-dark); }
+.deco-sparkle{ bottom: 18%; right: 22%; font-size: 1.4rem; animation-delay: 2s; color: var(--lavender-deep); }
+.deco-leaf{ top: 30%; left: 1%; font-size: 1.8rem; animation-delay: 2.4s; color: var(--mint-deep); }
+@media (max-width: 720px){ .hero-deco{ display:none; } }
+
+@keyframes floaty{
+  0%, 100%{ transform: translateY(0) rotate(-6deg); }
+  50%{ transform: translateY(-10px) rotate(-3deg); }
+}
+
+/* ===========================================================
+   GLOBAL MASCOT — "Maskot Mahira", parked bottom-right corner.
+   Lives outside #landing / #booth so it stays on screen no
+   matter which page or booth step is currently showing, and
+   only fades out while the intro gate / reveal overlay is
+   covering the whole viewport anyway. Tap it to toggle glasses;
+   it also pipes cute little reactions whenever you pick something.
+=========================================================== */
+.global-mascot{
+  position: fixed;
+  right: clamp(10px, 3vw, 26px);
+  bottom: clamp(10px, 3vw, 26px);
+  z-index: 700;
+  width: clamp(56px, 12vw, 90px);
+  pointer-events: auto;
+  cursor: pointer;
+  animation: floaty 5s ease-in-out infinite;
+  filter: drop-shadow(0 8px 14px rgba(74,53,36,0.25));
+  transition: opacity .3s ease, transform .18s cubic-bezier(.34,1.56,.64,1);
+}
+.global-mascot svg{ width:100%; height:auto; display:block; }
+.global-mascot:hover{ transform: scale(1.08); }
+.global-mascot:active,
+.global-mascot.mascot-tapped{ transform: scale(.88) rotate(-4deg); }
+.global-mascot .mascot-glasses{ transition: opacity .2s ease; }
+.global-mascot.no-glasses .mascot-glasses{ opacity: 0; }
+body.gate-active .global-mascot{ opacity:0; transform: translateY(12px) scale(.9); pointer-events:none; }
+
+.mascot-bubble{
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: -6px;
+  max-width: 190px;
+  width: max-content;
+  background: #fff;
+  color: var(--plum);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  line-height: 1.3;
+  padding: 10px 14px;
+  border-radius: 16px 16px 4px 16px;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  transform: translateY(6px) scale(.9);
+  transform-origin: bottom right;
+  transition: opacity .22s ease, transform .22s cubic-bezier(.34,1.56,.64,1);
+  pointer-events: none;
+}
+.mascot-bubble.show{ opacity: 1; transform: translateY(0) scale(1); }
+@media (max-width: 480px){
+  .mascot-bubble{ max-width: 150px; font-size: 0.76rem; padding: 8px 12px; }
+}
+
+
+/* ---------- section shared ---------- */
+.section-eyebrow{
+  font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--mint-deep); text-align:center; margin-bottom: 10px;
+}
+.section-title{ text-align:center; font-size: clamp(1.7rem, 3vw, 2.3rem); margin-bottom: 12px; }
+.section-desc{ text-align:center; color: var(--plum-soft); max-width: 520px; margin: 0 auto 40px; }
+
+/* ---------- how it works ---------- */
+.how{ max-width: 1280px; margin: 90px auto; padding: 0 24px; text-align:center; }
+.how-steps{
+  display:grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 48px;
+}
+@media (max-width: 900px){ .how-steps{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){ .how-steps{ grid-template-columns: 1fr; } }
+.how-step{
+  background: #fff; border-radius: var(--radius-md); padding: 32px 24px; text-align:left;
+  box-shadow: var(--shadow-card); position:relative; overflow:hidden;
+  display:block; text-decoration:none; color:inherit; cursor:pointer;
+  border: 1px solid transparent;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.how-step:hover, .how-step:focus-visible{
+  transform: translateY(-6px);
+  box-shadow: 0 20px 34px -14px rgba(74,53,36,0.32);
+  border-color: var(--pink);
+}
+.how-step:hover .how-num{ background: var(--pink); color:#fff; }
+.how-step:hover .how-step-cta{ opacity:1; transform: translateX(0); }
+.how-step::before{
+  content:""; position:absolute; top:-30px; right:-30px; width:90px; height:90px; border-radius:50%;
+  background: var(--cream-deep); transition: background .25s ease;
+}
+.how-step:hover::before{ background: var(--yellow); opacity:0.4; }
+.how-num{
+  font-family: var(--font-mono); font-size: 0.85rem; color: var(--pink-dark);
+  background: var(--cream-deep); padding: 4px 10px; border-radius: 999px; position:relative;
+  transition: background .25s ease, color .25s ease;
+}
+.how-step h3{ margin: 16px 0 8px; font-size: 1.25rem; }
+.how-step p{ color: var(--plum-soft); font-size: 0.95rem; position:relative; }
+.how-step-cta{
+  display:inline-block; margin-top: 14px; font-family: var(--font-mono); font-size: 0.78rem;
+  color: var(--pink-dark); font-weight:700; opacity:0; transform: translateX(-4px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+/* ---------- frame gallery grid (shared: landing teaser + booth step1) ---------- */
+.gallery-teaser{ max-width: 1100px; margin: 90px auto; padding: 0 24px; text-align:center; }
+.frame-preview-grid{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 10px 0 40px;
+}
+@media (max-width: 720px){ .frame-preview-grid{ grid-template-columns: repeat(2, 1fr); } }
+
+.frame-card{
+  background:#fff; border-radius: var(--radius-md); padding: 16px; box-shadow: var(--shadow-card);
+  cursor:pointer; border: 3px solid transparent; transition: transform .18s ease, border-color .18s ease;
+  text-align:left;
+}
+.frame-card:hover{ transform: translateY(-4px); }
+.frame-card.selected{ border-color: var(--pink-dark); }
+
+/* frame-thumb is now a live mini photostrip preview: a grid of "photo" cells
+   (count/columns follow the currently selected layout) sitting inside a
+   themed, decorated background — instead of one big flat emoji. */
+.frame-thumb{
+  width:100%; aspect-ratio: 4/5; border-radius: var(--radius-sm); margin-bottom: 12px;
+  position:relative; overflow:hidden; display:grid; gap: 8px; padding: 14px;
+  align-content:center;
+}
+.frame-thumb-cell{
+  position:relative; border-radius: 8px; min-height: 0;
+  background: rgba(255,255,255,0.65);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);
+}
+.frame-thumb-cell::after{
+  content:"📷"; font-size: 0.95rem; opacity:0.32;
+}
+/* washi tape stuck on top of each photo cell — scrapbook signature detail */
+.cell-tape{
+  position:absolute; top:0; left:50%; width: 34%; height: 12px;
+  border-radius: 2px; opacity:0.9; z-index:6; pointer-events:none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+}
+.cell-tape::before{
+  content:""; position:absolute; inset:0;
+  background: repeating-linear-gradient(115deg, rgba(255,255,255,0.55) 0 3px, transparent 3px 7px);
+}
+.frame-sticker{
+  position:absolute; z-index:4; pointer-events:none; line-height:1;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.18));
+}
+.frame-card h4{ font-family: var(--font-display); font-size: 1rem; margin-bottom: 2px; }
+.frame-card p{ font-size: 0.8rem; color: var(--plum-soft); }
+
+/* frames with a dark background (night sky, denim, deep navy, etc.) get a
+   lighter, higher-contrast cell + inverted camera icon so previews stay legible */
+.frame-thumb-cell.on-dark{ background: rgba(255,255,255,0.15); }
+.frame-thumb-cell.on-dark::after{ opacity:0.55; filter: invert(1) brightness(2); }
+
+.frame-badge{
+  position:absolute; z-index:5; font-family:var(--font-mono); font-weight:700;
+  font-size:0.6rem; letter-spacing:0.05em; text-transform:uppercase;
+  padding:3px 8px; border-radius:999px; pointer-events:none; white-space:nowrap;
+}
+
+/* ---------- filmstrip-style frame preview (used by Layout 4 / poses:4 frames) ----------
+   A real vertical filmstrip: black perforated strip with white photo windows,
+   sitting inside a decorated scrapbook background with stickers scattered
+   around it — matching the reference collage boards, instead of a plain
+   grid of dashed rectangles. */
+.frame-thumb.is-filmstrip{
+  display:block; padding: 18px 14px;
+}
+.filmstrip-stage{
+  position:relative; width:100%; height:100%;
+  display:flex; align-items:center; justify-content:center;
+}
+.filmstrip{
+  position:relative; width: 58%; height:100%;
+  background: #171310;
+  border-radius: 6px;
+  padding: 10px 16px;
+  display:flex; flex-direction:column; gap: 8%;
+  box-shadow: 0 6px 18px -8px rgba(0,0,0,0.45);
+}
+.filmstrip::before, .filmstrip::after{
+  content:""; position:absolute; top:6px; bottom:6px; width: 9px;
+  background: repeating-linear-gradient(to bottom, var(--film-hole, #FBF2E3) 0 7px, transparent 7px 17px);
+  border-radius: 2px;
+}
+.filmstrip::before{ left:3px; }
+.filmstrip::after{ right:3px; }
+.filmstrip-window{
+  position:relative; flex:1; min-height:0;
+  background:#fff; border-radius: 5px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+}
+.filmstrip-window::after{
+  content:"📷"; position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.85rem; opacity:0.26;
+}
+.filmstrip-window.on-dark{ background: rgba(255,255,255,0.92); }
+
+.frame-section-label{
+  text-align:center; font-family: var(--font-mono); font-size: 0.8rem;
+  letter-spacing: 0.03em; color: var(--mint-deep); margin: 2px 0 22px;
+}
+
+/* ---------- frame cell shapes (circle / arch windows for variety) ---------- */
+.frame-thumb-cell.shape-circle{ border-radius: 50%; }
+.frame-thumb-cell.shape-arch{ border-radius: 50% 50% 6px 6px; }
+
+/* ---------- multi-page system (Home / Layout / Frame / Share) ---------- */
+.page{ display:block; }
+.page.hidden{ display:none !important; }
+.page.page-enter{ animation: pageIn .38s ease both; }
+@keyframes pageIn{
+  from{ opacity:0; transform: translateY(18px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+/* JS-triggered staggered pop-in for cards on the Layout/Frame pages —
+   each card animates in one after another instead of the whole page
+   just fading in as one flat block. */
+.stagger-pop{ animation: staggerPopIn .5s cubic-bezier(.34,1.56,.64,1) both; }
+@keyframes staggerPopIn{
+  0%{ opacity:0; transform: translateY(26px) scale(.88) rotate(-2deg); }
+  60%{ opacity:1; transform: translateY(-4px) scale(1.03) rotate(1deg); }
+  100%{ opacity:1; transform: translateY(0) scale(1) rotate(0deg); }
+}
+.nav-links button.active{ color: var(--pink-dark); }
+.nav-links button.active .nav-icon{ opacity:1; }
+
+.page-hero{ max-width: 780px; margin: 0 auto 10px; padding: 56px 24px 0; text-align:center; }
+.page-hero .section-eyebrow{ margin-bottom: 10px; }
+
+/* ---------- layout gallery (pilih layout / pose count) ---------- */
+.layout-grid{
+  display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 10px 0 40px;
+}
+@media (max-width: 900px){ .layout-grid{ grid-template-columns: repeat(2, 1fr); } }
+
+.layout-card{
+  background:#fff; border-radius: var(--radius-md); padding: 16px; box-shadow: var(--shadow-card);
+  cursor:pointer; border: 3px solid transparent; transition: transform .18s ease, border-color .18s ease;
+  text-align:left;
+}
+.layout-card:hover{ transform: translateY(-4px); }
+.layout-card.selected{ border-color: var(--pink-dark); }
+.layout-thumb{
+  display:grid; gap: 6px; background: var(--cream-deep); border-radius: var(--radius-sm);
+  padding: 10px; margin-bottom: 12px; aspect-ratio: 4/5;
+}
+.layout-cell{ background: linear-gradient(145deg,#fff, var(--cream-deep)); border: 2px solid var(--pink); border-radius: 5px; }
+.layout-card h4{ font-family: var(--font-display); font-size: 1rem; margin-bottom: 2px; }
+.layout-card p{ font-size: 0.8rem; color: var(--plum-soft); }
+
+/* ---------- quote / journey section ---------- */
+.quote-section{
+  max-width: 760px; margin: 30px auto 10px; padding: 56px 32px;
+  text-align:center; background: var(--cream-deep); border-radius: var(--radius-lg);
+  border: 1px solid rgba(74,53,36,0.1);
+}
+.quote-eyebrow{
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--pink-dark); margin-bottom: 10px;
+}
+.quote-title{ font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-style: italic; margin-bottom: 6px; }
+.quote-mark{ font-family: var(--font-display); font-size: 2.6rem; color: var(--lavender-deep); opacity:0.5; line-height: 1; margin-bottom: 4px; }
+.quote-text{ color: var(--plum-soft); font-size: 1.02rem; max-width: 560px; margin: 0 auto 14px; line-height: 1.7; }
+.quote-text em{ font-style: italic; color: var(--plum); }
+.quote-divider{ margin-top: 22px; }
+.quote-divider span{
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--mint-deep); border-top: 1px solid rgba(74,53,36,0.15); border-bottom: 1px solid rgba(74,53,36,0.15);
+  padding: 10px 18px; display:inline-block;
+}
+
+/* ---------- share section ---------- */
+.share-section{ max-width: 1100px; margin: 90px auto; padding: 0 24px; }
+.share-card{
+  background: linear-gradient(135deg, var(--pink) 0%, var(--brown) 100%);
+  border-radius: var(--radius-lg); padding: 48px; display:grid; grid-template-columns: 1.2fr 1fr; gap: 30px;
+  align-items:center; box-shadow: var(--shadow-soft); color: #fff;
+}
+.share-card .section-eyebrow{ color: var(--yellow); text-align:left; }
+.share-card h2{ color:#fff; }
+.share-desc{ color: rgba(255,255,255,0.88); margin: 10px 0 24px; max-width: 420px; }
+.share-visual{ display:flex; flex-direction:column; gap: 12px; }
+.share-chip{
+  background: rgba(255,255,255,0.14); border: 1px dashed rgba(255,255,255,0.5);
+  border-radius: 999px; padding: 12px 20px; font-weight:600; font-size: 0.92rem;
+  backdrop-filter: blur(4px);
+}
+@media (max-width: 760px){ .share-card{ grid-template-columns: 1fr; padding: 32px; } }
+
+/* ---------- album (scrapbook) page ---------- */
+.album-section{ max-width: 1100px; margin: 0 auto 90px; padding: 0 24px; }
+.album-empty{
+  text-align:center; max-width: 460px; margin: 30px auto 0; padding: 44px 32px;
+  background: var(--cream-deep); border-radius: var(--radius-lg); border: 2px dashed rgba(74,53,36,0.25);
+}
+.album-empty .album-empty-icon{ font-size: 2.4rem; margin-bottom: 12px; }
+.album-empty p{ color: var(--plum-soft); margin-top: 8px; }
+.album-empty .btn{ margin-top: 20px; }
+
+.album-board{
+  background:
+    repeating-linear-gradient(0deg, rgba(74,53,36,0.05) 0 1px, transparent 1px 34px),
+    var(--cream-deep);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(74,53,36,0.12);
+  padding: 44px clamp(20px, 4vw, 44px);
+  box-shadow: inset 0 0 0 10px rgba(255,255,255,0.35), var(--shadow-card);
+}
+.album-grid{
+  display:grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 46px 30px;
+}
+.album-card{
+  position:relative; background:#fff; padding: 14px 14px 16px; border-radius: 6px;
+  box-shadow: 0 10px 22px -8px rgba(74,53,36,0.35);
+  transform: rotate(var(--tilt, -2deg));
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.album-card:hover{ transform: rotate(0deg) translateY(-4px) scale(1.02); box-shadow: 0 16px 30px -8px rgba(74,53,36,0.4); z-index:2; }
+.album-card::before{
+  content:""; position:absolute; top:-14px; left:50%; transform: translateX(-50%) rotate(-4deg);
+  width: 70px; height: 26px;
+  background: repeating-linear-gradient(45deg, rgba(225,169,77,0.55) 0 6px, rgba(225,169,77,0.35) 6px 12px);
+  opacity: 0.85; border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+}
+.album-card:nth-child(3n+1){ --tilt: -2.4deg; }
+.album-card:nth-child(3n+2){ --tilt: 1.8deg; }
+.album-card:nth-child(3n+3){ --tilt: -1deg; }
+.album-card img{ width:100%; border-radius: 3px; display:block; background: var(--cream); }
+.album-caption{
+  width:100%; margin-top: 10px; border:none; resize:none; background:transparent;
+  font-family: var(--font-hand); font-size: 1.35rem; line-height: 1.25; color: var(--plum);
+  text-align:center; min-height: 44px;
+}
+.album-caption:focus{ outline: none; background: rgba(225,169,77,0.12); border-radius: 4px; }
+.album-caption::placeholder{ color: var(--plum-soft); opacity: 0.55; font-family: var(--font-hand); font-size: 1.3rem; }
+.album-card-meta{ display:flex; align-items:center; justify-content: space-between; margin-top: 6px; }
+.album-date{ font-family: var(--font-mono); font-size: 0.68rem; color: var(--plum-soft); opacity:0.75; }
+.album-card-actions{ display:flex; gap: 6px; }
+.album-card-actions button{
+  font-size: 0.85rem; width: 26px; height: 26px; border-radius: 50%; display:flex; align-items:center; justify-content:center;
+  color: var(--plum-soft); transition: background .15s, color .15s;
+}
+.album-card-actions button:hover{ background: rgba(74,53,36,0.1); color: var(--pink-dark); }
+.album-toolbar{ display:flex; justify-content:center; margin: 26px 0 10px; }
+@media (max-width: 560px){ .album-grid{ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 40px 18px; } }
+
+/* footer */
+.site-footer{ text-align:center; padding: 40px 24px 60px; color: var(--plum-soft); font-size: 0.85rem; }
+.footer-credit{ margin-top:6px; font-size:1rem; font-weight:700; color: var(--plum); opacity:1; }
+
+/* ===========================================================
+   BOOTH APP
+=========================================================== */
+.booth{ min-height: 100vh; background: var(--cream-deep); padding: 20px 24px 60px; }
+.booth-topbar{
+  max-width: 1000px; margin: 0 auto 30px; display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap: 16px;
+}
+.back-link{ background:none; font-weight:600; color: var(--plum-soft); font-family: var(--font-body); font-size: 0.95rem; }
+.back-link:hover{ color: var(--pink-dark); }
+
+.steps-indicator{ display:flex; gap: 10px; }
+.step-dot{
+  font-family: var(--font-mono); font-size: 0.72rem; padding: 8px 14px; border-radius: 999px;
+  background: #fff; color: var(--plum-soft); border: 1px solid rgba(74,59,82,0.12);
+}
+.step-dot.active{ background: var(--pink-dark); color:#fff; }
+.step-dot.done{ background: var(--mint-deep); color:#fff; }
+
+.booth-step{ max-width: 1000px; margin: 0 auto; text-align:center; }
+.booth-step h2{ font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 8px; }
+.step-desc{ color: var(--plum-soft); margin-bottom: 28px; }
+
+#toStep2, #toStep3{ margin-top: 10px; }
+
+/* camera layout */
+.camera-layout{ display:grid; grid-template-columns: 1.4fr 1fr; gap: 30px; text-align:left; align-items:start; }
+@media (max-width: 800px){ .camera-layout{ grid-template-columns: 1fr; } }
+
+.camera-stage{
+  position:relative; background: #111; border-radius: var(--radius-md); overflow:hidden;
+  box-shadow: var(--shadow-soft); aspect-ratio: 4/3;
+}
+.camera-stage video{
+  width:100%; height:100%; object-fit: cover; transform: scaleX(-1);
+}
+.camera-stage.f-grayscale video{ filter: grayscale(1); }
+.camera-stage.f-sepia video{ filter: sepia(0.75) saturate(1.2); }
+.camera-stage.f-vintage video{ filter: sepia(0.35) contrast(1.15) saturate(1.3) brightness(1.02); }
+.camera-stage.f-soft video{ filter: brightness(1.08) saturate(1.1) blur(0.4px); }
+
+.camera-overlay{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-family: var(--font-display); font-size: 5rem; color:#fff;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.4); pointer-events:none;
+}
+.shot-counter{
+  position:absolute; top: 14px; right: 16px; background: rgba(0,0,0,0.45); color:#fff;
+  font-family: var(--font-mono); font-size: 0.78rem; padding: 6px 12px; border-radius: 999px;
+}
+.camera-error{
+  position:absolute; inset: 0; display:flex; align-items:center; justify-content:center; text-align:center;
+  padding: 20px; color:#fff; background: rgba(0,0,0,0.6); font-weight:600;
+}
+
+.camera-side{ display:flex; flex-direction:column; gap: 26px; }
+.side-label{ font-family: var(--font-mono); font-size: 0.72rem; text-transform:uppercase; color: var(--plum-soft); display:block; margin-bottom: 10px; letter-spacing: 0.05em;}
+
+.filter-chips{ display:flex; flex-wrap:wrap; gap: 8px; }
+.chip{
+  background:#fff; border: 1px solid rgba(74,59,82,0.15); padding: 8px 14px; border-radius: 999px;
+  font-size: 0.82rem; font-weight:600; color: var(--plum-soft); transition: all .15s;
+}
+.chip.active{ background: var(--plum); color:#fff; border-color: var(--plum); }
+
+.thumbs-row{ display:grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+.thumb-slot{
+  aspect-ratio: 4/3; background: #fff; border-radius: 8px; border: 1px dashed rgba(74,59,82,0.25);
+  overflow:hidden; display:flex; align-items:center; justify-content:center;
+}
+.thumb-slot img{ width:100%; height:100%; object-fit:cover; }
+
+#startCapture{ margin-top: 4px; }
+
+/* result */
+.result-layout{ display:flex; flex-direction:column; align-items:center; gap: 24px; }
+#resultCanvas{
+  max-width: 340px; width:100%; border-radius: 14px; box-shadow: var(--shadow-soft);
+}
+.result-actions{ display:flex; gap: 14px; flex-wrap:wrap; justify-content:center; }
+
+/* ---------- frame step: rapi/acak style choice + customize ---------- */
+.frame-style-choice{
+  display:grid; grid-template-columns: repeat(2, 1fr); gap: 22px; max-width: 640px;
+  margin: 0 auto 10px;
+}
+@media (max-width: 640px){ .frame-style-choice{ grid-template-columns: 1fr; } }
+.style-card{
+  background:#fff; border-radius: var(--radius-md); padding: 22px; box-shadow: var(--shadow-card);
+  cursor:pointer; border: 3px solid transparent; transition: transform .18s ease, border-color .18s ease;
+  text-align:center;
+}
+.style-card:hover{ transform: translateY(-4px); }
+.style-card.selected{ border-color: var(--pink-dark); }
+.style-card h4{ font-family: var(--font-display); font-size: 1.15rem; margin: 14px 0 4px; }
+.style-card p{ font-size: 0.85rem; color: var(--plum-soft); }
+.style-card-preview{
+  aspect-ratio: 4/5; border-radius: var(--radius-sm); background: var(--cream-deep);
+  display:flex; align-items:center; justify-content:center; padding: 18px; overflow:hidden;
+}
+.style-preview-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 8px; width:100%; height:100%; }
+.style-preview-cell{
+  background:#fff; border: 3px solid var(--pink-dark); border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);
+}
+.style-preview-grid.is-scatter{ display:flex; align-items:center; justify-content:center; position:relative; }
+.style-preview-grid.is-scatter .style-preview-cell{
+  position:absolute; width: 52%; aspect-ratio: 4/5;
+}
+
+.frame-customize{ margin-top: 36px; }
+.frame-customize .back-link{ display:block; margin-bottom: 18px; text-align:center; }
+.booth-step > .back-link{ display:block; margin-bottom: 18px; text-align:center; }
+.customize-layout{
+  display:grid; grid-template-columns: 260px 1fr; gap: 34px; max-width: 760px; margin: 0 auto;
+  text-align:left; align-items:start;
+}
+@media (max-width: 720px){ .customize-layout{ grid-template-columns: 1fr; } }
+.customize-preview{ display:flex; flex-direction:column; align-items:center; gap: 8px; }
+.customize-preview .frame-thumb{ width: 200px; }
+.customize-preview .frame-section-label{ margin: 4px 0 0; }
+
+.color-picker-block, .sticker-set-block{ margin-bottom: 26px; }
+.color-picker-block.locked .color-swatch-grid,
+.color-picker-block.locked .custom-color-row{ opacity: 0.35; pointer-events: none; filter: grayscale(0.4); }
+.color-locked-note{
+  font-family: var(--font-mono); font-size: 0.78rem; color: var(--plum-soft);
+  margin-top: 10px; line-height: 1.5; max-width: 320px;
+}
+.color-locked-note.hidden{ display:none; }
+.color-swatch-grid{ display:flex; flex-wrap:wrap; gap: 12px; }
+.custom-color-row{
+  display:flex; align-items:center; gap: 10px; margin-top: 14px; font-size: 0.85rem;
+  color: var(--plum-soft); font-weight:600;
+}
+.custom-color-row input[type="color"]{
+  width: 40px; height: 40px; border-radius: 50%; border: 2px solid rgba(74,53,36,0.15);
+  padding:0; cursor:pointer; background:none;
+}
+.sticker-set-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.sticker-set-btn{
+  background:#fff; border: 2px solid rgba(74,59,82,0.12); border-radius: var(--radius-sm);
+  padding: 10px 12px; text-align:left; transition: all .15s ease;
+}
+.sticker-set-btn:hover{ transform: translateY(-2px); }
+.sticker-set-btn.active{ border-color: var(--pink-dark); background: var(--cream-deep); }
+.sticker-set-btn .set-emojis{ font-size: 1.1rem; display:block; margin-bottom: 4px; letter-spacing: 2px; }
+.sticker-set-btn .set-name{ font-size: 0.78rem; font-weight:700; color: var(--plum); }
+
+/* ---------- arrangement toggle (grid vs scatter) ---------- */
+.arrangement-picker{ max-width: 560px; margin: 0 auto 34px; text-align:center; }
+.arrangement-tabs{ display:inline-flex; gap: 8px; background:#fff; padding: 6px; border-radius: 999px; box-shadow: var(--shadow-card); }
+.arrangement-tab{
+  padding: 10px 20px; border-radius: 999px; font-weight:700; font-size: 0.88rem;
+  color: var(--plum-soft); transition: all .18s ease;
+}
+.arrangement-tab.active{ background: var(--pink); color:#fff; }
+.arrangement-tab:hover:not(.active){ background: var(--cream-deep); }
+.arrangement-hint{ margin-top: 10px; font-size: 0.82rem; color: var(--plum-soft); }
+
+/* ---------- theme color swatches ---------- */
+.theme-picker{ max-width: 640px; margin: 0 auto 34px; }
+.theme-picker .side-label{ text-align:center; margin-bottom: 14px; }
+.theme-swatches{ display:flex; gap: 12px; flex-wrap:wrap; justify-content:center; }
+.theme-swatch{
+  width: 40px; height: 40px; border-radius: 50%; border: 3px solid #fff;
+  box-shadow: 0 0 0 2px rgba(74,53,36,0.15), var(--shadow-card);
+  transition: transform .15s ease, box-shadow .15s ease; position:relative;
+}
+.theme-swatch:hover{ transform: translateY(-3px) scale(1.06); }
+.theme-swatch.active{ box-shadow: 0 0 0 3px var(--plum); }
+.theme-swatch.active::after{
+  content:"✓"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  color:#fff; font-weight:800; text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.theme-swatch.is-default{ background: repeating-conic-gradient(#ddd 0% 25%, #fff 0% 50%) 0 0/12px 12px; }
+.theme-swatch.is-default::before{ content:"↺"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color: var(--plum-soft); font-weight:800; }
+.theme-swatch.is-default.active::after{ content:""; }
+
+/* ---------- source tabs (camera vs gallery) ---------- */
+.source-tabs{ display:inline-flex; gap: 8px; background:#fff; padding: 6px; border-radius: 999px; box-shadow: var(--shadow-card); margin-bottom: 24px; }
+.source-tab{
+  padding: 9px 18px; border-radius: 999px; font-weight:700; font-size: 0.85rem;
+  color: var(--plum-soft); transition: all .18s ease;
+}
+.source-tab.active{ background: var(--mint-deep); color:#fff; }
+.source-tab:hover:not(.active){ background: var(--cream-deep); }
+
+.gallery-source{
+  background:#fff; border-radius: var(--radius-md); padding: 26px; box-shadow: var(--shadow-card);
+  text-align:center;
+}
+.gallery-dropzone{
+  border: 2px dashed var(--lavender-deep); border-radius: var(--radius-sm); padding: 30px 16px;
+  transition: border-color .15s ease, background .15s ease;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  min-height: 170px;
+}
+.gallery-dropzone.drag-over{ border-color: var(--pink-dark); background: var(--cream-deep); }
+.gallery-placeholder{ display:flex; flex-direction:column; align-items:center; }
+.gallery-placeholder.hidden{ display:none; }
+.gallery-thumbs-row{
+  display:flex; flex-wrap:wrap; justify-content:center; gap: 8px;
+  width:100%; max-width: 360px; margin: 0 auto;
+}
+.gallery-thumbs-row:empty{ display:none; }
+.gallery-thumbs-row .thumb-slot{ width: 78px; aspect-ratio: 4/3; }
+.gallery-pick-again{ margin-top:16px; }
+.gallery-count-hint{ font-family: var(--font-mono); font-size: 0.8rem; color: var(--plum-soft); margin-top: 6px; }
+.gallery-count-hint.ok{ color: var(--mint-deep); font-weight:700; }
+.gallery-count-hint.bad{ color: var(--pink-dark); font-weight:700; }
+
+/* ---------- sticker picker + draggable overlay on result canvas ---------- */
+.canvas-wrap{ position:relative; max-width: 340px; width:100%; }
+.canvas-wrap #resultCanvas{ position:relative; z-index:1; }
+.sticker-layer{ position:absolute; inset:0; z-index:2; touch-action:none; }
+.sticker-instance{
+  position:absolute; font-size: 30px; line-height:1; cursor:grab; user-select:none;
+  transform: translate(-50%, -50%); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+.sticker-instance:active{ cursor:grabbing; }
+.sticker-instance .sticker-remove{
+  position:absolute; top:-10px; right:-10px; width:18px; height:18px; border-radius:50%;
+  background: var(--pink-dark); color:#fff; font-size: 11px; line-height:18px; text-align:center;
+  opacity:0; transition: opacity .15s ease; font-family: var(--font-body); font-weight:700;
+}
+.sticker-instance:hover .sticker-remove{ opacity:1; }
+
+.sticker-panel{
+  background:#fff; border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-card);
+  max-width: 340px; width:100%; text-align:center;
+}
+.sticker-palette{ display:flex; flex-wrap:wrap; gap: 8px; justify-content:center; margin-bottom: 12px; }
+.sticker-btn{
+  width: 42px; height: 42px; border-radius: 12px; background: var(--cream-deep); font-size: 1.35rem;
+  transition: transform .15s ease, background .15s ease;
+}
+.sticker-btn:hover{ transform: translateY(-2px) scale(1.05); background: var(--pink); }
+
+/* ===========================================================
+   INTRO — envelope / mailbox gate
+=========================================================== */
+#introGate{
+  position: fixed; inset: 0; z-index: 9999;
+  display:flex; align-items:center; justify-content:center;
+  background:
+    radial-gradient(rgba(74,53,36,0.06) 1px, transparent 1px) 0 0/22px 22px,
+    var(--cream);
+  overflow: hidden;
+  transition: opacity .7s ease, visibility .7s ease;
+}
+#introGate.gate-hidden{ opacity: 0; visibility: hidden; pointer-events: none; }
+
+.gate-floaters span{
+  position:absolute; font-size: 1.6rem; opacity:.55;
+  animation: gateFloat 6s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(74,53,36,.15));
+}
+.gate-floaters span:nth-child(1){ top:12%; left:10%; animation-delay: 0s; }
+.gate-floaters span:nth-child(2){ top:20%; right:12%; animation-delay: .8s; font-size:1.9rem; }
+.gate-floaters span:nth-child(3){ bottom:16%; left:16%; animation-delay: 1.6s; font-size:1.4rem; }
+.gate-floaters span:nth-child(4){ bottom:22%; right:18%; animation-delay: 2.2s; font-size:1.7rem; }
+.gate-floaters span:nth-child(5){ top:50%; left:6%; animation-delay: 3s; font-size:1.3rem; }
+.gate-floaters span:nth-child(6){ top:45%; right:7%; animation-delay: 1.2s; font-size:1.5rem; }
+@keyframes gateFloat{
+  0%,100%{ transform: translateY(0) rotate(0deg); }
+  50%{ transform: translateY(-16px) rotate(8deg); }
+}
+
+.gate-content{
+  position:relative; z-index:2; text-align:center;
+  display:flex; flex-direction:column; align-items:center; gap:22px;
+  padding: 24px;
+}
+.gate-eyebrow{
+  font-family: var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+  color: var(--pink-dark); opacity:0; animation: gateFadeUp .7s ease .2s forwards;
+}
+.gate-title{
+  font-family: var(--font-display); font-weight:700; color: var(--plum);
+  font-size: clamp(1.4rem, 3.2vw, 2.1rem); max-width: 520px; line-height:1.3;
+  opacity:0; animation: gateFadeUp .7s ease .35s forwards;
+}
+.gate-title em{ color: var(--pink); font-style: italic; }
+
+/* envelope */
+.envelope-wrap{
+  opacity:0; animation: gateFadeUp .7s ease .5s forwards;
+}
+.envelope{
+  position: relative; width: 224px; height: 149px; cursor:pointer;
+  filter: drop-shadow(0 16px 30px rgba(74,53,36,.32));
+  transition: transform .35s ease;
+}
+.envelope:hover{ transform: translateY(-5px) scale(1.03); }
+.envelope:active{ transform: translateY(0) scale(.98); }
+
+.env-body{
+  position:absolute; inset:0;
+  background: linear-gradient(160deg, #fff 0%, var(--cream-deep) 100%);
+  border: 2px solid var(--plum);
+  border-radius: 12px;
+  overflow:hidden;
+}
+.env-body::before, .env-body::after{
+  content:""; position:absolute; top:0; width:50%; height:100%;
+  border-top: 2px solid var(--plum);
+}
+.env-flap{
+  position:absolute; top:-1px; left:-1px; right:-1px; height:85px;
+  background: linear-gradient(160deg, var(--pink) 0%, var(--pink-dark) 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 78%);
+  transform-origin: top center;
+  transition: transform .55s cubic-bezier(.6,.05,.4,1);
+  border-radius: 12px 12px 0 0;
+  z-index:3;
+}
+.envelope.opening .env-flap{ transform: rotateX(180deg); }
+
+.env-heart{
+  position:absolute; top:50px; left:50%; transform:translateX(-50%);
+  font-size:1.4rem; z-index:2; color:var(--pink-dark);
+  transition: opacity .3s ease .1s;
+}
+.envelope.opening .env-heart{ opacity:0; }
+
+.env-letter{
+  position:absolute; left:50%; bottom:8px; transform: translate(-50%, 0);
+  width: 78%; height: 78px; background: #fff; border:2px solid var(--plum-soft);
+  border-radius:8px 8px 3px 3px; z-index:1;
+  display:flex; align-items:center; justify-content:center;
+  font-family: var(--font-mono); font-size:.8rem; color: var(--plum-soft); text-align:center; padding:8px;
+  transition: transform .6s cubic-bezier(.34,1.56,.64,1) .15s, opacity .5s ease .15s;
+}
+.envelope.opening .env-letter{
+  transform: translate(-50%, -168px) scale(1.06);
+  opacity: 0;
+}
+
+.gate-hint{
+  font-family: var(--font-body); font-size:.9rem; color: var(--plum-soft);
+  opacity:0; animation: gateFadeUp .7s ease .65s forwards;
+}
+.envelope.opening ~ .gate-hint{ opacity:0; }
+
+@keyframes gateFadeUp{
+  from{ opacity:0; transform: translateY(14px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+/* reveal animation for main content once gate closes */
+body.gate-active #landing, body.gate-active header.nav{
+  opacity:0;
+}
+
+/* camera-flash style burst that fires right as the gate dismisses, so the
+   site "jreng" pops into view instead of just quietly fading in */
+.gate-flash{
+  position: fixed; inset:0; z-index: 9998; pointer-events:none;
+  background: radial-gradient(circle at 50% 40%, #fff 0%, rgba(255,240,245,.95) 32%, rgba(255,240,245,0) 68%);
+  opacity:0;
+}
+.gate-flash.flash-fire{ animation: gateFlashBurst .6s ease-out forwards; }
+@keyframes gateFlashBurst{
+  0%{ opacity:0; }
+  15%{ opacity:1; }
+  100%{ opacity:0; }
+}
+
+@keyframes gatePopIn{
+  0%{ opacity:0; transform: scale(.85) translateY(22px); }
+  55%{ opacity:1; transform: scale(1.04) translateY(-4px); }
+  80%{ transform: scale(.99) translateY(1px); }
+  100%{ opacity:1; transform: scale(1) translateY(0); }
+}
+header.nav.reveal-in{ animation: gatePopIn .65s cubic-bezier(.34,1.56,.64,1) forwards; }
+#landing.reveal-in{ animation: gatePopIn .75s cubic-bezier(.34,1.56,.64,1) .08s forwards; }
+
+/* scroll-reveal utility, toggled by IntersectionObserver */
+.reveal-on-scroll{ opacity:0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+.reveal-on-scroll.in-view{ opacity:1; transform: translateY(0); }
+
+/* gentle ambient float for hero decorations, layered on top of any existing motion */
+.hero-deco{ will-change: transform; }
+
+/* button press ripple */
+.ripple{
+  position:absolute; border-radius:50%; background: rgba(255,255,255,.55);
+  transform: scale(0); animation: rippleAnim .6s ease-out forwards; pointer-events:none;
+}
+@keyframes rippleAnim{ to{ transform: scale(2.6); opacity:0; } }
+.btn, .sticker-btn{ position:relative; overflow:hidden; }
+
+/* cursor sparkle trail */
+.cursor-sparkle{
+  position: fixed; pointer-events:none; z-index: 4000;
+  font-size: 14px; color: var(--pink-dark);
+  animation: sparkleFade .8s ease-out forwards;
+}
+@keyframes sparkleFade{
+  0%{ opacity:1; transform: translate(0,0) scale(1) rotate(0deg); }
+  100%{ opacity:0; transform: translate(var(--sx,0), var(--sy,-24px)) scale(.4) rotate(90deg); }
+}
+
+@media (max-width: 480px){
+  .envelope{ width:186px; height:124px; }
+  .env-flap{ height:71px; }
+  .env-heart{ top:42px; font-size:1.2rem; }
+  .env-letter{ height:64px; font-size:.72rem; bottom:6px; }
+  .envelope.opening .env-letter{ transform: translate(-50%, -140px) scale(1.06); }
+}
+
+/* ===========================================================
+   REVEAL SCREEN — cute interstitial between the envelope and
+   the actual homepage, with a bouncy little "photobooth" scene.
+=========================================================== */
+#gateReveal{
+  position: fixed; inset:0; z-index: 9997;
+  display:flex; align-items:center; justify-content:center;
+  background:
+    radial-gradient(rgba(74,53,36,0.06) 1px, transparent 1px) 0 0/22px 22px,
+    var(--cream);
+  overflow:hidden;
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition: opacity .5s ease, visibility .5s ease;
+}
+#gateReveal.reveal-show{ opacity:1; visibility:visible; pointer-events:auto; }
+
+.reveal-confetti span{
+  position:absolute; top:-40px; font-size:1.4rem;
+  animation: revealConfettiFall 2.6s ease-in forwards;
+  opacity:0;
+}
+#gateReveal.reveal-show .reveal-confetti span{ opacity:1; }
+@keyframes revealConfettiFall{
+  0%{ transform: translateY(-40px) rotate(0deg); opacity:0; }
+  8%{ opacity:1; }
+  100%{ transform: translateY(110vh) rotate(340deg); opacity:.9; }
+}
+
+.reveal-content{
+  position:relative; z-index:2; text-align:center;
+  display:flex; flex-direction:column; align-items:center; gap:16px;
+  padding:24px;
+}
+.reveal-mascot{
+  font-size: 4.2rem; line-height:1;
+  animation: revealBounce 1.15s cubic-bezier(.34,1.56,.64,1) infinite;
+  filter: drop-shadow(0 10px 16px rgba(74,53,36,.22));
+}
+@keyframes revealBounce{
+  0%, 100%{ transform: translateY(0) rotate(-4deg) scale(1); }
+  35%{ transform: translateY(-22px) rotate(4deg) scale(1.05); }
+  55%{ transform: translateY(0) rotate(-2deg) scale(.98); }
+}
+.reveal-eyebrow{
+  font-family: var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+  color: var(--pink-dark); opacity:0; animation: gateFadeUp .6s ease .15s forwards;
+}
+.reveal-title{
+  font-family: var(--font-display); font-weight:700; color: var(--plum);
+  font-size: clamp(1.5rem, 3.4vw, 2.3rem); max-width: 540px; line-height:1.28;
+  opacity:0; animation: gateFadeUp .6s ease .28s forwards;
+}
+.reveal-title em{ color: var(--pink); font-style: italic; }
+.reveal-desc{
+  font-family: var(--font-body); font-size:1rem; color: var(--plum-soft);
+  max-width: 420px; opacity:0; animation: gateFadeUp .6s ease .4s forwards;
+}
+.reveal-stickers{
+  display:flex; gap:14px; opacity:0; animation: gateFadeUp .6s ease .5s forwards;
+}
+.reveal-stickers span{
+  font-size:1.7rem; display:inline-block;
+  animation: revealWiggle 2.4s ease-in-out infinite;
+}
+.reveal-stickers span:nth-child(1){ animation-delay: 0s; }
+.reveal-stickers span:nth-child(2){ animation-delay: .3s; }
+.reveal-stickers span:nth-child(3){ animation-delay: .6s; }
+.reveal-stickers span:nth-child(4){ animation-delay: .9s; }
+@keyframes revealWiggle{
+  0%, 100%{ transform: rotate(-8deg) translateY(0); }
+  50%{ transform: rotate(10deg) translateY(-6px); }
+}
+.reveal-cta-zone{
+  position:relative; width:100%; max-width:380px; height:150px;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; animation: revealPopIn .55s cubic-bezier(.34,1.56,.64,1) .62s forwards;
+}
+#gateRevealCta:hover{ transform: translateY(-3px) scale(1.03); }
+.reveal-btn-dodge{
+  position:absolute; left:62%; top:50%; transform:translateY(-50%);
+  transition: left .28s cubic-bezier(.34,1.56,.64,1), top .28s cubic-bezier(.34,1.56,.64,1);
+  white-space:nowrap; font-size:.85rem;
+}
+@keyframes revealPopIn{
+  0%{ opacity:0; transform: scale(.7); }
+  100%{ opacity:1; transform: scale(1); }
+}
+@media (max-width: 480px){
+  .reveal-cta-zone{ max-width: 280px; height: 170px; }
+}
+
+</style>
+</head>
+<body class="gate-active">
+
+<!-- ============ INTRO GATE (envelope) ============ -->
+<div id="introGate">
+  <div class="gate-floaters" aria-hidden="true">
+    <span>✦</span><span>🌸</span><span>♡</span><span>✧</span><span>🍃</span><span>🌼</span>
+  </div>
+  <div class="gate-content">
+    <p class="gate-eyebrow">✦ Psst, ini buat kamu ✦</p>
+    <h2 class="gate-title">Tunggu dulu... <em>ada sesuatu di sini yang bakal bikin kamu tertarik.</em></h2>
+    <div class="envelope-wrap">
+      <div class="envelope" id="introEnvelope" role="button" tabindex="0" aria-label="Buka amplop untuk masuk">
+        <div class="env-letter">Buka aja ✦</div>
+        <div class="env-body"></div>
+        <div class="env-heart">♡</div>
+        <div class="env-flap"></div>
+      </div>
+    </div>
+    <p class="gate-hint">Penasaran? Klik amplopnya ✦</p>
+  </div>
+</div>
+<div class="gate-flash" id="gateFlash" aria-hidden="true"></div>
+
+<!-- ============ REVEAL SCREEN (cute interstitial) ============ -->
+<div id="gateReveal">
+  <div class="reveal-confetti" aria-hidden="true">
+    <span style="left:8%; animation-delay:.1s;">🎉</span>
+    <span style="left:20%; animation-delay:.5s;">✦</span>
+    <span style="left:34%; animation-delay:.2s;">🌸</span>
+    <span style="left:48%; animation-delay:.7s;">♡</span>
+    <span style="left:62%; animation-delay:.35s;">✧</span>
+    <span style="left:76%; animation-delay:.6s;">🎀</span>
+    <span style="left:88%; animation-delay:.15s;">🌼</span>
+    <span style="left:15%; animation-delay:.9s;">✨</span>
+    <span style="left:56%; animation-delay:1.1s;">🎉</span>
+    <span style="left:70%; animation-delay:.05s;">♡</span>
+  </div>
+  <div class="reveal-content">
+    <div class="reveal-mascot" aria-hidden="true">📸</div>
+    <p class="reveal-eyebrow">✦ Nah, ini dia ✦</p>
+    <h2 class="reveal-title">Waktunya bikin <em>kenangan lucu</em> bareng photobooth instan!</h2>
+    <p class="reveal-desc">Langsung dari browser, gak perlu install apa-apa. Pilih pose, jepret, tempel stiker — beres dalam sekejap.</p>
+    <div class="reveal-stickers" aria-hidden="true">
+      <span>🧸</span><span>🌈</span><span>⭐</span><span>🦋</span>
+    </div>
+    <div class="reveal-cta-zone" id="revealCtaZone">
+      <button type="button" class="btn btn-primary" id="gateRevealCta">Yuk, Mau! →</button>
+      <button type="button" class="btn btn-ghost reveal-btn-dodge" id="gateRevealNo">Gak, ah</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ GLOBAL MASCOT (always on screen, bottom-right) ============ -->
+<div class="global-mascot" id="globalMascot" role="button" tabindex="0" aria-label="Maskot Mahira, ketuk buat ganti gaya kacamata" title="Maskot Mahira — ketuk buat ganti kacamata">
+  <div class="mascot-bubble" id="mascotBubble"></div>
+  <svg viewBox="0 0 100 122" xmlns="http://www.w3.org/2000/svg">
+    <!-- shoulders / cape -->
+    <path d="M6 120c2-22 18-36 44-36s42 14 44 36" fill="#C7A784"/>
+    <!-- hijab hood -->
+    <path d="M50 6C24 6 13 29 13 54c0 21 8 36 8 36h58s8-15 8-36C87 29 76 6 50 6Z" fill="#E3CBA6"/>
+    <!-- face -->
+    <circle cx="50" cy="55" r="29" fill="#F8E2C6"/>
+    <!-- inner hijab frame around face -->
+    <path d="M50 15c-19 0-29 15-29 33 0 9 3 16 3 16s6-27 26-27 26 27 26 27 3-7 3-16c0-18-10-33-29-33Z" fill="#C7A784"/>
+    <!-- little flower clip -->
+    <g transform="translate(74,20)">
+      <circle cx="0" cy="-6" r="4" fill="#E7A6C6"/>
+      <circle cx="5.6" cy="-2" r="4" fill="#E7A6C6"/>
+      <circle cx="3.6" cy="4.8" r="4" fill="#E7A6C6"/>
+      <circle cx="-3.6" cy="4.8" r="4" fill="#E7A6C6"/>
+      <circle cx="-5.6" cy="-2" r="4" fill="#E7A6C6"/>
+      <circle cx="0" cy="0" r="3.4" fill="#F4D24D"/>
+    </g>
+    <!-- blush -->
+    <circle cx="32" cy="64" r="6" fill="#F0A98C" opacity=".5"/>
+    <circle cx="68" cy="64" r="6" fill="#F0A98C" opacity=".5"/>
+    <!-- eyelashes -->
+    <path d="M25 44l-3-4M30 41l-2-5M36 40l-1-5" stroke="#4A3524" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <path d="M75 44l3-4M70 41l2-5M64 40l1-5" stroke="#4A3524" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <!-- sparkly eyes -->
+    <circle cx="35" cy="55" r="4.4" fill="#4A3524"/>
+    <circle cx="65" cy="55" r="4.4" fill="#4A3524"/>
+    <circle cx="36.8" cy="53" r="1.5" fill="#fff"/>
+    <circle cx="66.8" cy="53" r="1.5" fill="#fff"/>
+    <circle cx="33.5" cy="57" r="0.8" fill="#fff" opacity=".8"/>
+    <circle cx="63.5" cy="57" r="0.8" fill="#fff" opacity=".8"/>
+    <!-- round wire glasses (tap the mascot to toggle) -->
+    <g class="mascot-glasses">
+      <line x1="24" y1="49" x2="17" y2="45" stroke="#4A3524" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="76" y1="49" x2="83" y2="45" stroke="#4A3524" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="46.5" y1="53" x2="53.5" y2="53" stroke="#4A3524" stroke-width="2.5"/>
+      <circle cx="35" cy="53" r="11.5" fill="rgba(255,255,255,0.15)" stroke="#4A3524" stroke-width="2.5"/>
+      <circle cx="65" cy="53" r="11.5" fill="rgba(255,255,255,0.15)" stroke="#4A3524" stroke-width="2.5"/>
+    </g>
+    <!-- beauty mark + smile -->
+    <circle cx="40" cy="68" r="1.3" fill="#8A5A3E"/>
+    <path d="M41 71c4 6 14 6 18 0" stroke="#4A3524" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- camera accessory -->
+    <text x="70" y="102" font-size="20">📷</text>
+  </svg>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="nav-inner">
+    <button type="button" data-page="home" class="logo">
+      <span class="logo-mark">📷</span>
+      <span class="logo-text">Memorable<em>Frames</em></span>
+    </button>
+    <nav class="nav-links">
+      <button type="button" data-page="home" class="active"><span class="nav-icon">⌂</span><span class="nav-label">Home</span></button>
+      <button type="button" data-page="layout"><span class="nav-icon">▦</span><span class="nav-label">Layout</span></button>
+      <button type="button" data-page="frame"><span class="nav-icon">🖼</span><span class="nav-label">Frame</span></button>
+      <button type="button" data-page="share"><span class="nav-icon">⇩</span><span class="nav-label">Unduh</span></button>
+      <button type="button" data-page="album"><span class="nav-icon">📔</span><span class="nav-label">Album</span></button>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ LANDING (multi-page) ============ -->
+<main id="landing">
+
+  <!-- PAGE: HOME -->
+  <div class="page" id="page-home">
+    <section id="top" class="hero">
+      <div class="hero-deco deco-bear" aria-hidden="true">🐻</div>
+      <div class="hero-deco deco-flower-1" aria-hidden="true">🌸</div>
+      <div class="hero-deco deco-flower-2" aria-hidden="true">🌼</div>
+      <div class="hero-deco deco-star" aria-hidden="true">✦</div>
+      <div class="hero-deco deco-heart" aria-hidden="true">♡</div>
+      <div class="hero-deco deco-sparkle" aria-hidden="true">✧</div>
+      <div class="hero-deco deco-leaf" aria-hidden="true">🍃</div>
+
+      <div class="hero-inner">
+        <p class="eyebrow">✦ instant photobooth, timeless memories ✦</p>
+        <h1>Every Smile Tells a Story —<br><span class="highlight">kenangan yang selalu berkesan.</span></h1>
+        <p class="hero-sub">Memorable Frames menemani setiap momen spesialmu. Nyalakan kamera langsung dari browser, pilih layout &amp; frame vintage favoritmu, lalu simpan strip fotonya dalam sekali klik — anywhere, anytime.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="heroCta">📷 Buat Frame</button>
+          <button type="button" data-page="layout" class="btn btn-ghost">Lihat Koleksi</button>
+        </div>
+        <div class="frame-note">🎞️ <strong>4 pilihan layout, gaya rapi/acak</strong> — plus warna &amp; stiker custom, semua bisa kamu atur sendiri.</div>
+      </div>
+    </section>
+
+    <!-- QUOTE / JOURNEY -->
+    <section class="quote-section">
+      <p class="quote-eyebrow">— the memorable frames journey —</p>
+      <h2 class="quote-title">Momen yang Tak Ingin Terlewat</h2>
+      <div class="quote-mark">”</div>
+
+      <p class="quote-text">Suatu hari nanti kamu akan sadar, bukan <em>big moments</em> yang paling berharga, melainkan momen sederhana — tawa keluarga, candaan teman, tatapan hangat orang tersayang.</p>
+      <p class="quote-text">Yang terpenting adalah: <strong>were you truly present</strong> saat semua itu terjadi?</p>
+      <div class="quote-divider"><span>— let's be there, together —</span></div>
+    </section>
+
+    <!-- CARA KERJA -->
+    <section id="cara-kerja" class="how">
+      <p class="section-eyebrow">it's this simple</p>
+      <h2 class="section-title">Empat langkah ke foto strip impianmu</h2>
+
+      <div class="how-steps">
+        <button type="button" class="how-step" data-page="layout">
+          <span class="how-num">01</span>
+          <h3>Pilih Layout</h3>
+          <p>Tentukan dulu berapa pose &amp; susunan strip yang kamu mau — 2, 3, 4, sampai 6 pose.</p>
+          <span class="how-step-cta">Pilih layout →</span>
+        </button>
+        <button type="button" class="how-step" data-page="frame">
+          <span class="how-num">02</span>
+          <h3>Pilih Gaya</h3>
+          <p>Pilih gaya penataan fotonya — rapi &amp; simetris atau acak estetik ala scrapbook — lalu atur warna &amp; stiker favoritmu.</p>
+          <span class="how-step-cta">Pilih gaya →</span>
+        </button>
+        <button type="button" class="how-step" data-action="booth">
+          <span class="how-num">03</span>
+          <h3>Smile &amp; Jepret</h3>
+          <p>Nyalakan kamera, ikuti hitungan mundur, dan biarkan kami menangkap pose terbaikmu berturut-turut.</p>
+          <span class="how-step-cta">Mulai sesi foto →</span>
+        </button>
+        <button type="button" class="how-step" data-page="share">
+          <span class="how-num">04</span>
+          <h3>Unduh</h3>
+          <p>Strip fotomu langsung jadi lengkap dengan layout &amp; frame pilihan. Satu klik, langsung siap diunduh.</p>
+          <span class="how-step-cta">Lihat caranya →</span>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE: LAYOUT -->
+  <div class="page hidden" id="page-layout">
+    <div class="page-hero">
+      <p class="section-eyebrow">step one</p>
+      <h2 class="section-title">Pilih Layout Dulu</h2>
+      <p class="section-desc">Tentukan susunan &amp; jumlah pose foto stripmu. Tiap layout punya koleksi frame scrapbook sendiri, jadi setelah pilih layout kamu akan lihat frame yang memang didesain khusus untuknya.</p>
+    </div>
+    <section class="gallery-teaser">
+      <div class="layout-grid" id="landingLayoutGrid"></div>
+    </section>
+  </div>
+
+  <!-- PAGE: FRAME -->
+  <div class="page hidden" id="page-frame">
+    <div class="page-hero">
+      <p class="section-eyebrow">step two</p>
+      <h2 class="section-title">Rapi atau Acak?</h2>
+      <p class="section-desc">Pilih gaya penataan fotomu dulu. Warna frame &amp; stiker baru diatur setelah foto-fotomu jadi — entah dijepret langsung atau dipilih dari galeri — dan stikernya langsung tertata rapi otomatis, tanpa perlu kamu geser-geser sendiri.</p>
+    </div>
+    <section class="gallery-teaser">
+      <p class="frame-section-label" id="landingFrameLabel"></p>
+      <div class="frame-style-choice" id="landingStyleChoice"></div>
+      <button class="btn btn-primary" id="landingFrameCta" style="margin-top:30px;" disabled>Coba Buat Sekarang →</button>
+    </section>
+  </div>
+
+  <!-- PAGE: SHARE -->
+  <div class="page hidden" id="page-share">
+    <section class="share-section" style="margin-top:70px;">
+      <div class="share-card">
+        <div class="share-copy">
+          <p class="section-eyebrow">save the memory</p>
+          <h2 class="section-title" style="text-align:left;">Unduh, lalu Simpan ke Galeri</h2>
+          <p class="share-desc">Setelah strip fotomu jadi, unduh dalam satu klik dan simpan langsung ke galeri HP-mu atau ke album kenangan digitalmu.</p>
+          <button class="btn btn-primary" id="shareCta">Coba Buat &amp; Unduh</button>
+        </div>
+        <div class="share-visual" aria-hidden="true">
+          <div class="share-chip">⬇️ Unduh Sekali Klik</div>
+          <div class="share-chip">🖼️ Simpan ke Galeri</div>
+          <button type="button" class="share-chip" data-page="album" style="cursor:pointer;">📌 Print it Yourself → jadi Album Scrapbook</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE: ALBUM (SCRAPBOOK) -->
+  <div class="page hidden" id="page-album">
+    <div class="page-hero">
+      <p class="section-eyebrow">print it yourself</p>
+      <h2 class="section-title">Album Kenangan ala Scrapbook</h2>
+      <p class="section-desc">Setiap strip foto yang kamu buat bisa ditempel ke sini, lengkap dengan washi tape &amp; catatan tulisan tanganmu sendiri. Klik langsung di kolom teks buat nulis kata-katamu.</p>
+    </div>
+    <section class="album-section">
+      <div class="album-empty hidden" id="albumEmpty">
+        <div class="album-empty-icon">📔</div>
+        <h3>Album kamu masih kosong</h3>
+        <p>Buat strip foto dulu, lalu tempel ke album ini dari halaman hasil fotomu.</p>
+        <button type="button" class="btn btn-primary" id="albumEmptyCta">📷 Buat Strip Pertama</button>
+      </div>
+      <div class="album-board hidden" id="albumBoard">
+        <div class="album-grid" id="albumGrid"></div>
+        <div class="album-toolbar">
+          <button type="button" class="btn btn-ghost btn-small" id="albumAddMoreBtn">📷 Tempel Strip Baru</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="site-footer">
+    <p class="footer-credit">Dibuat oleh Mahira Raihana Salsabila · Kelas XII 4 · Eskul SIT — Memorable Frames, 2026</p>
+  </footer>
+
+</main>
+
+<!-- ============ PHOTOBOOTH APP ============ -->
+<section id="booth" class="booth hidden">
+  <div class="booth-topbar">
+    <button class="back-link" id="backToLanding">← Kembali</button>
+    <div class="steps-indicator">
+      <span class="step-dot active" data-step="1">1. Layout</span>
+      <span class="step-dot" data-step="2">2. Gaya</span>
+      <span class="step-dot" data-step="3">3. Jepret</span>
+      <span class="step-dot" data-step="4">4. Kustomisasi</span>
+    </div>
+  </div>
+
+  <!-- STEP 1: PILIH LAYOUT -->
+  <div class="booth-step" id="step1">
+    <h2>Pilih layout favoritmu</h2>
+    <p class="step-desc">Layout menentukan jumlah &amp; susunan pose di foto stripmu.</p>
+    <div class="layout-grid" id="boothLayoutGrid"></div>
+
+    <button class="btn btn-primary" id="toStep2" disabled>Lanjut ke Gaya →</button>
+  </div>
+
+  <!-- STEP 2: RAPI ATAU ACAK -->
+  <div class="booth-step hidden" id="step2">
+    <button type="button" class="back-link" id="boothBackToLayout">← Ganti layout</button>
+    <h2>Rapi atau acak?</h2>
+    <p class="step-desc">Gaya penataan fotonya — warna &amp; stiker baru diatur belakangan, setelah foto-fotomu jadi.</p>
+    <div class="frame-style-choice" id="boothStyleChoice"></div>
+
+    <button class="btn btn-primary" id="toStep3" disabled>Lanjut ke Kamera →</button>
+  </div>
+
+  <!-- STEP 3: KAMERA -->
+  <div class="booth-step hidden" id="step3">
+    <h2>Senyum, tiga, dua, satu…</h2>
+    <p class="step-desc"><span id="poseCountLabel">4</span> foto dibutuhkan. Jepret langsung atau pilih dari galeri, terserah kamu!</p>
+
+    <div class="source-tabs" id="sourceTabs">
+      <button class="source-tab active" data-source="camera">📸 Kamera</button>
+      <button class="source-tab" data-source="gallery">🖼️ Pilih dari Galeri</button>
+    </div>
+
+    <div class="camera-layout" id="cameraSource">
+      <div class="camera-stage">
+        <video id="video" autoplay playsinline muted></video>
+        <div class="camera-overlay" id="countdownOverlay"></div>
+        <div class="shot-counter" id="shotCounter">Foto 0 / 4</div>
+        <p class="camera-error hidden" id="cameraError">Kami tidak bisa mengakses kamera. Izinkan akses kamera di browser lalu muat ulang halaman.</p>
+      </div>
+
+      <div class="camera-side">
+        <div class="filter-picker">
+          <span class="side-label">Filter</span>
+          <div class="filter-chips" id="filterChips">
+            <button class="chip active" data-filter="none">Normal</button>
+            <button class="chip" data-filter="grayscale">B&amp;W</button>
+            <button class="chip" data-filter="sepia">Sepia</button>
+            <button class="chip" data-filter="vintage">Vintage</button>
+            <button class="chip" data-filter="soft">Soft Glow</button>
+          </div>
+        </div>
+
+        <div class="thumbs-preview">
+          <span class="side-label">Hasil Sementara</span>
+          <div class="thumbs-row" id="thumbsRow"></div>
+        </div>
+
+        <button class="btn btn-primary" id="startCapture">Mulai Sesi Foto 📸</button>
+      </div>
+    </div>
+
+    <div class="gallery-source hidden" id="gallerySource">
+      <div class="filter-picker" style="margin-bottom:20px;">
+        <span class="side-label">Filter (berlaku juga untuk foto galeri)</span>
+        <div class="filter-chips" id="filterChipsGallery">
+          <button class="chip active" data-filter="none">Normal</button>
+          <button class="chip" data-filter="grayscale">B&amp;W</button>
+          <button class="chip" data-filter="sepia">Sepia</button>
+          <button class="chip" data-filter="vintage">Vintage</button>
+          <button class="chip" data-filter="soft">Soft Glow</button>
+        </div>
+      </div>
+      <div class="gallery-dropzone" id="galleryDropzone">
+        <input type="file" id="galleryInput" accept="image/*" multiple hidden>
+        <div class="gallery-placeholder" id="galleryPlaceholder">
+          <p style="margin-bottom:14px; color:var(--plum-soft);">Seret &amp; taruh foto di sini, atau</p>
+          <button class="btn btn-ghost btn-small" id="galleryPickBtn">📂 Pilih File dari Galeri</button>
+        </div>
+        <div class="gallery-thumbs-row" id="galleryThumbsRow"></div>
+        <button class="btn btn-ghost btn-small gallery-pick-again hidden" id="galleryPickAgainBtn">📂 Ganti Foto</button>
+        <p class="gallery-count-hint" id="galleryCountHint">Pilih tepat <strong>4</strong> foto ya.</p>
+      </div>
+      <button class="btn btn-primary hidden" id="galleryUseBtn" style="margin-top:18px;">Gunakan Foto Ini →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: KUSTOMISASI & UNDUH (foto sudah diambil — tinggal atur gaya, warna, stiker) -->
+  <div class="booth-step hidden" id="step4">
+    <h2>Yeay, foto stripmu jadi! 🎉</h2>
+    <p class="step-desc">Atur gaya, warna &amp; stiker di bawah — hasilnya langsung ke-preview sudah rapi, tanpa perlu ditata manual.</p>
+
+    <div class="frame-customize" id="boothFrameCustomize">
+      <button type="button" class="back-link" id="boothBackToStyle">← Ganti gaya/layout</button>
+      <div class="customize-layout">
+        <div class="canvas-wrap" id="canvasWrap">
+          <canvas id="resultCanvas"></canvas>
+        </div>
+
+        <div class="customize-panel">
+          <div class="color-picker-block" id="boothColorPickerBlock">
+            <span class="side-label">Warna Frame</span>
+            <div class="color-swatch-grid" id="boothColorSwatches"></div>
+            <label class="custom-color-row">
+              <span>Custom:</span>
+              <input type="color" id="boothCustomColor" value="#4A3524">
+            </label>
+            <p class="color-locked-note hidden" id="boothColorLockedNote">🔒 Paket tema ini sudah punya warna &amp; bentuk framenya sendiri, jadi warnanya nggak bisa diubah manual lagi — ganti ke paket stiker lain kalau mau pilih warna sendiri.</p>
+          </div>
+          <div class="sticker-set-block">
+            <span class="side-label">Stiker — otomatis tertata, tanpa perlu drag manual</span>
+            <div class="sticker-set-grid" id="boothStickerSets"></div>
+          </div>
+
+          <div class="result-actions">
+            <button class="btn btn-primary" id="downloadBtn">⬇️ Unduh Foto Strip</button>
+            <button class="btn btn-ghost" id="addToAlbumBtn">📔 Tempel ke Album</button>
+            <button class="btn btn-ghost" id="retakeBtn">↺ Sesi Baru</button>
+            <button class="btn btn-ghost" id="changeLayoutBtn">▦ Ganti Layout</button>
+          </div>
+          <p class="hidden" id="addToAlbumConfirm" style="font-family:var(--font-mono); font-size:0.78rem; color:var(--mint-deep); margin-top:8px; font-weight:700;">✓ Tertempel di album! Lihat di menu Album.</p>
+          <p style="font-family:var(--font-mono); font-size:0.78rem; color:var(--plum-soft); margin-top:10px;">
+            Kalau tombol unduh di atas tidak jalan (misalnya karena preview ini disandbox), coba
+            <a href="#" id="openTabFallback" style="color:var(--pink-dark); font-weight:700;">buka fotonya di tab baru</a>
+            lalu klik kanan → Simpan gambar sebagai...
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<canvas id="workCanvas" class="hidden"></canvas>
+
+<script>
+/* ===========================================================
+   GLOBAL MASCOT — speech bubble reactions + tap-to-toggle glasses
+=========================================================== */
+(function(){
+  const mascot = document.getElementById('globalMascot');
+  const bubble = document.getElementById('mascotBubble');
+  if (!mascot || !bubble) return;
+
+  let bubbleTimer = null;
+  let hasGlasses = true;
+
+  function pick(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+
+  // exposed globally so every selection handler across the app can
+  // trigger a little reaction without needing to know about the DOM
+  window.mascotSay = function(text){
+    bubble.textContent = text;
+    bubble.classList.add('show');
+    clearTimeout(bubbleTimer);
+    bubbleTimer = setTimeout(() => bubble.classList.remove('show'), 2400);
+  };
+
+  window.mascotSayRandom = function(pool){
+    window.mascotSay(pick(pool));
+  };
+
+  const GLASSES_ON_LINES = ["Kacamatanya balik lagi ✦", "Makin kece pake kacamata!", "Nih, gaya nerd-cute~"];
+  const GLASSES_OFF_LINES = ["Coba tanpa kacamata dulu~", "Tetep gemes kok!", "Gaya polos, tetep cantik ✦"];
+
+  function toggleGlasses(){
+    hasGlasses = !hasGlasses;
+    mascot.classList.toggle('no-glasses', !hasGlasses);
+    mascot.classList.add('mascot-tapped');
+    setTimeout(() => mascot.classList.remove('mascot-tapped'), 180);
+    window.mascotSayRandom(hasGlasses ? GLASSES_ON_LINES : GLASSES_OFF_LINES);
+  }
+
+  mascot.addEventListener('click', toggleGlasses);
+  mascot.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleGlasses(); }
+  });
+})();
+
+
+/* ===========================================================
+   INTRO GATE — envelope open animation
+=========================================================== */
+(function(){
+  const gate = document.getElementById('introGate');
+  const envelope = document.getElementById('introEnvelope');
+  const flash = document.getElementById('gateFlash');
+  const reveal = document.getElementById('gateReveal');
+  const revealCta = document.getElementById('gateRevealCta');
+  const nav = document.querySelector('header.nav');
+  const landing = document.getElementById('landing');
+  let opened = false;
+  let entered = false;
+
+  function openGate(){
+    if (opened) return;
+    opened = true;
+    envelope.classList.add('opening');
+    // wait for the letter-pop + flap-open animation, then dismiss the gate
+    // with a quick camera-flash burst, landing on the cute interstitial
+    // "reveal" screen instead of jumping straight to the homepage
+    setTimeout(() => {
+      gate.classList.add('gate-hidden');
+      flash.classList.add('flash-fire');
+      reveal.classList.add('reveal-show');
+    }, 680);
+    // fully remove the envelope gate from flow after its fade-out finishes
+    setTimeout(() => { gate.style.display = 'none'; }, 1450);
+    setTimeout(() => { flash.style.display = 'none'; }, 1350);
+  }
+
+  function enterSite(){
+    if (entered) return;
+    entered = true;
+    reveal.classList.remove('reveal-show');
+    document.body.classList.remove('gate-active');
+    if (nav) nav.classList.add('reveal-in');
+    if (landing) landing.classList.add('reveal-in');
+    setTimeout(() => { reveal.style.display = 'none'; }, 550);
+  }
+
+  envelope.addEventListener('click', openGate);
+  envelope.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openGate(); }
+  });
+  revealCta.addEventListener('click', enterSite);
+})();
+
+/* ===========================================================
+   REVEAL SCREEN — the "Gak, ah" button dodges so there's really
+   only one honest choice: Mau.
+=========================================================== */
+(function(){
+  const zone = document.getElementById('revealCtaZone');
+  const noBtn = document.getElementById('gateRevealNo');
+  if (!zone || !noBtn) return;
+
+  const dodgeTexts = ['Gak, ah', 'Yakin?', 'Beneran gak mau?', 'Coba lagi deh', 'Susah kan? 😆', 'Nyerah aja, klik Mau', 'Ehh kabur lagi', 'Udah, iya-in aja 😝'];
+  let count = 0;
+
+  function dodge(){
+    const zoneRect = zone.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+    const maxX = Math.max(zoneRect.width - btnRect.width - 6, 0);
+    const maxY = Math.max(zoneRect.height - btnRect.height - 6, 0);
+    noBtn.style.left = `${Math.random() * maxX}px`;
+    noBtn.style.top = `${Math.random() * maxY}px`;
+    count++;
+    noBtn.textContent = dodgeTexts[Math.min(count, dodgeTexts.length - 1)];
+  }
+
+  noBtn.addEventListener('mouseenter', dodge);
+  noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); dodge(); }, { passive: false });
+  noBtn.addEventListener('focus', dodge);
+  // just in case a click ever lands on it anyway, don't let it go anywhere —
+  // just make it flee again
+  noBtn.addEventListener('click', (e) => { e.preventDefault(); dodge(); });
+})();
+
+/* ===========================================================
+   SCROLL-REVEAL — fade/slide sections in as they enter view
+=========================================================== */
+(function(){
+  const targets = document.querySelectorAll(
+    '.hero-inner, .page-hero, .section-eyebrow, .card, .step, .layout-card, .frame-card'
+  );
+  targets.forEach(el => el.classList.add('reveal-on-scroll'));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  targets.forEach(el => io.observe(el));
+})();
+
+/* ===========================================================
+   BUTTON RIPPLE — little pop on every click
+=========================================================== */
+(function(){
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn, .sticker-btn');
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    const size = Math.max(rect.width, rect.height);
+    ripple.className = 'ripple';
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+    btn.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 650);
+  });
+})();
+
+/* ===========================================================
+   CURSOR SPARKLES — occasional trail near the hero deco icons
+=========================================================== */
+(function(){
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const symbols = ['✦','✧','♡','✨'];
+  let lastSpark = 0;
+
+  hero.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - lastSpark < 90) return; // throttle
+    lastSpark = now;
+    const spark = document.createElement('span');
+    spark.className = 'cursor-sparkle';
+    spark.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    spark.style.left = e.clientX + 'px';
+    spark.style.top = e.clientY + 'px';
+    spark.style.setProperty('--sx', (Math.random() * 30 - 15) + 'px');
+    spark.style.setProperty('--sy', (-20 - Math.random() * 20) + 'px');
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 820);
+  });
+})();
+
+/* ===========================================================
+   MEMORABLE FRAMES — app logic
+=========================================================== */
+
+/* ---------- helpers ---------- */
+function roundRectPath(ctx, x, y, w, h, r){
+  if (typeof r === "number") r = {tl:r, tr:r, br:r, bl:r};
+  ctx.beginPath();
+  ctx.moveTo(x + r.tl, y);
+  ctx.lineTo(x + w - r.tr, y);
+  ctx.arcTo(x + w, y, x + w, y + r.tr, r.tr);
+  ctx.lineTo(x + w, y + h - r.br);
+  ctx.arcTo(x + w, y + h, x + w - r.br, y + h, r.br);
+  ctx.lineTo(x + r.bl, y + h);
+  ctx.arcTo(x, y + h, x, y + h - r.bl, r.bl);
+  ctx.lineTo(x, y + r.tl);
+  ctx.arcTo(x, y, x + r.tl, y, r.tl);
+  ctx.closePath();
+}
+
+function stickerAt(ctx, ch, x, y, size, rotateDeg = 0){
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate((rotateDeg * Math.PI) / 180);
+  ctx.font = `${size}px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  // fillText still applies the emoji's own colors, but browsers scale that
+  // color's ALPHA by ctx.fillStyle's alpha — so if a caller last set a
+  // near-transparent fillStyle (e.g. decorateCellGeneric's invisible-fill
+  // trick for click-through cells), every sticker silently renders at ~0%
+  // opacity. Force a fully-opaque fillStyle here so stickers never inherit
+  // that.
+  ctx.fillStyle = "rgba(0,0,0,1)";
+  ctx.fillText(ch, 0, 0);
+  ctx.restore();
+}
+
+function seededRandom(seed){
+  let s = seed;
+  return function(){
+    s = (s * 9301 + 49297) % 233280;
+    return s / 233280;
+  };
+}
+
+/* ---------- frame library ---------- */
+/* Frames are now pure DATA (colors, pattern type, sticker positions) fed into
+   a small set of shared renderers below — paintStripGeneric() paints the
+   whole strip background, decorateCellGeneric() draws each cell's border +
+   stickers. This makes it cheap to add many frame designs without writing a
+   custom canvas function for every single one. */
+
+function drawChecker(ctx, w, h, c1, c2, cell = 24){
+  for (let yy = 0; yy < h; yy += cell){
+    for (let xx = 0; xx < w; xx += cell){
+      const on = (Math.floor(xx / cell) + Math.floor(yy / cell)) % 2 === 0;
+      ctx.fillStyle = on ? c1 : c2;
+      ctx.fillRect(xx, yy, cell, cell);
+    }
+  }
+}
+
+function drawGingham(ctx, w, h, base, line, cell = 26){
+  ctx.fillStyle = base;
+  ctx.fillRect(0, 0, w, h);
+  ctx.fillStyle = line;
+  ctx.globalAlpha = 0.35;
+  for (let xx = 0; xx < w; xx += cell) ctx.fillRect(xx, 0, cell / 2, h);
+  for (let yy = 0; yy < h; yy += cell) ctx.fillRect(0, yy, w, cell / 2);
+  ctx.globalAlpha = 1;
+}
+
+function drawDots(ctx, w, h, base, dot, cell = 30){
+  ctx.fillStyle = base;
+  ctx.fillRect(0, 0, w, h);
+  ctx.fillStyle = dot;
+  for (let yy = cell / 2; yy < h; yy += cell){
+    for (let xx = cell / 2; xx < w; xx += cell){
+      ctx.beginPath();
+      ctx.arc(xx, yy, cell * 0.12, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+function drawDiagonalStripes(ctx, w, h, c1, c2, stripeW = 26){
+  ctx.fillStyle = c1;
+  ctx.fillRect(0, 0, w, h);
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(0, 0, w, h);
+  ctx.clip();
+  ctx.fillStyle = c2;
+  ctx.globalAlpha = 0.5;
+  for (let xx = -h; xx < w; xx += stripeW * 2){
+    ctx.save();
+    ctx.translate(xx, 0);
+    ctx.transform(1, 0, 0.5, 1, 0, 0);
+    ctx.fillRect(0, 0, stripeW, h * 2);
+    ctx.restore();
+  }
+  ctx.restore();
+  ctx.globalAlpha = 1;
+}
+
+function drawScatteredEmoji(ctx, w, h, ch, count, seed, sizeMin = 10, sizeMax = 18, alpha = 0.5){
+  const rnd = seededRandom(seed);
+  ctx.globalAlpha = alpha;
+  for (let i = 0; i < count; i++){
+    stickerAt(ctx, ch, rnd() * w, rnd() * h, sizeMin + rnd() * (sizeMax - sizeMin), rnd() * 360);
+  }
+  ctx.globalAlpha = 1;
+}
+
+function paintStripGeneric(ctx, w, h, frame){
+  const bg = frame.bg;
+  ctx.clearRect(0, 0, w, h);
+  switch (bg.type){
+    case "solid":
+      ctx.fillStyle = bg.colors[0];
+      ctx.fillRect(0, 0, w, h);
+      break;
+    case "gradient": {
+      const grad = ctx.createLinearGradient(0, 0, bg.horizontal ? w : 0, bg.horizontal ? 0 : h);
+      bg.colors.forEach((c, i) => grad.addColorStop(i / (bg.colors.length - 1), c));
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+      break;
+    }
+    case "checker":
+      drawChecker(ctx, w, h, bg.colors[0], bg.colors[1], bg.cell || 24);
+      break;
+    case "gingham":
+      drawGingham(ctx, w, h, bg.colors[0], bg.colors[1], bg.cell || 26);
+      break;
+    case "dots":
+      drawDots(ctx, w, h, bg.colors[0], bg.colors[1], bg.cell || 30);
+      break;
+    case "diagonal":
+      drawDiagonalStripes(ctx, w, h, bg.colors[0], bg.colors[1], bg.cell || 26);
+      break;
+    case "split":
+      ctx.fillStyle = bg.colors[0];
+      ctx.fillRect(0, 0, w, h * (bg.split ?? 0.55));
+      ctx.fillStyle = bg.colors[1];
+      ctx.fillRect(0, h * (bg.split ?? 0.55), w, h * (1 - (bg.split ?? 0.55)));
+      break;
+    default:
+      ctx.fillStyle = bg.colors[0] || "#fff";
+      ctx.fillRect(0, 0, w, h);
+  }
+  if (bg.scatter){
+    drawScatteredEmoji(ctx, w, h, bg.scatter.emoji, bg.scatter.count || 20, bg.scatter.seed || 1,
+      bg.scatter.min || 8, bg.scatter.max || 16, bg.scatter.alpha ?? 0.5);
+  }
+}
+
+/* Draws the frame's little scrapbook caption ribbon (e.g. "SWEET DAYS",
+   "TOGETHER") centered just under the header title — a consistent spot on
+   the final strip regardless of where the badge sits on the small gallery
+   thumbnail, so it never collides with the header text. */
+function drawBadgeRibbon(ctx, w, y, badge){
+  ctx.save();
+  ctx.font = `700 14px 'Space Mono', monospace`;
+  const paddingX = 14;
+  const textW = ctx.measureText(badge.text.toUpperCase()).width;
+  const boxW = textW + paddingX * 2;
+  const boxH = 26;
+  const x = w / 2 - boxW / 2;
+
+  roundRectPath(ctx, x, y, boxW, boxH, boxH / 2);
+  ctx.fillStyle = badge.bg;
+  ctx.fill();
+  ctx.fillStyle = badge.color;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(badge.text.toUpperCase(), w / 2, y + boxH / 2 + 1);
+  ctx.restore();
+}
+
+/* Draws a strip of washi tape stuck across the top edge of a photo cell —
+   the recurring scrapbook detail seen in the reference boards. */
+function drawTape(ctx, cx, cy, color, rotateDeg){
+  const tw = 74, th = 22;
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate((rotateDeg * Math.PI) / 180);
+  ctx.globalAlpha = 0.92;
+  ctx.fillStyle = color;
+  ctx.fillRect(-tw / 2, -th / 2, tw, th);
+  ctx.strokeStyle = "rgba(0,0,0,0.06)";
+  ctx.lineWidth = 1;
+  ctx.strokeRect(-tw / 2, -th / 2, tw, th);
+  ctx.globalAlpha = 0.35;
+  ctx.strokeStyle = "#fff";
+  for (let i = -tw / 2; i < tw / 2; i += 9){
+    ctx.beginPath();
+    ctx.moveTo(i, -th / 2);
+    ctx.lineTo(i + 8, th / 2);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+/* Builds the path for a single photo cell, shaped according to frame.cellShape
+   so frames aren't all the same plain straight rectangle: "circle" gives a
+   round porthole window, "arch" gives a rounded-top doorway window, "diamond"
+   gives an angular blade-cut gem, "hex" gives a hexagon window, and the
+   default falls back to a (optionally rounded) rectangle. Shared by both the
+   cell border/stroke drawing and the photo clip-path, so the shape is
+   consistent between preview and final result. */
+function frameCellPath(ctx, x, y, w, h, frame){
+  const shape = frame.cellShape || "rect";
+  if (shape === "circle"){
+    ctx.beginPath();
+    ctx.ellipse(x + w / 2, y + h / 2, w / 2, h / 2, 0, 0, Math.PI * 2);
+    ctx.closePath();
+  } else if (shape === "arch"){
+    const r = Math.min(w, h) * 0.46;
+    roundRectPath(ctx, x, y, w, h, { tl: r, tr: r, br: 0, bl: 0 });
+  } else if (shape === "diamond"){
+    ctx.beginPath();
+    ctx.moveTo(x + w / 2, y);
+    ctx.lineTo(x + w, y + h / 2);
+    ctx.lineTo(x + w / 2, y + h);
+    ctx.lineTo(x, y + h / 2);
+    ctx.closePath();
+  } else if (shape === "shield"){
+    // rounded-top crest that tapers to a point at the bottom — like a
+    // sword-guard/shield badge, more "katana" than a plain diamond
+    const r = w * 0.16;
+    ctx.beginPath();
+    ctx.moveTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h * 0.6);
+    ctx.quadraticCurveTo(x + w, y + h * 0.86, x + w / 2, y + h);
+    ctx.quadraticCurveTo(x, y + h * 0.86, x, y + h * 0.6);
+    ctx.closePath();
+  } else if (shape === "hex"){
+    const cx = x + w / 2, cy = y + h / 2;
+    ctx.beginPath();
+    for (let k = 0; k < 6; k++){
+      const angle = Math.PI / 6 + k * Math.PI / 3;
+      const px = cx + (w / 2) * Math.cos(angle);
+      const py = cy + (h / 2) * Math.sin(angle);
+      if (k === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+  } else {
+    roundRectPath(ctx, x, y, w, h, frame.cellRadius ?? 14);
+  }
+}
+
+/* For an oval (cellShape "circle") photo, the crop itself is inset well
+   inside its cell/card instead of stretching edge-to-edge — otherwise the
+   oval just fills the whole slot and reads as an oversized, zoomed-in
+   photo instead of a neat framed portrait like the reference boards. Any
+   other shape just uses the full box unchanged. */
+function getCellPhotoBounds(x, y, w, h, frame){
+  const shape = frame.cellShape || "rect";
+  if (shape === "circle"){
+    const insetX = w * 0.12, insetY = h * 0.12;
+    return { x: x + insetX, y: y + insetY, w: w - insetX * 2, h: h - insetY * 2 };
+  }
+  if (shape === "diamond" || shape === "hex" || shape === "shield"){
+    const insetX = w * 0.05, insetY = h * 0.05;
+    return { x: x + insetX, y: y + insetY, w: w - insetX * 2, h: h - insetY * 2 };
+  }
+  return { x, y, w, h };
+}
+
+function decorateCellGeneric(ctx, x, y, w, h, i, frame, col, cols){
+  const b = frame.cellBorder || { color: "#333", width: 3 };
+  const pb = getCellPhotoBounds(x, y, w, h, frame); // ring hugs the visible (possibly inset) photo, not the whole cell
+  ctx.strokeStyle = b.color;
+  ctx.lineWidth = b.width || 3;
+  if (b.dash) ctx.setLineDash(b.dash);
+  ctx.fillStyle = frame.cellFill || "rgba(255,255,255,0.001)";
+  frameCellPath(ctx, pb.x, pb.y, pb.w, pb.h, frame);
+  if (frame.cellFill) ctx.fill();
+  ctx.stroke();
+  ctx.setLineDash([]);
+  (frame.cellStickers || []).forEach((s) => {
+    // in a multi-column grid, skip corners that face an interior neighbor
+    // (e.g. a left-column cell's right-side corners sit right next to the
+    // next column's left-side corners) so stickers only decorate the
+    // strip's outer edges instead of doubling up in the middle gutters
+    if (cols > 1 && s.side){
+      if (s.side === "left" && col !== 0) return;
+      if (s.side === "right" && col !== cols - 1) return;
+    }
+
+    const emoji = Array.isArray(s.emoji) ? (i % s.emoji.length === 0 ? s.emoji[0] : s.emoji[i % s.emoji.length]) : s.emoji;
+
+    if (s.mode === "gap"){
+      // Forest only: only draw one diagonal pair per photo (alternating by
+      // photo index), positioned/sized from the real gap between the cell's
+      // outer edge and the visible photo so it never overlaps the photo.
+      if (s.alt !== (i % 2)) return;
+      const marginX = pb.x - x, marginY = pb.y - y;
+      const hasGap = marginX > 4 && marginY > 4;
+      const size = hasGap ? Math.max(14, Math.min(26, Math.min(marginX, marginY) * 1.2)) : Math.round(Math.min(w, h) * 0.07);
+      const offX = hasGap ? marginX * 0.55 : w * 0.045;
+      const offY = hasGap ? marginY * 0.55 : h * 0.045;
+      const cx = (s.corner === "tl" || s.corner === "bl") ? x + offX : x + w - offX;
+      const cy = (s.corner === "tl" || s.corner === "tr") ? y + offY : y + h - offY;
+      stickerAt(ctx, emoji, cx, cy, size, s.rotate || 0);
+      return;
+    }
+
+    // original fixed placement (every other abundant pack)
+    stickerAt(ctx, emoji, x + s.rx * w, y + s.ry * h, s.size || 18, s.rotate || 0);
+  });
+  if (frame.tape){
+    drawTape(ctx, x + w / 2, y, frame.tape, i % 2 === 0 ? -7 : 6);
+  }
+}
+
+/* Each frame is plain data: colors/pattern for the strip background (bg),
+   a border style for each photo cell (cellBorder) + small stickers placed at
+   relative positions inside each cell (cellStickers, rx/ry from 0 to 1),
+   and matching info for the HTML gallery preview (thumbBg / cellBorderCss /
+   stickers = corner decorations shown on the whole card thumbnail). */
+const FRAMES = [
+  {
+    id: "polaroid",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#FFD1DC",
+    name: "Pink Polaroid Dream",
+    desc: "Klasik, manis, dengan pita dan hati kecil.",
+    thumbBg: "linear-gradient(145deg,#fff 55%, #FF8FA8 130%)",
+    cellBorderCss: "2.5px dashed #A8583D",
+    stickers: [
+      { emoji: "🎀", top: "-6px", left: "50%", size: 30, rotate: 0, offsetX: "-50%" },
+      { emoji: "♡", top: "8%", left: "8%", size: 16, rotate: -12 },
+      { emoji: "♡", bottom: "6%", right: "8%", size: 14, rotate: 10 }
+    ],
+    badge: { text: "LOVE", top: "5%", left: "50%", offsetX: "-50%", bg: "#A8583D", color: "#fff" },
+    bg: { type: "solid", colors: ["#FFF9F3"] },
+    cellBorder: { color: "#FF8FA8", width: 3 },
+    cellStickers: [
+      { emoji: "♡", rx: 0.12, ry: 0.15, size: 20, rotate: -10 },
+      { emoji: "♡", rx: 0.88, ry: 0.85, size: 16, rotate: 12 }
+    ]
+  },
+  
+  {
+    id: "bear",
+    poses: 4,
+    cellShape: "circle",
+    tape: "#E7C9A0",
+    name: "Bear Ears Cutie",
+    desc: "Telinga beruang gemas di tiap frame.",
+    thumbBg: "linear-gradient(160deg, #f3e0c8, #6E4A30)",
+    cellBorderCss: "3px solid #8B5E3C",
+    stickers: [
+      { emoji: "🐻", top: "4%", left: "6%", size: 22, rotate: -8 },
+      { emoji: "🍯", bottom: "5%", right: "6%", size: 20, rotate: 10 },
+      { emoji: "🐾", top: "6%", right: "10%", size: 15, rotate: 18 }
+    ],
+    badge: { text: "CUTIE", top: "5%", left: "50%", offsetX: "-50%", bg: "#6E4A30", color: "#fff" },
+    bg: { type: "solid", colors: ["#F6E7D3"] },
+    cellBorder: { color: "#8B5E3C", width: 4 },
+    cellStickers: [
+      { emoji: "🐻", rx: 0.15, ry: 0.12, size: 22, rotate: -8 },
+      { emoji: "🐾", rx: 0.85, ry: 0.88, size: 16, rotate: 10 }
+    ]
+  },
+  
+  {
+    id: "stars",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#C9B6E4",
+    name: "Lavender Stars",
+    desc: "Langit malam ungu penuh bintang & bulan.",
+    thumbBg: "radial-gradient(circle at 70% 20%, #4b477a, #2E2015 75%)",
+    cellBorderCss: "2px solid #C9B6E4",
+    textOnDark: true,
+    stickers: [
+      { emoji: "🌙", top: "5%", right: "8%", size: 24, rotate: 0 },
+      { emoji: "⭐", top: "10%", left: "10%", size: 14, rotate: 0 },
+      { emoji: "✦", bottom: "8%", left: "14%", size: 12, rotate: 0 }
+    ],
+    badge: { text: "NIGHT VIBES", top: "5%", left: "50%", offsetX: "-50%", bg: "#4b477a", color: "#fff" },
+    bg: { type: "gradient", colors: ["#3a3564", "#221f3d"], scatter: { emoji: "✦", count: 40, seed: 42, min: 6, max: 14, alpha: 0.7 } },
+    cellBorder: { color: "#C9B6E4", width: 3 },
+    cellStickers: [
+      { emoji: ["🌙", "⭐"], rx: 0.85, ry: 0.15, size: 20, rotate: 0 }
+    ]
+  },
+  
+  {
+    id: "floral",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#CFEFDB",
+    name: "Mint Floral",
+    desc: "Bunga-bunga mint yang menyejukkan.",
+    thumbBg: "linear-gradient(160deg, #e8faf0, #9FAE86)",
+    cellBorderCss: "2px solid #6FC9A6",
+    stickers: [
+      { emoji: "🌸", top: "5%", left: "8%", size: 20, rotate: -10 },
+      { emoji: "🍃", bottom: "6%", right: "10%", size: 18, rotate: 16 },
+      { emoji: "🌿", top: "8%", right: "8%", size: 16, rotate: 20 }
+    ],
+    badge: { text: "BLOOM", top: "5%", left: "50%", offsetX: "-50%", bg: "#6E8058", color: "#fff" },
+    bg: { type: "solid", colors: ["#EAFBF2"], scatter: { emoji: "✿", count: 14, seed: 7, min: 12, max: 22, alpha: 0.55 } },
+    cellBorder: { color: "#6FC9A6", width: 3 },
+    cellStickers: [
+      { emoji: "🌸", rx: 0.12, ry: 0.85, size: 20, rotate: -8 },
+      { emoji: "🍃", rx: 0.88, ry: 0.15, size: 16, rotate: 20 }
+    ]
+  },
+  
+  {
+    id: "rainbow",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#FFE8B8",
+    name: "Sunny Rainbow",
+    desc: "Ceria dengan pelangi & awan kapas.",
+    thumbBg: "linear-gradient(120deg, #fff6e0, #ffe6cf)",
+    cellBorderCss: "2.5px solid #FFD97D",
+    stickers: [
+      { emoji: "🌈", top: "3%", left: "50%", size: 28, rotate: 0, offsetX: "-50%" },
+      { emoji: "☁️", bottom: "8%", left: "8%", size: 18, rotate: 0 },
+      { emoji: "☁️", bottom: "10%", right: "10%", size: 14, rotate: 0 }
+    ],
+    badge: { text: "SO SUNNY", top: "5%", left: "50%", offsetX: "-50%", bg: "#E1A94D", color: "#fff" },
+    bg: { type: "solid", colors: ["#FFF6E0"] },
+    cellBorder: { color: "#FFD97D", width: 3 },
+    cellStickers: [
+      { emoji: "☁️", rx: 0.15, ry: 0.15, size: 18, rotate: 0 },
+      { emoji: "🌈", rx: 0.85, ry: 0.85, size: 22, rotate: 0 }
+    ]
+  },
+
+  {
+    id: "citylights",
+    poses: 4,
+    cellShape: "arch",
+    tape: "#E8A6B8",
+    name: "City Lights Date",
+    desc: "Kiss mark, disco ball, dan bulan malam kota.",
+    thumbBg: "linear-gradient(150deg,#F3C9D6 0%, #C98BA0 100%)",
+    stickers: [
+      { emoji: "💋", top: "4%", left: "6%", size: 24, rotate: -10 },
+      { emoji: "🌙", top: "3%", right: "8%", size: 22, rotate: 0 },
+      { emoji: "🪩", bottom: "6%", right: "6%", size: 20, rotate: 0 }
+    ],
+    badge: { text: "CITY LIGHTS", top: "5%", left: "50%", offsetX: "-50%", bg: "#A8583D", color: "#fff" },
+    bg: { type: "solid", colors: ["#FBE9EE"] },
+    cellBorder: { color: "#E8A6B8", width: 3 },
+    holeColor: "#FBE9EE",
+    cellStickers: [
+      { emoji: "💋", rx: 0.85, ry: 0.13, size: 16, rotate: 8 }
+    ]
+  },
+
+  {
+    id: "mixtape",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#D9C7A8",
+    name: "Old School Mixtape",
+    desc: "Vinyl, tiket bioskop, dan nuansa retro.",
+    thumbBg: "linear-gradient(160deg, #F1E4CC, #8A6A46)",
+    stickers: [
+      { emoji: "💿", top: "5%", left: "8%", size: 24, rotate: -12 },
+      { emoji: "🎟️", bottom: "7%", right: "8%", size: 22, rotate: 10 },
+      { emoji: "🎵", top: "8%", right: "10%", size: 16, rotate: 8 }
+    ],
+    badge: { text: "GOOD VIBES", top: "5%", left: "50%", offsetX: "-50%", bg: "#6E4A30", color: "#fff" },
+    bg: { type: "solid", colors: ["#F3E9D6"] },
+    cellBorder: { color: "#B99B6B", width: 3 },
+    holeColor: "#F3E9D6",
+    cellStickers: [
+      { emoji: "💿", rx: 0.14, ry: 0.86, size: 18, rotate: -8 }
+    ]
+  },
+
+  {
+    id: "tulip",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#F4C6C6",
+    name: "Tulip Bouquet",
+    desc: "Setangkai tulip merah muda & pita.",
+    thumbBg: "linear-gradient(160deg, #FCEEF0, #E9A9AE)",
+    stickers: [
+      { emoji: "🌷", bottom: "5%", left: "8%", size: 26, rotate: -6 },
+      { emoji: "🎀", top: "-4px", left: "50%", size: 26, rotate: 0, offsetX: "-50%" },
+      { emoji: "💌", top: "8%", right: "8%", size: 18, rotate: 8 }
+    ],
+    badge: { text: "FOR YOU", top: "5%", left: "50%", offsetX: "-50%", bg: "#C97B5E", color: "#fff" },
+    bg: { type: "solid", colors: ["#FDF2F3"] },
+    cellBorder: { color: "#E9A9AE", width: 3 },
+    holeColor: "#FDF2F3",
+    cellStickers: [
+      { emoji: "🌷", rx: 0.86, ry: 0.87, size: 18, rotate: 8 }
+    ]
+  },
+
+  {
+    id: "coffeedate",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#C9A27A",
+    name: "Coffee Date",
+    desc: "Kopi hangat & suasana kafe santai.",
+    thumbBg: "linear-gradient(160deg, #EFE0CC, #7C5A3C)",
+    stickers: [
+      { emoji: "☕", top: "5%", left: "8%", size: 24, rotate: -6 },
+      { emoji: "🍪", bottom: "6%", right: "8%", size: 18, rotate: 10 },
+      { emoji: "✎", top: "8%", right: "10%", size: 15, rotate: 12 }
+    ],
+    badge: { text: "COFFEE TALK", top: "5%", left: "50%", offsetX: "-50%", bg: "#6E4A30", color: "#fff" },
+    bg: { type: "solid", colors: ["#F3E7D4"] },
+    cellBorder: { color: "#B08553", width: 3 },
+    holeColor: "#F3E7D4",
+    cellStickers: [
+      { emoji: "☕", rx: 0.85, ry: 0.14, size: 18, rotate: 8 }
+    ]
+  },
+
+  {
+    id: "seaside",
+    poses: 4,
+    cellShape: "circle",
+    tape: "#A8D8DC",
+    name: "Seaside Escape",
+    desc: "Ombak biru, kerang, dan angin pantai.",
+    thumbBg: "linear-gradient(160deg, #DCF3F5, #4E8C93)",
+    stickers: [
+      { emoji: "🌊", top: "5%", left: "8%", size: 22, rotate: 0 },
+      { emoji: "🐚", bottom: "6%", right: "8%", size: 18, rotate: 10 },
+      { emoji: "⛱️", top: "6%", right: "10%", size: 20, rotate: 8 }
+    ],
+    badge: { text: "SALTY AIR", top: "5%", left: "50%", offsetX: "-50%", bg: "#2E5C63", color: "#fff" },
+    bg: { type: "solid", colors: ["#E4F5F6"] },
+    cellBorder: { color: "#7CBEC4", width: 3 },
+    holeColor: "#E4F5F6",
+    cellStickers: [
+      { emoji: "🐚", rx: 0.14, ry: 0.86, size: 16, rotate: -6 }
+    ]
+  },
+
+  {
+    id: "autumnwalk",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#D9A15E",
+    name: "Autumn Walk",
+    desc: "Daun jatuh & suasana musim gugur hangat.",
+    thumbBg: "linear-gradient(160deg, #F3D9B0, #9C5A2E)",
+    stickers: [
+      { emoji: "🍁", top: "5%", left: "8%", size: 22, rotate: -10 },
+      { emoji: "🍂", bottom: "6%", right: "8%", size: 20, rotate: 12 },
+      { emoji: "🌰", top: "8%", right: "10%", size: 15, rotate: 6 }
+    ],
+    badge: { text: "COZY FALL", top: "5%", left: "50%", offsetX: "-50%", bg: "#8B4A24", color: "#fff" },
+    bg: { type: "solid", colors: ["#F6E5C8"] },
+    cellBorder: { color: "#C6803F", width: 3 },
+    holeColor: "#F6E5C8",
+    cellStickers: [
+      { emoji: "🍁", rx: 0.85, ry: 0.86, size: 18, rotate: 10 }
+    ]
+  },
+
+  {
+    id: "birthdaybash",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#F6C9D6",
+    name: "Birthday Bash",
+    desc: "Kue, balon, dan confetti ulang tahun.",
+    thumbBg: "linear-gradient(150deg, #FDEBE0, #E88AA0)",
+    stickers: [
+      { emoji: "🎂", top: "4%", left: "8%", size: 24, rotate: -6 },
+      { emoji: "🎈", bottom: "6%", right: "8%", size: 22, rotate: 10 },
+      { emoji: "🎉", top: "8%", right: "8%", size: 18, rotate: 10 }
+    ],
+    badge: { text: "MAKE A WISH", top: "5%", left: "50%", offsetX: "-50%", bg: "#C9527A", color: "#fff" },
+    bg: { type: "solid", colors: ["#FDECE3"] },
+    cellBorder: { color: "#E88AA0", width: 3 },
+    holeColor: "#FDECE3",
+    cellStickers: [
+      { emoji: "🎈", rx: 0.86, ry: 0.14, size: 18, rotate: 8 }
+    ]
+  },
+
+  {
+    id: "roadtrip",
+    poses: 4,
+    cellShape: "arch",
+    tape: "#8FB6C9",
+    name: "Road Trip",
+    desc: "Peta, kamera, dan jalanan terbuka.",
+    thumbBg: "linear-gradient(160deg, #DCEAF1, #3E6A85)",
+    stickers: [
+      { emoji: "🗺️", top: "5%", left: "8%", size: 22, rotate: -8 },
+      { emoji: "🚗", bottom: "6%", right: "8%", size: 22, rotate: 6 },
+      { emoji: "⛽", top: "8%", right: "10%", size: 16, rotate: 8 }
+    ],
+    badge: { text: "LET'S GO", top: "5%", left: "50%", offsetX: "-50%", bg: "#2E5470", color: "#fff" },
+    bg: { type: "solid", colors: ["#E6F0F5"] },
+    cellBorder: { color: "#6B9AB3", width: 3 },
+    holeColor: "#E6F0F5",
+    cellStickers: [
+      { emoji: "🚗", rx: 0.14, ry: 0.86, size: 18, rotate: -6 }
+    ]
+  },
+
+  {
+    id: "bookworm",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#C6B49A",
+    name: "Bookworm Cozy",
+    desc: "Buku, teh hangat, dan selimut rajut.",
+    thumbBg: "linear-gradient(160deg, #EFE6D6, #6E5A3E)",
+    stickers: [
+      { emoji: "📖", top: "5%", left: "8%", size: 24, rotate: -8 },
+      { emoji: "🍵", bottom: "6%", right: "8%", size: 18, rotate: 8 },
+      { emoji: "🕯️", top: "8%", right: "10%", size: 16, rotate: 6 }
+    ],
+    badge: { text: "QUIET HOURS", top: "5%", left: "50%", offsetX: "-50%", bg: "#5A4630", color: "#fff" },
+    bg: { type: "solid", colors: ["#F2EADB"] },
+    cellBorder: { color: "#A6885F", width: 3 },
+    holeColor: "#F2EADB",
+    cellStickers: [
+      { emoji: "📖", rx: 0.85, ry: 0.85, size: 18, rotate: 8 }
+    ]
+  },
+
+  {
+    id: "sunflowerfield",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#F0D26A",
+    name: "Sunflower Field",
+    desc: "Bunga matahari & langit sore keemasan.",
+    thumbBg: "linear-gradient(160deg, #FBEFC4, #D69A2E)",
+    stickers: [
+      { emoji: "🌻", top: "4%", left: "8%", size: 26, rotate: -8 },
+      { emoji: "🐝", bottom: "6%", right: "8%", size: 16, rotate: 12 },
+      { emoji: "☀️", top: "6%", right: "10%", size: 18, rotate: 0 }
+    ],
+    badge: { text: "GOLDEN HOUR", top: "5%", left: "50%", offsetX: "-50%", bg: "#B87F1E", color: "#fff" },
+    bg: { type: "solid", colors: ["#FCF3D6"] },
+    cellBorder: { color: "#E1B84E", width: 3 },
+    holeColor: "#FCF3D6",
+    cellStickers: [
+      { emoji: "🌻", rx: 0.86, ry: 0.86, size: 18, rotate: 6 }
+    ]
+  },
+
+  {
+    id: "rainyday",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#A9C0D6",
+    name: "Rainy Day Mood",
+    desc: "Payung, hujan rintik, dan jendela berembun.",
+    thumbBg: "linear-gradient(160deg, #E3EAF2, #5C7A96)",
+    stickers: [
+      { emoji: "☔", top: "4%", left: "8%", size: 22, rotate: -8 },
+      { emoji: "💧", bottom: "6%", right: "8%", size: 16, rotate: 6 },
+      { emoji: "🌧️", top: "6%", right: "10%", size: 20, rotate: 0 }
+    ],
+    badge: { text: "COZY RAIN", top: "5%", left: "50%", offsetX: "-50%", bg: "#3E5E78", color: "#fff" },
+    bg: { type: "solid", colors: ["#E9EFF5"] },
+    cellBorder: { color: "#8CA8C2", width: 3 },
+    holeColor: "#E9EFF5",
+    cellStickers: [
+      { emoji: "💧", rx: 0.14, ry: 0.14, size: 14, rotate: 0 }
+    ]
+  },
+
+  {
+    id: "groovy70s",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#E7A54E",
+    name: "Groovy Seventies",
+    desc: "Warna retro oranye-coklat penuh gaya.",
+    thumbBg: "linear-gradient(150deg, #F3D3A0, #A85C2E)",
+    stickers: [
+      { emoji: "🕶️", top: "5%", left: "8%", size: 22, rotate: -8 },
+      { emoji: "✌️", bottom: "6%", right: "8%", size: 20, rotate: 10 },
+      { emoji: "🌼", top: "7%", right: "10%", size: 16, rotate: 6 }
+    ],
+    badge: { text: "GROOVY", top: "5%", left: "50%", offsetX: "-50%", bg: "#8B4A24", color: "#fff" },
+    bg: { type: "solid", colors: ["#F5E1C4"] },
+    cellBorder: { color: "#C9803F", width: 3 },
+    holeColor: "#F5E1C4",
+    cellStickers: [
+      { emoji: "🌼", rx: 0.86, ry: 0.14, size: 16, rotate: 6 }
+    ]
+  },
+
+  {
+    id: "pastelclouds",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#D9CCF0",
+    name: "Pastel Clouds",
+    desc: "Langit senja lembut ungu & pink pastel.",
+    thumbBg: "linear-gradient(160deg, #EDE3FA, #B9A0DE)",
+    stickers: [
+      { emoji: "☁️", top: "5%", left: "8%", size: 22, rotate: 0 },
+      { emoji: "🎈", bottom: "6%", right: "8%", size: 18, rotate: 8 },
+      { emoji: "✨", top: "8%", right: "10%", size: 14, rotate: 0 }
+    ],
+    badge: { text: "SOFT DAYS", top: "5%", left: "50%", offsetX: "-50%", bg: "#7C6BA0", color: "#fff" },
+    bg: { type: "solid", colors: ["#F1EAFB"] },
+    cellBorder: { color: "#B29EDD", width: 3 },
+    holeColor: "#F1EAFB",
+    cellStickers: [
+      { emoji: "☁️", rx: 0.86, ry: 0.85, size: 16, rotate: 0 }
+    ]
+  },
+
+  {
+    id: "kittencuddle",
+    poses: 4,
+    cellShape: "circle",
+    tape: "#F2C9B0",
+    name: "Kitten Cuddles",
+    desc: "Kucing gemas & bantalan kaki lucu.",
+    thumbBg: "linear-gradient(160deg, #FBE9DC, #D89A6E)",
+    stickers: [
+      { emoji: "🐱", top: "4%", left: "8%", size: 24, rotate: -6 },
+      { emoji: "🐾", bottom: "6%", right: "8%", size: 16, rotate: 10 },
+      { emoji: "🧶", top: "8%", right: "10%", size: 18, rotate: 8 }
+    ],
+    badge: { text: "MEOW", top: "5%", left: "50%", offsetX: "-50%", bg: "#A8683D", color: "#fff" },
+    bg: { type: "solid", colors: ["#FCEEE1"] },
+    cellBorder: { color: "#D9A874", width: 3 },
+    holeColor: "#FCEEE1",
+    cellStickers: [
+      { emoji: "🐾", rx: 0.14, ry: 0.86, size: 16, rotate: -8 }
+    ]
+  },
+
+  {
+    id: "citypop",
+    poses: 4,
+    style: "filmstrip",
+    tape: "#F2A7C9",
+    name: "City Pop Neon",
+    desc: "Gedung malam neon & suasana kota 80an.",
+    thumbBg: "radial-gradient(circle at 30% 20%, #5A4A8C, #241A3D 80%)",
+    textOnDark: true,
+    stickers: [
+      { emoji: "🌆", top: "4%", left: "8%", size: 22, rotate: 0 },
+      { emoji: "🎧", bottom: "6%", right: "8%", size: 20, rotate: 8 },
+      { emoji: "✨", top: "8%", right: "10%", size: 14, rotate: 0 }
+    ],
+    badge: { text: "NIGHT DRIVE", top: "5%", left: "50%", offsetX: "-50%", bg: "#D14F8C", color: "#fff" },
+    bg: { type: "gradient", colors: ["#443A70", "#221A3B"], scatter: { emoji: "✦", count: 30, seed: 21, min: 6, max: 12, alpha: 0.6 } },
+    cellBorder: { color: "#F2A7C9", width: 3 },
+    holeColor: "#2B2140",
+    cellStickers: [
+      { emoji: "✨", rx: 0.86, ry: 0.14, size: 14, rotate: 0 }
+    ]
+  },
+
+  {
+    id: "confetti",
+    poses: 6,
+    cellShape: "circle",
+    tape: "#FFC1D0",
+    name: "Confetti Party",
+    desc: "Meriah, cocok buat rayain apa aja.",
+    thumbBg: "radial-gradient(circle at 30% 20%, #fff 0%, #fef1e6 65%)",
+    cellBorderCss: "2px solid #FF8FA8",
+    stickers: [
+      { emoji: "🎉", top: "4%", left: "6%", size: 20, rotate: -14 },
+      { emoji: "🎈", top: "6%", right: "8%", size: 20, rotate: 10 },
+      { emoji: "🎊", bottom: "6%", right: "10%", size: 18, rotate: 8 }
+    ],
+    badge: { text: "PARTY TIME", top: "5%", left: "50%", offsetX: "-50%", bg: "#FF8FA8", color: "#fff" },
+    bg: { type: "solid", colors: ["#FFFDF8"], scatter: { emoji: "•", count: 0 } },
+    cellBorder: { color: "#FF8FA8", width: 3 },
+    cellStickers: [
+      { emoji: ["🎈", "🎊"], rx: 0.86, ry: 0.15, size: 20, rotate: 8 }
+    ]
+  },
+  
+  {
+    id: "picnic",
+    poses: 6,
+    tape: "#DCE8FF",
+    name: "Blue Picnic Vibes",
+    desc: "Kotak-kotak biru yang fun & casual buat seharian.",
+    thumbBg: "repeating-conic-gradient(#4C6FBF 0% 25%, #EAF1FF 0% 50%) 0 0/26px 26px",
+    cellBorderCss: "2.5px solid #2E4C99",
+    stickers: [
+      { emoji: "✨", top: "4%", left: "8%", size: 16, rotate: 0 },
+      { emoji: "✨", bottom: "6%", right: "8%", size: 16, rotate: 0 }
+    ],
+    badge: { text: "VIBES", top: "6%", right: "6%", bg: "#2E4C99", color: "#fff" },
+    bg: { type: "checker", colors: ["#4C6FBF", "#EAF1FF"], cell: 24 },
+    cellBorder: { color: "#2E4C99", width: 4 },
+    cellFill: "#ffffff",
+    cellStickers: [
+      { emoji: "✨", rx: 0.14, ry: 0.15, size: 18, rotate: 0 },
+      { emoji: "✨", rx: 0.86, ry: 0.85, size: 18, rotate: 0 }
+    ]
+  },
+  
+  {
+    id: "candy",
+    poses: 3,
+    cellShape: "circle",
+    tape: "#F3D9B8",
+    name: "Vintage Candy Booth",
+    desc: "Nuansa pastel klasik ala photobooth jadul.",
+    thumbBg: "linear-gradient(180deg, #FBEFE0 0%, #F3D9B8 100%)",
+    cellBorderCss: "2px solid #A8583D",
+    stickers: [
+      { emoji: "🍬", top: "5%", left: "8%", size: 18, rotate: -12 },
+      { emoji: "🎗️", bottom: "6%", right: "8%", size: 18, rotate: 10 }
+    ],
+    badge: { text: "SWEET DAYS", top: "5%", left: "50%", offsetX: "-50%", bg: "#A8583D", color: "#fff" },
+    bg: { type: "gradient", colors: ["#FBEFE0", "#F3D9B8"] },
+    cellBorder: { color: "#A8583D", width: 3 },
+    cellStickers: [
+      { emoji: "🍬", rx: 0.13, ry: 0.13, size: 18, rotate: -10 },
+      { emoji: "🎗️", rx: 0.87, ry: 0.87, size: 18, rotate: 8 }
+    ]
+  },
+  
+  {
+    id: "cherry",
+    poses: 2,
+    cellShape: "arch",
+    tape: "#FFD1E1",
+    name: "Cherry Pink Elegance",
+    desc: "Pink lembut dipadu hitam yang elegan & manis.",
+    thumbBg: "linear-gradient(165deg, #FFE3EC 55%, #2B2B2B 55%)",
+    cellBorderCss: "2.5px solid #C4416B",
+    stickers: [
+      { emoji: "🍒", top: "5%", right: "8%", size: 20, rotate: -8 },
+      { emoji: "✦", bottom: "8%", left: "10%", size: 14, rotate: 0 }
+    ],
+    badge: { text: "CHERRY MOOD", top: "5%", left: "50%", offsetX: "-50%", bg: "#C4416B", color: "#fff" },
+    bg: { type: "split", colors: ["#FFE3EC", "#2B2B2B"], split: 0.55 },
+    cellBorder: { color: "#C4416B", width: 4 },
+    cellStickers: [
+      { emoji: "🍒", rx: 0.87, ry: 0.15, size: 20, rotate: -6 },
+      { emoji: "✦", rx: 0.13, ry: 0.85, size: 14, rotate: 0 }
+    ]
+  },
+  
+  {
+    id: "snap",
+    poses: 6,
+    tape: "#CDEBB0",
+    name: "Snap Your Joy",
+    desc: "Retro kotak-kotak hijau, ceria & penuh energi.",
+    thumbBg: "repeating-conic-gradient(#1F2A1B 0% 25%, #7FBF6A 0% 50%) 0 0/22px 22px",
+    cellBorderCss: "2.5px solid #1F2A1B",
+    stickers: [
+      { emoji: "⭐", top: "5%", left: "8%", size: 16, rotate: 0 },
+      { emoji: "⭐", bottom: "6%", right: "8%", size: 16, rotate: 0 }
+    ],
+    badge: { text: "SNAP", bottom: "5%", left: "6%", bg: "#1F2A1B", color: "#fff" },
+    bg: { type: "checker", colors: ["#1F2A1B", "#7FBF6A"], cell: 22 },
+    cellBorder: { color: "#1F2A1B", width: 4 },
+    cellFill: "#EFF7EA",
+    cellStickers: [
+      { emoji: "⭐", rx: 0.14, ry: 0.15, size: 16, rotate: 0 },
+      { emoji: "⭐", rx: 0.86, ry: 0.85, size: 16, rotate: 0 }
+    ]
+  },
+  
+  {
+    id: "gingham",
+    poses: 3,
+    tape: "#EAD9BC",
+    name: "Simple Life Gingham",
+    desc: "Kotak-kotak gingham krem, homey & scrapbook banget.",
+    thumbBg: "repeating-linear-gradient(#F1DFC0 0 12px, #C97B5E22 12px 24px), repeating-linear-gradient(90deg,#F1DFC0 0 12px, #C97B5E22 12px 24px)",
+    cellBorderCss: "2px solid #6E4A30",
+    stickers: [
+      { emoji: "📷", top: "5%", right: "8%", size: 16, rotate: -8 },
+      { emoji: "🌼", bottom: "6%", left: "8%", size: 18, rotate: 6 }
+    ],
+    badge: { text: "HOME SWEET", top: "5%", left: "50%", offsetX: "-50%", bg: "#6E4A30", color: "#fff" },
+    bg: { type: "gingham", colors: ["#F1DFC0", "#C97B5E"], cell: 26 },
+    cellBorder: { color: "#6E4A30", width: 3 },
+    cellFill: "#FBF2E3",
+    cellStickers: [
+      { emoji: "🌼", rx: 0.13, ry: 0.87, size: 16, rotate: 6 }
+    ]
+  },
+  
+  {
+    id: "bongo",
+    poses: 3,
+    tape: "#FBE3C7",
+    name: "Playful Doodle Cat",
+    desc: "Coretan lucu ala jurnal, penuh semangat #OOTD.",
+    thumbBg: "linear-gradient(160deg,#FFF8EC,#FBEFE0)",
+    cellBorderCss: "2px dashed #C97B5E",
+    stickers: [
+      { emoji: "🐱", top: "4%", left: "7%", size: 20, rotate: -10 },
+      { emoji: "✨", top: "6%", right: "10%", size: 14, rotate: 0 },
+      { emoji: "📌", bottom: "6%", right: "8%", size: 16, rotate: 12 }
+    ],
+    badge: { text: "TODAY", top: "5%", left: "50%", offsetX: "-50%", bg: "#C97B5E", color: "#fff" },
+    bg: { type: "solid", colors: ["#FFF8EC"], scatter: { emoji: "✦", count: 10, seed: 21, min: 8, max: 12, alpha: 0.35 } },
+    cellBorder: { color: "#C97B5E", width: 2.5, dash: [6, 6] },
+    cellStickers: [
+      { emoji: "🐱", rx: 0.13, ry: 0.14, size: 18, rotate: -8 },
+      { emoji: "✨", rx: 0.87, ry: 0.86, size: 14, rotate: 0 }
+    ]
+  },
+  
+  {
+    id: "stamp",
+    poses: 2,
+    tape: "#F1DFC0",
+    name: "Vintage Stamp Collection",
+    desc: "Merah berani dengan tepi bergerigi ala perangko.",
+    thumbBg: "linear-gradient(160deg,#A8583D,#7C2A1E)",
+    cellBorderCss: "2.5px dashed #fff",
+    stickers: [
+      { emoji: "✉️", top: "5%", left: "8%", size: 18, rotate: -8 },
+      { emoji: "⭐", bottom: "6%", right: "10%", size: 14, rotate: 0 }
+    ],
+    badge: { text: "A Bit of Memory", top: "5%", right: "6%", bg: "rgba(255,255,255,0.85)", color: "#7C2A1E" },
+    bg: { type: "solid", colors: ["#A8583D"] },
+    cellBorder: { color: "#fff", width: 3, dash: [8, 6] },
+    cellFill: "#F1DFC0",
+    cellStickers: [
+      { emoji: "✉️", rx: 0.87, ry: 0.15, size: 16, rotate: -6 }
+    ]
+  },
+  
+  {
+    id: "blueheart",
+    poses: 2,
+    tape: "#D8E8F7",
+    name: "Blue Heart Memories",
+    desc: "Krem lembut dihiasi doodle hati biru.",
+    thumbBg: "linear-gradient(160deg,#F1F6FB,#DCEBF9)",
+    cellBorderCss: "2px solid #5C87B8",
+    stickers: [
+      { emoji: "💙", top: "5%", left: "50%", size: 20, rotate: 0, offsetX: "-50%" },
+      { emoji: "✨", bottom: "6%", right: "10%", size: 14, rotate: 0 }
+    ],
+    badge: { text: "MY MEMORY", top: "5%", left: "50%", offsetX: "-50%", bg: "#5C87B8", color: "#fff" },
+    bg: { type: "gradient", colors: ["#F1F6FB", "#DCEBF9"], scatter: { emoji: "♡", count: 12, seed: 9, min: 8, max: 14, alpha: 0.35 } },
+    cellBorder: { color: "#5C87B8", width: 2.5 },
+    cellStickers: [
+      { emoji: "💙", rx: 0.5, ry: 0.12, size: 16, rotate: 0 }
+    ]
+  },
+  
+  {
+    id: "denim",
+    poses: 6,
+    cellShape: "arch",
+    tape: "#AFC8DE",
+    name: "Denim Keepsake",
+    desc: "Tekstur denim biru dengan tempelan tiket manis.",
+    thumbBg: "repeating-linear-gradient(115deg,#3B5F8A 0 10px,#2E4C6E 10px 20px)",
+    cellBorderCss: "2.5px solid #1F3550",
+    textOnDark: true,
+    stickers: [
+      { emoji: "🎫", top: "5%", right: "8%", size: 18, rotate: 8 },
+      { emoji: "🧷", bottom: "6%", left: "8%", size: 16, rotate: -10 }
+    ],
+    badge: { text: "KEEPSAKE", top: "5%", left: "50%", offsetX: "-50%", bg: "#1F3550", color: "#fff" },
+    bg: { type: "diagonal", colors: ["#3B5F8A", "#2E4C6E"], cell: 22 },
+    cellBorder: { color: "#1F3550", width: 3 },
+    cellFill: "#E9EEF3",
+    cellStickers: [
+      { emoji: "🎫", rx: 0.86, ry: 0.14, size: 16, rotate: 6 }
+    ]
+  },
+  
+  {
+    id: "sweetheart",
+    poses: 6,
+    tape: "#FFD6E8",
+    name: "Sweetheart Lover",
+    desc: "Pink manis penuh pita, cocok buat pasangan.",
+    thumbBg: "linear-gradient(160deg,#FFE1EE,#FFC6DE)",
+    cellBorderCss: "2.5px solid #D6577E",
+    stickers: [
+      { emoji: "🎀", top: "4%", left: "8%", size: 18, rotate: -10 },
+      { emoji: "💗", bottom: "5%", right: "8%", size: 18, rotate: 10 }
+    ],
+    badge: { text: "TOGETHER", top: "5%", left: "50%", offsetX: "-50%", bg: "#D6577E", color: "#fff" },
+    bg: { type: "gradient", colors: ["#FFE1EE", "#FFC6DE"] },
+    cellBorder: { color: "#D6577E", width: 3 },
+    cellStickers: [
+      { emoji: "🎀", rx: 0.13, ry: 0.14, size: 16, rotate: -10 },
+      { emoji: "💗", rx: 0.87, ry: 0.86, size: 16, rotate: 10 }
+    ]
+  },
+  
+  {
+    id: "proud",
+    poses: 6,
+    tape: "#FFD1DC",
+    name: "Productive & Proud",
+    desc: "Pop art pink dengan pola polkadot ceria.",
+    thumbBg: "radial-gradient(#fff 30%, transparent 31%) 0 0/18px 18px, #FF8FA8",
+    cellBorderCss: "3px solid #2B2B2B",
+    stickers: [
+      { emoji: "✔️", top: "5%", left: "8%", size: 16, rotate: 0 },
+      { emoji: "📌", bottom: "6%", right: "8%", size: 16, rotate: 10 }
+    ],
+    badge: { text: "PROUD OF U", top: "5%", left: "50%", offsetX: "-50%", bg: "#2B2B2B", color: "#fff" },
+    bg: { type: "dots", colors: ["#FF8FA8", "#fff"], cell: 28 },
+    cellBorder: { color: "#2B2B2B", width: 3 },
+    cellFill: "#fff",
+    cellStickers: [
+      { emoji: "✔️", rx: 0.87, ry: 0.14, size: 16, rotate: 0 }
+    ]
+  },
+  
+  {
+    id: "positivepink",
+    poses: 6,
+    tape: "#FFD9E4",
+    name: "Positive Vibes Pink",
+    desc: "Kotak-kotak pink terang dengan energi positif.",
+    thumbBg: "repeating-conic-gradient(#FF6F91 0% 25%, #FFE1EC 0% 50%) 0 0/24px 24px",
+    cellBorderCss: "2.5px solid #C4416B",
+    stickers: [
+      { emoji: "💬", top: "5%", left: "8%", size: 16, rotate: -8 },
+      { emoji: "✨", bottom: "6%", right: "8%", size: 16, rotate: 0 }
+    ],
+    badge: { text: "GOOD VIBES", top: "5%", left: "50%", offsetX: "-50%", bg: "#C4416B", color: "#fff" },
+    bg: { type: "checker", colors: ["#FF6F91", "#FFE1EC"], cell: 24 },
+    cellBorder: { color: "#C4416B", width: 3 },
+    cellFill: "#fff",
+    cellStickers: [
+      { emoji: "💬", rx: 0.13, ry: 0.15, size: 16, rotate: -8 }
+    ]
+  },
+  
+  {
+    id: "wanderlust",
+    poses: 2,
+    tape: "#B9D3E4",
+    name: "Deep Blue Wanderlust",
+    desc: "Biru tua misterius, cocok untuk mood traveling.",
+    thumbBg: "radial-gradient(circle at 30% 20%, #3A5A78, #16222E 75%)",
+    cellBorderCss: "2px solid #9FC2DB",
+    textOnDark: true,
+    stickers: [
+      { emoji: "🧭", top: "5%", left: "8%", size: 18, rotate: -8 },
+      { emoji: "✈️", bottom: "6%", right: "8%", size: 16, rotate: 10 }
+    ],
+    badge: { text: "WANDERLUST", top: "5%", left: "50%", offsetX: "-50%", bg: "#16222E", color: "#fff" },
+    bg: { type: "gradient", colors: ["#3A5A78", "#16222E"] },
+    cellBorder: { color: "#9FC2DB", width: 2.5 },
+    cellStickers: [
+      { emoji: "🧭", rx: 0.13, ry: 0.14, size: 16, rotate: -8 }
+    ]
+  },
+  
+  {
+    id: "floralpunch",
+    poses: 2,
+    tape: "#EDEDED",
+    name: "Black & White Floral Punch",
+    desc: "Monokrom berani dengan bunga garis putih.",
+    thumbBg: "linear-gradient(160deg,#2B2B2B,#1a1a1a)",
+    cellBorderCss: "2px solid #fff",
+    textOnDark: true,
+    stickers: [
+      { emoji: "❀", top: "5%", right: "8%", size: 18, rotate: 0 },
+      { emoji: "❀", bottom: "6%", left: "8%", size: 14, rotate: 20 }
+    ],
+    badge: { text: "BOLD & BLOOM", top: "5%", left: "50%", offsetX: "-50%", bg: "#2B2B2B", color: "#fff" },
+    bg: { type: "solid", colors: ["#2B2B2B"] },
+    cellBorder: { color: "#fff", width: 2.5 },
+    cellFill: "#f4f4f4",
+    cellStickers: [
+      { emoji: "❀", rx: 0.87, ry: 0.14, size: 16, rotate: 0 }
+    ]
+  },
+  
+  {
+    id: "doodlerest",
+    poses: 3,
+    tape: "#F6E2C4",
+    name: "Colorful Doodle Rest",
+    desc: "Pastel ceria dengan coretan penyemangat.",
+    thumbBg: "linear-gradient(120deg,#FFEAD1,#E1F3E8,#E7E4F7)",
+    cellBorderCss: "2.5px dashed #E1A94D",
+    stickers: [
+      { emoji: "🌈", top: "4%", left: "8%", size: 18, rotate: 0 },
+      { emoji: "☕", bottom: "6%", right: "8%", size: 16, rotate: 10 }
+    ],
+    badge: { text: "JUST BREATHE", top: "5%", left: "50%", offsetX: "-50%", bg: "#E1A94D", color: "#fff" },
+    bg: { type: "gradient", colors: ["#FFEAD1", "#E1F3E8", "#E7E4F7"], horizontal: true },
+    cellBorder: { color: "#E1A94D", width: 2.5, dash: [7, 7] },
+    cellStickers: [
+      { emoji: "🌈", rx: 0.13, ry: 0.14, size: 16, rotate: 0 }
+    ]
+  },
+  
+  {
+    id: "daisygarden",
+    poses: 3,
+    tape: "#EAF7F2",
+    name: "Sunlight Daisy Garden",
+    desc: "Teduh cerah dengan bunga daisy putih.",
+    thumbBg: "linear-gradient(160deg,#6FC9C9,#4CA6A6)",
+    cellBorderCss: "3px solid #fff",
+    stickers: [
+      { emoji: "🌼", top: "4%", right: "10%", size: 18, rotate: 0 },
+      { emoji: "☀️", bottom: "6%", left: "8%", size: 18, rotate: 0 }
+    ],
+    badge: { text: "SUNSHINE", top: "5%", left: "50%", offsetX: "-50%", bg: "#4CA6A6", color: "#fff" },
+    bg: { type: "gradient", colors: ["#6FC9C9", "#4CA6A6"] },
+    cellBorder: { color: "#fff", width: 3.5 },
+    cellStickers: [
+      { emoji: "🌼", rx: 0.87, ry: 0.14, size: 16, rotate: 0 }
+    ]
+  }
+];
+
+const FILTERS = {
+  none: "",
+  grayscale: "grayscale(1)",
+  sepia: "sepia(0.75) saturate(1.2)",
+  vintage: "sepia(0.35) contrast(1.15) saturate(1.3) brightness(1.02)",
+  soft: "brightness(1.08) saturate(1.1) blur(0.4px)"
+};
+
+/* ---------- layout library ---------- */
+/* Each layout: number of poses + column count for the final strip. */
+const LAYOUTS = [
+  { id: "a", name: "Layout A", poses: 4, cols: 1, desc: "4 pose, strip klasik memanjang." },
+  { id: "b", name: "Layout B", poses: 3, cols: 1, desc: "3 pose, pas buat yang cepat." },
+  { id: "c", name: "Layout C", poses: 2, cols: 1, desc: "2 pose, simpel & minimalis." },
+  { id: "d", name: "Layout D", poses: 6, cols: 2, desc: "6 pose, dua kolom penuh gaya." }
+];
+
+/* ---------- print proportions ----------
+   Fixed cell ratio for every strip (the old Story Instagram / 2R size
+   picker was removed — one clean proportion is used for all frames now). */
+const STRIP_CELL_RATIO = 1.15;
+const STRIP_THUMB_ASPECT = "4/5";
+
+/* ---------- state ---------- */
+const state = {
+  selectedLayout: null,
+  selectedFrame: null,
+  selectedFilter: "none",
+  arrangement: "scatter",   // "grid" | "scatter" — scatter (acak estetik) is the default look
+  themeColor: null,         // hex override for frame accent colors, or null = frame default
+  stickerSetId: "none",     // id from STICKER_SETS — preset sticker pack applied to the custom frame
+  stickers: [],             // [{ id, emoji, rx, ry, rot, size }]
+  photoSource: "camera",    // "camera" | "gallery"
+  galleryFiles: [],         // filtered dataURLs staged from gallery picks, before "Gunakan Foto Ini"
+  shots: [],
+  stream: null
+};
+
+/* Keeps a reference to the raw File objects most recently picked from the
+   gallery, so switching filters afterwards can re-bake them without asking
+   the person to re-pick. */
+let galleryInputFilesCache = [];
+
+/* ---------- theme colors (used for the frame border color picker in Step 2) ---------- */
+const THEME_COLORS = [
+  { id: "white",   name: "Putih",    hex: "#FDFBF6" },
+  { id: "black",   name: "Hitam",    hex: "#221D18" },
+  { id: "pink",    name: "Pink",     hex: "#E88CA0" },
+  { id: "green",   name: "Hijau",    hex: "#7FB595" },
+  { id: "blue",    name: "Biru",     hex: "#6FA8D6" },
+  { id: "yellow",  name: "Kuning",   hex: "#E1A94D" },
+  { id: "purple",  name: "Ungu",     hex: "#9B8AC4" },
+  { id: "maroon",  name: "Maroon",   hex: "#7A2E38" },
+  { id: "burgundy",name: "Burgundy", hex: "#6E2439" }
+];
+
+/* ---------- cute sticker palette (flowers, stars, cartoon-ish faces, etc.) ---------- */
+const STICKER_EMOJIS = ["🌸","🌷","🌼","🌻","⭐","✨","💫","🎀","🧸","🐻","🐱","🐰","☁️","💗","🍒","🌈","☀️","🌙","🦋","🍓"];
+
+/* ---------- sticker sets (Step 2 customize) ----------
+   Each pack is a small curated group of emoji "stickers" that get placed
+   for you — neatly in fixed spots when the person picked the "Rapi" style,
+   or scattered playfully when they picked "Acak Estetik" — instead of
+   making them drag stickers on one by one. */
+const STICKER_SETS = [
+  { id: "none",     name: "Tanpa Stiker", emojis: [] },
+  { id: "girlypop", name: "Girly Pop",    emojis: ["🎀", "💖", "✨", "🩰"] },
+  { id: "cute",     name: "Cutie",        emojis: ["🐰", "🌸", "☁️", "🧸"] },
+  { id: "bear",     name: "Bear Buddy",   emojis: ["🐻", "🍯", "🐾"] },
+  { id: "kitty",    name: "Kitty Kawaii", emojis: ["🐱", "🐟", "🧶", "🎐"] },
+  { id: "kiddo",    name: "Playful Kiddo",emojis: ["⚽", "🍬", "🌈", "⭐"] },
+  { id: "panda",    name: "Panda Party",  emojis: ["🐼", "🎋", "🐾", "🍃"] },
+  // these six "spill over" the whole strip with lots of big stickers, their
+  // own matching background tint, AND a distinct auto photo shape each —
+  // not all the same oval — like a full themed takeover. Color + shape are
+  // locked while one of these is active.
+  { id: "forest",   name: "Forest Spirit",  emojis: ["🌲", "🍂", "🌰", "☁️", "🍃", "🦋", "✨"], abundant: true, bgColor: "#DCEAD6", cellShape: "circle" },
+  { id: "titan",    name: "Titan Hunter",   emojis: ["⚔️", "🦅", "⛓️", "🔥", "💥", "🎯", "🛡️", "🧭"], abundant: true, bgColor: "#3F4A3A", cellShape: "arch" },
+  { id: "slayer",   name: "Slayer Spirit",  emojis: ["🗡️", "🔥", "💧", "🦋", "⚡", "🌙", "⛩️", "🌸"], abundant: true, bgColor: "#241318", cellShape: "shield" },
+  { id: "cursed",   name: "Cursed Spirit",  emojis: ["👁️", "🌀", "⚡", "💀", "🔮", "🖤", "🕸️", "🌑"], abundant: true, bgColor: "#1B1023", cellShape: "hex" },
+  { id: "grimoire", name: "Grimoire Knight",emojis: ["📖", "🍀", "⚔️", "✨", "🛡️", "👑", "🕯️", "📜"], abundant: true, bgColor: "#1B2A4A", cellShape: "rect", cellRadius: 10 },
+  { id: "rascal",   name: "Kiddo Rascal",   emojis: ["👦", "😝", "🖍️", "🦕", "💨", "🍭", "⚽"], abundant: true, bgColor: "#FFE9A8", cellShape: "rect", cellRadius: 40 }
+];
+
+/* Given a hex color, decide black or white text/badge-label reads best on it. */
+function contrastTextColor(hex){
+  const c = hex.replace("#", "");
+  const r = parseInt(c.substring(0,2), 16), g = parseInt(c.substring(2,4), 16), b = parseInt(c.substring(4,6), 16);
+  const luminance = (0.299*r + 0.587*g + 0.114*b) / 255;
+  return luminance > 0.6 ? "#3A2E42" : "#ffffff";
+}
+
+/* Returns a shallow-cloned frame with its accent colors (badge, cell border, tape)
+   swapped for the chosen theme color, so any frame can be recolored to match
+   the person's preferred palette without losing its pattern/stickers/layout. */
+/* Builds a CSS border string straight from the cellBorder data object,
+   instead of a static pre-baked string — so when getEffectiveFrame() swaps
+   in a theme color, the HTML preview border updates automatically too. */
+function cssBorderFromCellBorder(border){
+  if (!border) return "2px solid #333";
+  const style = border.dash ? "dashed" : "solid";
+  return `${border.width || 2}px ${style} ${border.color}`;
+}
+
+function getEffectiveFrame(frame){
+  if (!state.themeColor) return frame;
+  const tint = state.themeColor;
+  const textColor = contrastTextColor(tint);
+  return {
+    ...frame,
+    tape: tint,
+    badge: frame.badge ? { ...frame.badge, bg: tint, color: textColor } : frame.badge,
+    cellBorder: frame.cellBorder ? { ...frame.cellBorder, color: tint } : frame.cellBorder
+  };
+}
+
+/* ---------- custom frame (Step 2 redesign: rapi/acak → one frame → customize) ----------
+   Instead of picking one design out of a big gallery, the person now picks a
+   layout style (rapi/acak), then customizes ONE frame: border color +
+   a ready-made sticker pack. This builds that single frame as plain data so
+   it can flow through the exact same thumb/canvas renderers as everything
+   else in the file.
+
+   Stickers are placed ACROSS THE WHOLE STRIP (a handful of stickers total,
+   tucked near the edges/corners of the finished strip) rather than repeated
+   inside every single photo cell — that's what keeps the "Rapi" look clean
+   instead of cluttered, and matches how a real preset sticker pack looks:
+   already arranged nicely, nothing for the person to drag into place. */
+function buildStickerPositions(stickerSet, arrangement, poses){
+  if (!stickerSet || !stickerSet.emojis.length) return [];
+  const emojis = stickerSet.emojis;
+  const abundant = !!stickerSet.abundant;
+  const count = abundant ? Math.min(14, emojis.length * 3) : Math.min(6, emojis.length + 2);
+  const sizeBase = abundant ? 58 : 40;
+  const sizeVariance = abundant ? 30 : 14;
+  if (arrangement === "grid"){
+    // rapi: fixed, symmetric spots hugging the edges of the WHOLE strip —
+    // same every time, safely clear of the header/footer text. Abundant
+    // packs get extra spots along the top/bottom/middle too, so stickers
+    // properly spill across the whole strip instead of just the corners.
+    const spots = [
+      { rx: 0.09, ry: 0.15 }, { rx: 0.91, ry: 0.10 },
+      { rx: 0.90, ry: 0.46 }, { rx: 0.10, ry: 0.50 },
+      { rx: 0.10, ry: 0.80 }, { rx: 0.90, ry: 0.83 },
+      { rx: 0.50, ry: 0.05 }, { rx: 0.06, ry: 0.30 },
+      { rx: 0.94, ry: 0.30 }, { rx: 0.50, ry: 0.95 },
+      { rx: 0.22, ry: 0.94 }, { rx: 0.78, ry: 0.05 },
+      { rx: 0.03, ry: 0.63 }, { rx: 0.97, ry: 0.63 }
+    ];
+    return spots.slice(0, count).map((pos, i) => ({
+      emoji: emojis[i % emojis.length], rx: pos.rx, ry: pos.ry,
+      size: sizeBase + (i % 3) * (sizeVariance / 3), rotate: i % 2 === 0 ? -10 : 10
+    }));
+  }
+  // acak: seeded-random spread across the whole strip + gentle rotation —
+  // seeded on the set id so it stays put instead of reshuffling on every
+  // render. Crucially, spots are checked against the tilted polaroid cards
+  // for this exact pose count first, and rejected if they'd land on top of
+  // (or too close to) a photo — that's what used to put butterflies and
+  // hearts right on top of someone's face. Stickers now only ever land in
+  // the actual gaps between/around the cards.
+  const template = SCATTER_TEMPLATES[poses] || SCATTER_TEMPLATES[4];
+  const pad = 0.045; // clears the white polaroid border too, not just the photo edge
+  const cardBoxes = (template.cards || []).map((c) => ({
+    x1: c.x - pad, y1: c.y - pad, x2: c.x + c.w + pad, y2: c.y + c.h + pad
+  }));
+  const insideAnyCard = (x, y) => cardBoxes.some((b) => x >= b.x1 && x <= b.x2 && y >= b.y1 && y <= b.y2);
+
+  const rnd = seededRandom(stickerSet.id.length * 37 + 11);
+  const positions = [];
+  let guard = 0;
+  while (positions.length < count && guard < count * 60){
+    guard++;
+    const rx = 0.04 + rnd() * 0.92;
+    const ry = 0.03 + rnd() * 0.94;
+    if (insideAnyCard(rx, ry)) continue;
+    positions.push({
+      emoji: emojis[positions.length % emojis.length],
+      rx, ry,
+      size: sizeBase + rnd() * sizeVariance,
+      rotate: rnd() * 40 - 20
+    });
+  }
+  return positions;
+}
+
+/* For the "abundant" theme packs, every single photo in the strip gets its
+   own stickers tucked into the corner gaps that its shape naturally leaves
+   empty (a circle/diamond/hex never reaches the literal corner of its box)
+   — this is now the ONLY sticker source for these packs, so it stays a
+   neat, repeatable placement instead of also fighting with a random
+   whole-strip scatter on top of it.
+   Four corners (not just two) at a bigger, clearly-visible size — two tiny
+   30px stickers tucked in a diagonal pair read as barely-there specks once
+   a real photo is behind them, so this spreads the whole emoji set around
+   every photo instead of hiding most of it off in the corners. */
+function buildCellStickerPositions(stickerSet){
+  if (!stickerSet || !stickerSet.abundant || !stickerSet.emojis.length) return [];
+  const emojis = stickerSet.emojis;
+
+  // Forest Spirit's circular photo crop leaves a real gap around each photo,
+  // so its stickers are positioned/sized from that actual gap (computed at
+  // render time in decorateCellGeneric/composeScatterResult) and only 2 of
+  // the 4 corners show per photo, alternating — keeps them tucked neatly at
+  // the edges without ever overlapping the photo.
+  if (stickerSet.id === "forest"){
+    const corners = [
+      { corner: "tl", rotate: -14, side: "left",  alt: 0 },
+      { corner: "br", rotate: -12, side: "right", alt: 0 },
+      { corner: "tr", rotate: 14,  side: "right", alt: 1 },
+      { corner: "bl", rotate: 12,  side: "left",  alt: 1 }
+    ];
+    return corners.map((c, idx) => ({
+      mode: "gap",
+      emoji: emojis.slice(idx % emojis.length).concat(emojis.slice(0, idx % emojis.length)),
+      corner: c.corner,
+      rotate: c.rotate,
+      side: c.side,
+      alt: c.alt
+    }));
+  }
+
+  // every other abundant pack (Slayer Spirit, Titan Hunter, Cursed Realm,
+  // Grimoire, Rascal Crew, ...): original fixed corner placement — all 4
+  // corners, fixed size, positioned as a fraction of the whole cell.
+  const corners = [
+    { rx: 0.08, ry: 0.08, rotate: -14, side: "left" },
+    { rx: 0.92, ry: 0.08, rotate: 14, side: "right" },
+    { rx: 0.08, ry: 0.92, rotate: 12, side: "left" },
+    { rx: 0.92, ry: 0.92, rotate: -12, side: "right" }
+  ];
+  return corners.map((c, idx) => ({
+    mode: "fixed",
+    // rotates which emoji lands in which corner so photo cells don't all
+    // show the exact same symbol in the exact same spot
+    emoji: emojis.slice(idx % emojis.length).concat(emojis.slice(0, idx % emojis.length)),
+    rx: c.rx, ry: c.ry,
+    size: 42,
+    rotate: c.rotate,
+    side: c.side
+  }));
+}
+
+
+/* Converts whole-strip-relative sticker positions (rx/ry 0–1) into the
+   top/left percentage format buildFrameThumb() expects, so the small
+   marketing-preview thumb on the landing page shows the same "already
+   arranged" look as the real result. */
+function stickersForThumb(stripStickers){
+  return (stripStickers || []).map((s) => ({
+    emoji: s.emoji,
+    top: `${(s.ry * 100).toFixed(1)}%`,
+    left: `${(s.rx * 100).toFixed(1)}%`,
+    size: Math.max(14, Math.round((s.size || 24) * 0.6)),
+    rotate: s.rotate || 0
+  }));
+}
+
+function buildCustomFrame(){
+  const layout = currentLayout();
+  const color = state.themeColor || "#4A3524";
+  const textOnDark = contrastTextColor(color) === "#ffffff";
+  const stickerSet = STICKER_SETS.find((s) => s.id === state.stickerSetId) || STICKER_SETS[0];
+  // abundant theme packs rely only on the neat, deterministic per-photo
+  // corner stickers (never overlapping the photo) — adding the whole-strip
+  // random scatter on top of that is what made things look messy/stacked,
+  // so it's skipped here and only used for the plain (non-abundant) packs.
+  const stripStickers = stickerSet.abundant ? [] : buildStickerPositions(stickerSet, state.arrangement, layout.poses);
+  const cellStickers = buildCellStickerPositions(stickerSet);
+  return {
+    id: "custom",
+    poses: layout.poses,
+    name: "Frame Custom",
+    desc: "Frame sesuai warna & stiker pilihanmu.",
+    thumbBg: `linear-gradient(160deg, ${color}, ${color}CC)`,
+    cellBorderCss: `10px solid ${color}`,
+    // the whole strip's background is now filled with the chosen color
+    // (not just a thin line hugging each photo), so it reads as a real
+    // colored frame/mat rather than a faint accent.
+    bg: { type: "solid", colors: [color] },
+    textOnDark,
+    cellBorder: { color, width: 10 },
+    cardFill: color,       // scatter/polaroid card mat uses the full color too
+    photoBorderColor: "rgba(255,255,255,0.9)",
+    // preset theme packs each auto-switch to their own distinct photo
+    // shape (oval / arch / diamond / hex / bubbly rect), so they don't all
+    // look like the same recolored template.
+    cellShape: stickerSet.cellShape || "rect",
+    cellRadius: stickerSet.cellRadius,
+    cellStickers,                 // per-photo stickers (only for abundant packs)
+    stripStickers,               // whole-strip preset placement (canvas draw)
+    stickers: stickersForThumb(stripStickers) // whole-thumb placement (HTML preview)
+  };
+}
+
+function resolveActiveFrame(){
+  if (state.selectedFrame === "custom") return buildCustomFrame();
+  return FRAMES.find((f) => f.id === state.selectedFrame) || FRAMES[0];
+}
+
+/* ---------- build layout grids ---------- */
+function buildLayoutThumb(layout){
+  const thumb = document.createElement("div");
+  thumb.className = "layout-thumb";
+  thumb.style.gridTemplateColumns = `repeat(${layout.cols}, 1fr)`;
+  for (let i = 0; i < layout.poses; i++){
+    const cell = document.createElement("div");
+    cell.className = "layout-cell";
+    thumb.appendChild(cell);
+  }
+  return thumb;
+}
+
+function buildLayoutCard(layout, mode){
+  const card = document.createElement("div");
+  card.className = "layout-card";
+  card.dataset.layout = layout.id;
+  card.appendChild(buildLayoutThumb(layout));
+  const h4 = document.createElement("h4");
+  h4.textContent = `${layout.name} · ${layout.poses} pose`;
+  const p = document.createElement("p");
+  p.textContent = layout.desc;
+  card.appendChild(h4);
+  card.appendChild(p);
+
+  if (mode === "booth"){
+    card.addEventListener("click", () => selectLayout(layout.id));
+  } else {
+    // landing "Layout" page: pick layout (same as booth, including the
+    // mascot's little reaction), then move on to the Frame page
+    card.addEventListener("click", () => {
+      selectLayout(layout.id);
+      navigateTo("frame");
+    });
+  }
+  return card;
+}
+
+function renderLayoutGrids(){
+  const landingGrid = document.getElementById("landingLayoutGrid");
+  const boothGrid = document.getElementById("boothLayoutGrid");
+  LAYOUTS.forEach((l) => {
+    landingGrid.appendChild(buildLayoutCard(l, "landing"));
+    boothGrid.appendChild(buildLayoutCard(l, "booth"));
+  });
+}
+
+function syncLandingLayoutSelection(){
+  document.querySelectorAll("#landingLayoutGrid .layout-card").forEach((card) => {
+    card.classList.toggle("selected", card.dataset.layout === state.selectedLayout);
+  });
+}
+
+function syncBoothLayoutSelection(){
+  document.querySelectorAll("#boothLayoutGrid .layout-card").forEach((card) => {
+    card.classList.toggle("selected", card.dataset.layout === state.selectedLayout);
+  });
+  document.getElementById("toStep2").disabled = !state.selectedLayout;
+}
+
+/* Landing's "Layout" page and the booth's step-1 layout grid share the same
+   state, so whichever one the person picks from, both stay highlighted the
+   same way — no matter which one they open next. */
+function syncAllLayoutSelections(){
+  syncLandingLayoutSelection();
+  syncBoothLayoutSelection();
+}
+
+const LAYOUT_PICK_LINES = ["Ohh pilihan yang bagus!", "Layout ini lucu banget~", "Nice, cocok nih!", "Wih, selera bagus!"];
+function selectLayout(id){
+  state.selectedLayout = id;
+  syncAllLayoutSelections();
+  onLayoutChanged();
+  window.mascotSayRandom?.(LAYOUT_PICK_LINES);
+}
+
+/* Whenever the chosen layout changes, the live single-frame preview just
+   needs to re-draw with the new pose count — the custom frame itself
+   (color + stickers) stays valid across every layout. */
+function onLayoutChanged(){
+  refreshFramePreview();
+}
+
+function currentLayout(){
+  return LAYOUTS.find((l) => l.id === state.selectedLayout) || LAYOUTS[0];
+}
+
+/* ---------- build frame grids ---------- */
+/* Builds a live mini photostrip preview for a frame: a grid of "photo" cells
+   matching the currently selected layout's pose count/column count, decorated
+   with that frame's stickers — so the gallery actually shows what your strip
+   will look like, instead of one flat color with a single emoji. */
+function buildFrameThumb(frame){
+  const layout = currentLayout();
+  const thumb = document.createElement("div");
+  thumb.className = "frame-thumb";
+  thumb.style.background = frame.thumbBg;
+  thumb.style.aspectRatio = STRIP_THUMB_ASPECT;
+
+  if (frame.style === "filmstrip"){
+    /* real filmstrip preview: black perforated strip + white photo windows,
+       decorative stickers scattered on the background around it */
+    thumb.classList.add("is-filmstrip");
+    thumb.style.setProperty("--film-hole", frame.holeColor || "#FBF2E3");
+    const stage = document.createElement("div");
+    stage.className = "filmstrip-stage";
+    const strip = document.createElement("div");
+    strip.className = "filmstrip";
+    for (let i = 0; i < layout.poses; i++){
+      const win = document.createElement("div");
+      win.className = "filmstrip-window";
+      if (frame.textOnDark) win.classList.add("on-dark");
+      strip.appendChild(win);
+    }
+    stage.appendChild(strip);
+    thumb.appendChild(stage);
+  } else {
+    thumb.style.gridTemplateColumns = `repeat(${layout.cols}, 1fr)`;
+    for (let i = 0; i < layout.poses; i++){
+      const cell = document.createElement("div");
+      cell.className = "frame-thumb-cell";
+      // built from cellBorder (not the old static cellBorderCss string) so a
+      // chosen theme color actually shows up here, live
+      cell.style.border = cssBorderFromCellBorder(frame.cellBorder);
+      if (frame.cellShape === "circle") cell.classList.add("shape-circle");
+      else if (frame.cellShape === "arch") cell.classList.add("shape-arch");
+      if (frame.textOnDark) cell.classList.add("on-dark");
+      thumb.appendChild(cell);
+    }
+  }
+  (frame.stickers || []).forEach((st) => {
+    const s = document.createElement("span");
+    s.className = "frame-sticker";
+    s.textContent = st.emoji;
+    s.style.fontSize = `${st.size || 18}px`;
+    if (st.top !== undefined) s.style.top = st.top;
+    if (st.bottom !== undefined) s.style.bottom = st.bottom;
+    if (st.left !== undefined) s.style.left = st.left;
+    if (st.right !== undefined) s.style.right = st.right;
+    const tx = st.offsetX || "0";
+    s.style.transform = `translateX(${tx}) rotate(${st.rotate || 0}deg)`;
+    thumb.appendChild(s);
+  });
+  if (frame.badge){
+    const b = document.createElement("span");
+    b.className = "frame-badge";
+    b.textContent = frame.badge.text;
+    b.style.background = frame.badge.bg;
+    b.style.color = frame.badge.color;
+    ["top", "bottom", "left", "right"].forEach((k) => {
+      if (frame.badge[k] !== undefined) b.style[k] = frame.badge[k];
+    });
+    if (frame.badge.offsetX) b.style.transform = `translateX(${frame.badge.offsetX})`;
+    thumb.appendChild(b);
+  }
+  /* washi-tape corners on every photo cell — the little scrapbook touch that
+     sells the "kertas ditempel" feel from the reference boards. Filmstrip
+     frames get a single tape/ribbon clip at the top of the strip instead,
+     since the strip itself replaces the per-cell tape look. */
+  if (frame.tape && frame.style !== "filmstrip"){
+    thumb.querySelectorAll(".frame-thumb-cell").forEach((cell, i) => {
+      const tape = document.createElement("span");
+      tape.className = "cell-tape";
+      tape.style.background = frame.tape;
+      tape.style.transform = `translate(-50%, -50%) rotate(${i % 2 === 0 ? -7 : 6}deg)`;
+      cell.appendChild(tape);
+    });
+  } else if (frame.tape && frame.style === "filmstrip"){
+    const strip = thumb.querySelector(".filmstrip");
+    if (strip){
+      const tape = document.createElement("span");
+      tape.className = "cell-tape";
+      tape.style.background = frame.tape;
+      tape.style.top = "-8px";
+      tape.style.left = "50%";
+      tape.style.transform = "translate(-50%, -50%) rotate(-5deg)";
+      strip.appendChild(tape);
+    }
+  }
+  return thumb;
+}
+
+/* ---------- Step 2, redesigned: rapi/acak style choice → one frame → customize ----------
+   Landing "Frame" page and booth Step 2 share the same two-part flow and the
+   same global state, just rendered into differently-prefixed elements.
+   Landing only ever shows the style-choice cards + a CTA (no customize
+   panel — that only makes sense once real photos exist, in the booth). */
+const FRAME_STEP_TARGETS = {
+  landing: {
+    styleChoice: "landingStyleChoice", customize: null,
+    preview: null, colorSwatches: null,
+    customColor: null, stickerSets: null,
+    backBtn: null, ctaBtn: "landingFrameCta"
+  },
+  booth: {
+    styleChoice: "boothStyleChoice", customize: "boothFrameCustomize",
+    preview: null, colorSwatches: "boothColorSwatches",
+    customColor: "boothCustomColor", stickerSets: "boothStickerSets",
+    colorPickerBlock: "boothColorPickerBlock", colorLockedNote: "boothColorLockedNote",
+    backBtn: "boothBackToStyle", ctaBtn: "toStep3"
+  }
+};
+const FRAME_STYLES = [
+  { id: "grid", name: "Rapi", desc: "Foto tersusun rapi berbaris lurus, bersih & simetris." },
+  { id: "scatter", name: "Acak Estetik", desc: "Foto ditempel miring & berantakan lucu ala scrapbook." }
+];
+
+function buildStylePreview(styleId){
+  const wrap = document.createElement("div");
+  wrap.className = "style-card-preview";
+  const grid = document.createElement("div");
+  grid.className = "style-preview-grid" + (styleId === "scatter" ? " is-scatter" : "");
+  const count = styleId === "scatter" ? 3 : 4;
+  for (let i = 0; i < count; i++){
+    const cell = document.createElement("div");
+    cell.className = "style-preview-cell";
+    if (styleId === "scatter"){
+      const rot = [-9, 4, -3][i % 3];
+      const shift = [-14, 0, 14][i % 3];
+      cell.style.transform = `translateX(${shift}px) rotate(${rot}deg)`;
+      cell.style.zIndex = String(i);
+    }
+    grid.appendChild(cell);
+  }
+  wrap.appendChild(grid);
+  return wrap;
+}
+
+function buildStyleCard(style, prefix){
+  const card = document.createElement("button");
+  card.type = "button";
+  card.className = "style-card";
+  card.dataset.style = style.id;
+  card.appendChild(buildStylePreview(style.id));
+  const h4 = document.createElement("h4");
+  h4.textContent = style.name;
+  const p = document.createElement("p");
+  p.textContent = style.desc;
+  card.appendChild(h4);
+  card.appendChild(p);
+  card.addEventListener("click", () => chooseFrameStyle(style.id, prefix));
+  return card;
+}
+
+function renderFrameStyleChoice(prefix){
+  const t = FRAME_STEP_TARGETS[prefix];
+  const box = document.getElementById(t.styleChoice);
+  if (!box) return;
+  box.innerHTML = "";
+  FRAME_STYLES.forEach((s) => box.appendChild(buildStyleCard(s, prefix)));
+  syncStyleChoiceSelection(prefix);
+}
+
+function syncStyleChoiceSelection(prefix){
+  const t = FRAME_STEP_TARGETS[prefix];
+  const box = document.getElementById(t.styleChoice);
+  if (!box) return;
+  const chosen = state.selectedFrame === "custom";
+  box.querySelectorAll(".style-card").forEach((card) => {
+    card.classList.toggle("selected", chosen && card.dataset.style === state.arrangement);
+  });
+}
+
+/* Picking Rapi/Acak sets the arrangement, locks in the single "custom"
+   frame, and reveals the customize panel in BOTH landing and booth so the
+   choice always stays in sync no matter where it was made. */
+const STYLE_PICK_LINES = ["Gayanya keren!", "Suka deh sama ini~", "Mantap, lanjut yuk!"];
+function chooseFrameStyle(styleId, prefix){
+  state.arrangement = styleId;
+  state.selectedFrame = "custom";
+  if (!state.selectedLayout) state.selectedLayout = LAYOUTS[0].id;
+  ["landing", "booth"].forEach((p) => {
+    syncStyleChoiceSelection(p);
+    syncFrameStepVisibility(p);
+  });
+  if (state.shots.length) composeResult();
+  window.mascotSayRandom?.(STYLE_PICK_LINES);
+}
+
+/* Shows/hides the step-3 customize panel based on whether a rapi/acak
+   style has been chosen (it's picked earlier now, in step 1 — this is
+   just a defensive check), and keeps each prefix's CTA button + style
+   selection highlight in sync either way. */
+function syncFrameStepVisibility(prefix){
+  const t = FRAME_STEP_TARGETS[prefix];
+  const chosen = state.selectedFrame === "custom";
+  syncStyleChoiceSelection(prefix);
+  const cta = t.ctaBtn && document.getElementById(t.ctaBtn);
+  // booth's CTA ("Lanjut ke Kamera") also needs a layout picked, not just
+  // a style — landing has no such requirement (it defaults to LAYOUTS[0]).
+  if (cta) cta.disabled = !chosen || (prefix === "booth" && !state.selectedLayout);
+  const panel = t.customize && document.getElementById(t.customize);
+  if (!panel) return; // landing has no customize panel
+  panel.classList.toggle("hidden", !chosen);
+  if (chosen) renderFrameCustomizePanel(prefix);
+}
+
+function renderFrameCustomizePanel(prefix){
+  const t = FRAME_STEP_TARGETS[prefix];
+  renderColorSwatchGrid(prefix);
+  renderStickerSetGrid(prefix);
+  const customColorInput = document.getElementById(t.customColor);
+  if (customColorInput && state.themeColor) customColorInput.value = state.themeColor;
+  syncColorLockState(prefix);
+  refreshFramePreview();
+}
+
+/* Preset theme packs (Titan Hunter, Slayer Spirit, Forest Spirit, Kiddo
+   Rascal) already come with their own color + shape "baked in", like the
+   Miffy reference board — so while one of those is active, the manual
+   color pickers are visually locked instead of implying they still do
+   anything (picking a plain color would just fight the preset). */
+function syncColorLockState(prefix){
+  const t = FRAME_STEP_TARGETS[prefix];
+  if (!t || !t.colorPickerBlock) return;
+  const block = document.getElementById(t.colorPickerBlock);
+  const note = document.getElementById(t.colorLockedNote);
+  if (!block) return;
+  const stickerSet = STICKER_SETS.find((s) => s.id === state.stickerSetId);
+  const locked = !!(stickerSet && stickerSet.abundant);
+  block.classList.toggle("locked", locked);
+  if (note) note.classList.toggle("hidden", !locked);
+}
+
+function renderColorSwatchGrid(prefix){
+  const t = FRAME_STEP_TARGETS[prefix];
+  const box = document.getElementById(t.colorSwatches);
+  if (!box || box.childElementCount) { syncColorSwatchSelection(); return; } // build once
+  THEME_COLORS.forEach((c) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "theme-swatch";
+    btn.style.background = c.hex;
+    btn.dataset.hex = c.hex;
+    btn.title = c.name;
+    btn.addEventListener("click", () => selectThemeColor(c.hex));
+    box.appendChild(btn);
+  });
+  syncColorSwatchSelection();
+}
+
+function syncColorSwatchSelection(){
+  document.querySelectorAll(".color-swatch-grid .theme-swatch").forEach((sw) => {
+    sw.classList.toggle("active", sw.dataset.hex === state.themeColor);
+  });
+}
+
+const COLOR_PICK_LINES = ["Warnanya cantik!", "Cakep, cocok banget~", "Ohh manis warnanya!"];
+function selectThemeColor(hex){
+  state.themeColor = hex;
+  syncColorSwatchSelection();
+  Object.values(FRAME_STEP_TARGETS).forEach((t) => {
+    const input = document.getElementById(t.customColor);
+    if (input) input.value = hex;
+  });
+  refreshFramePreview();
+  if (state.shots.length) composeResult();
+  window.mascotSayRandom?.(COLOR_PICK_LINES);
+}
+
+function renderStickerSetGrid(prefix){
+  const t = FRAME_STEP_TARGETS[prefix];
+  const box = document.getElementById(t.stickerSets);
+  if (!box || box.childElementCount) { syncStickerSetSelection(); return; } // build once
+  STICKER_SETS.forEach((set) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "sticker-set-btn";
+    btn.dataset.set = set.id;
+    const emojis = document.createElement("span");
+    emojis.className = "set-emojis";
+    emojis.textContent = set.emojis.length ? set.emojis.join(" ") : "🚫";
+    const name = document.createElement("span");
+    name.className = "set-name";
+    name.textContent = set.name;
+    btn.appendChild(emojis);
+    btn.appendChild(name);
+    btn.addEventListener("click", () => selectStickerSet(set.id));
+    box.appendChild(btn);
+  });
+  syncStickerSetSelection();
+}
+
+function syncStickerSetSelection(){
+  document.querySelectorAll(".sticker-set-grid .sticker-set-btn").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.set === state.stickerSetId);
+  });
+}
+
+const STICKER_PICK_LINES = ["Lucu, keren stikernya!", "Gemesin banget pilihan ini~", "Wah, estetik!"];
+function selectStickerSet(id){
+  state.stickerSetId = id;
+  const set = STICKER_SETS.find((s) => s.id === id);
+  // abundant theme packs (Titan Hunter, Slayer Spirit, Forest Spirit) bring
+  // their own matching background color, so picking one instantly takes
+  // over the whole frame instead of just adding a few small stickers.
+  if (set && set.bgColor){
+    state.themeColor = set.bgColor;
+    syncColorSwatchSelection();
+    Object.values(FRAME_STEP_TARGETS).forEach((t) => {
+      const input = document.getElementById(t.customColor);
+      if (input) input.value = set.bgColor;
+    });
+  }
+  syncStickerSetSelection();
+  Object.keys(FRAME_STEP_TARGETS).forEach(syncColorLockState);
+  refreshFramePreview();
+  if (state.shots.length) composeResult();
+  window.mascotSayRandom?.(STICKER_PICK_LINES);
+}
+
+/* Rebuilds the single live frame preview (both landing + booth, whichever
+   panels currently exist) plus the "which layout this frame is for" label. */
+function refreshFramePreview(){
+  const layout = currentLayout();
+  const label = `Menampilkan frame untuk layout ${layout.poses} pose (${layout.name})`;
+  ["landingFrameLabel", "boothFrameLabel"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = label;
+  });
+  Object.values(FRAME_STEP_TARGETS).forEach((t) => {
+    const box = document.getElementById(t.preview);
+    if (!box) return;
+    box.innerHTML = "";
+    box.appendChild(buildFrameThumb(buildCustomFrame()));
+  });
+}
+
+function renderGrids(){
+  renderLayoutGrids();
+  renderFrameStyleChoice("landing");
+  renderFrameStyleChoice("booth");
+  syncFrameStepVisibility("landing");
+  syncFrameStepVisibility("booth");
+}
+
+/* ---------- landing pages (Home / Layout / Frame / Share) ---------- */
+/* Restarts a bouncy pop-in on a container's direct children, each one
+   delayed a little after the last, so a grid of cards animates in as a
+   lively cascade instead of the whole page just fading in flat. */
+function staggerReveal(container){
+  if (!container) return;
+  Array.from(container.children).forEach((card, i) => {
+    card.classList.remove("stagger-pop");
+    void card.offsetWidth; // restart animation even on repeat visits
+    card.style.animationDelay = `${i * 70}ms`;
+    card.classList.add("stagger-pop");
+  });
+}
+
+function renderLandingPage(pageName){
+  document.querySelectorAll(".page").forEach((page) => {
+    const isTarget = page.id === `page-${pageName}`;
+    page.classList.toggle("hidden", !isTarget);
+    if (isTarget){
+      page.classList.remove("page-enter");
+      // restart animation
+      void page.offsetWidth;
+      page.classList.add("page-enter");
+    }
+  });
+  document.querySelectorAll(".nav-links [data-page]").forEach((link) => {
+    link.classList.toggle("active", link.dataset.page === pageName);
+  });
+  if (pageName === "layout") staggerReveal(document.getElementById("landingLayoutGrid"));
+  if (pageName === "frame") staggerReveal(document.getElementById("landingStyleChoice"));
+  if (pageName === "album") renderAlbum();
+  window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+}
+
+/* Every navigation action below just changes the URL hash — the actual
+   showing/hiding happens in applyRoute(), which runs on every hashchange.
+   That's what makes each section behave like a real page: it gets its own
+   URL, so the browser's Back/Forward buttons and bookmarking/sharing a
+   link both work, even though it's still one single HTML file. */
+function navigateTo(pageName){
+  window.location.hash = pageName;
+}
+
+/* ---------- landing <-> booth ---------- */
+function showBooth(){
+  window.location.hash = "booth";
+}
+
+function showLanding(){
+  window.location.hash = "home";
+}
+
+/* Jumps to a specific booth step (2 = camera, 3 = customize) via the hash,
+   same reasoning as navigateTo() above. */
+function goToBoothStep(n){
+  window.location.hash = `booth/${n}`;
+}
+
+function applyRoute(){
+  const raw = window.location.hash.replace(/^#\/?/, "");
+  const [section, stepRaw] = raw.split("/");
+
+  if (section === "booth"){
+    document.getElementById("landing").classList.add("hidden");
+    document.querySelector(".nav").classList.add("hidden");
+    document.getElementById("booth").classList.remove("hidden");
+    goToStep(Number(stepRaw) || 1);
+    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+  } else {
+    stopCamera();
+    document.getElementById("booth").classList.add("hidden");
+    document.querySelector(".nav").classList.remove("hidden");
+    document.getElementById("landing").classList.remove("hidden");
+    renderLandingPage(["home", "layout", "frame", "share", "album"].includes(section) ? section : "home");
+  }
+}
+
+/* ---------- step navigation ---------- */
+function goToStep(n){
+  [1, 2, 3, 4].forEach((i) => {
+    document.getElementById(`step${i}`).classList.toggle("hidden", i !== n);
+  });
+  document.querySelectorAll(".step-dot").forEach((dot) => {
+    const step = Number(dot.dataset.step);
+    dot.classList.toggle("active", step === n);
+    dot.classList.toggle("done", step < n);
+  });
+  if (n === 3){
+    const layout = currentLayout();
+    document.getElementById("poseCountLabel").textContent = layout.poses;
+    document.getElementById("shotCounter").textContent = `Foto 0 / ${layout.poses}`;
+    const thumbsRow = document.getElementById("thumbsRow");
+    thumbsRow.innerHTML = "";
+    thumbsRow.style.gridTemplateColumns = `repeat(${Math.min(layout.poses, 4)}, 1fr)`;
+    for (let i = 0; i < layout.poses; i++){
+      const slot = document.createElement("div");
+      slot.className = "thumb-slot";
+      slot.dataset.slot = i;
+      thumbsRow.appendChild(slot);
+    }
+    // reset any stale gallery picks whenever the pose count changes
+    state.galleryFiles = [];
+    document.getElementById("galleryThumbsRow").innerHTML = "";
+    document.getElementById("galleryUseBtn").classList.add("hidden");
+    document.getElementById("galleryPlaceholder").classList.remove("hidden");
+    document.getElementById("galleryPickAgainBtn").classList.add("hidden");
+    const hint = document.getElementById("galleryCountHint");
+    hint.textContent = `Pilih tepat ${layout.poses} foto ya.`;
+    hint.classList.remove("ok", "bad");
+
+    if (state.photoSource === "camera") startCamera(); else stopCamera();
+  } else {
+    stopCamera();
+  }
+  if (n === 4){
+    // photos are already taken by now — show the color/sticker customize
+    // panel with the REAL photos live-composited, instead of a flat mock
+    // preview, so every change is already an accurate final look.
+    syncFrameStepVisibility("booth");
+    if (state.shots.length) composeResult();
+  }
+}
+
+/* ---------- camera ---------- */
+/* Gives a specific, actionable reason instead of one generic message, since
+   "can't access camera" can mean several very different things: the page
+   isn't served over HTTPS (getUserMedia is blocked on plain http/file://),
+   the browser has no camera API at all, the person denied the permission
+   prompt, no camera device exists, or another app is already using it. */
+async function startCamera(){
+  const video = document.getElementById("video");
+  const errorBox = document.getElementById("cameraError");
+  errorBox.classList.add("hidden");
+
+  if (!window.isSecureContext){
+    errorBox.textContent = "Kamera cuma bisa diakses lewat halaman HTTPS (bukan file yang dibuka langsung, atau http biasa). Upload halaman ini ke hosting/https lalu buka linknya, atau pakai 'Pilih dari Galeri' untuk sementara.";
+    errorBox.classList.remove("hidden");
+    return;
+  }
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    errorBox.textContent = "Browser ini tidak mendukung akses kamera lewat web. Coba buka di Chrome/Safari versi terbaru, atau pakai 'Pilih dari Galeri'.";
+    errorBox.classList.remove("hidden");
+    return;
+  }
+
+  try {
+    state.stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "user" },
+      audio: false
+    });
+    video.srcObject = state.stream;
+  } catch (err){
+    if (err.name === "NotAllowedError" || err.name === "SecurityError"){
+      errorBox.textContent = "Akses kamera ditolak. Buka izin situs di pengaturan browser, aktifkan Kamera, lalu muat ulang halaman.";
+    } else if (err.name === "NotFoundError"){
+      errorBox.textContent = "Tidak ada kamera yang terdeteksi di perangkat ini. Coba gunakan 'Pilih dari Galeri'.";
+    } else if (err.name === "NotReadableError"){
+      errorBox.textContent = "Kamera sedang dipakai aplikasi lain. Tutup aplikasi lain yang memakai kamera, lalu coba lagi.";
+    } else {
+      errorBox.textContent = "Kami tidak bisa mengakses kamera. Izinkan akses kamera di browser lalu muat ulang halaman.";
+    }
+    errorBox.classList.remove("hidden");
+  }
+}
+
+function stopCamera(){
+  if (state.stream){
+    state.stream.getTracks().forEach((t) => t.stop());
+    state.stream = null;
+  }
+}
+
+/* ---------- filters ---------- */
+function applyFilterUI(name){
+  state.selectedFilter = name;
+  document.querySelectorAll(".chip").forEach((chip) => {
+    chip.classList.toggle("active", chip.dataset.filter === name);
+  });
+  const stage = document.querySelector(".camera-stage");
+  stage.className = "camera-stage" + (name !== "none" ? ` f-${name}` : "");
+  if (name !== "none") window.mascotSayRandom?.(["Filter kece!", "Aesthetic banget~", "Suka nih tone-nya!"]);
+}
+
+/* ---------- photo source (camera vs gallery) ---------- */
+function selectPhotoSource(src){
+  state.photoSource = src;
+  document.querySelectorAll(".source-tab").forEach((t) => t.classList.toggle("active", t.dataset.source === src));
+  document.getElementById("cameraSource").classList.toggle("hidden", src !== "camera");
+  document.getElementById("gallerySource").classList.toggle("hidden", src !== "gallery");
+  if (src === "camera"){
+    startCamera();
+  } else {
+    stopCamera();
+  }
+}
+
+/* Draws an uploaded image file onto the offscreen work canvas with the
+   currently selected filter baked in, exactly like a camera capture, so
+   gallery photos and live shots end up visually consistent. */
+function fileToFilteredDataUrl(file){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const work = document.getElementById("workCanvas");
+        work.width = img.naturalWidth;
+        work.height = img.naturalHeight;
+        const wctx = work.getContext("2d");
+        wctx.save();
+        wctx.filter = FILTERS[state.selectedFilter] || "";
+        wctx.drawImage(img, 0, 0);
+        wctx.restore();
+        resolve(work.toDataURL("image/png"));
+      };
+      img.onerror = reject;
+      img.src = reader.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function handleGalleryFiles(fileList){
+  const layout = currentLayout();
+  const needed = layout.poses;
+  const files = Array.from(fileList).filter((f) => f.type.startsWith("image/")).slice(0, needed);
+
+  const row = document.getElementById("galleryThumbsRow");
+  const hint = document.getElementById("galleryCountHint");
+  const useBtn = document.getElementById("galleryUseBtn");
+  const placeholder = document.getElementById("galleryPlaceholder");
+  const pickAgainBtn = document.getElementById("galleryPickAgainBtn");
+  row.innerHTML = "";
+  useBtn.classList.add("hidden");
+
+  if (!files.length){
+    placeholder.classList.remove("hidden");
+    pickAgainBtn.classList.add("hidden");
+    return;
+  }
+
+  const dataUrls = await Promise.all(files.map(fileToFilteredDataUrl));
+  state.galleryFiles = dataUrls;
+
+  dataUrls.forEach((url) => {
+    const slot = document.createElement("div");
+    slot.className = "thumb-slot";
+    const img = document.createElement("img");
+    img.src = url;
+    slot.appendChild(img);
+    row.appendChild(slot);
+  });
+
+  // photos are showing now, so swap the "drag & drop" placeholder for a
+  // small "ganti foto" button instead of stacking both at once
+  placeholder.classList.add("hidden");
+  pickAgainBtn.classList.remove("hidden");
+
+  const ok = dataUrls.length === needed;
+  hint.textContent = ok
+    ? `${dataUrls.length}/${needed} foto siap dipakai ✓`
+    : `Pilih tepat ${needed} foto (sekarang ${dataUrls.length}/${needed}).`;
+  hint.classList.toggle("ok", ok);
+  hint.classList.toggle("bad", !ok);
+  useBtn.classList.toggle("hidden", !ok);
+}
+
+async function useGalleryPhotos(){
+  if (state.galleryFiles.length !== currentLayout().poses) return;
+  state.shots = state.galleryFiles.slice();
+  await composeResult();
+  window.mascotSayRandom?.(["Foto pilihanmu lucu!", "Duh, hasilnya bagus~", "Keren, lanjut yuk!"]);
+  goToBoothStep(4);
+}
+
+/* ---------- capture sequence ---------- */
+function sleep(ms){ return new Promise((res) => setTimeout(res, ms)); }
+
+async function runCaptureSequence(){
+  const layout = currentLayout();
+  const totalShots = layout.poses;
+
+  const startBtn = document.getElementById("startCapture");
+  startBtn.disabled = true;
+  state.shots = [];
+  document.querySelectorAll(".thumb-slot").forEach((slot) => (slot.innerHTML = ""));
+  window.mascotSayRandom?.(["Siap-siap difoto ya!", "Yuk, pose paling gemes!", "3, 2, 1... senyum!"]);
+
+
+  const overlay = document.getElementById("countdownOverlay");
+  const counter = document.getElementById("shotCounter");
+  const video = document.getElementById("video");
+
+  for (let shot = 0; shot < totalShots; shot++){
+    for (let c = 3; c >= 1; c--){
+      overlay.textContent = c;
+      await sleep(650);
+    }
+    overlay.textContent = "📸";
+    await sleep(150);
+    overlay.textContent = "";
+
+    const work = document.getElementById("workCanvas");
+    work.width = video.videoWidth || 720;
+    work.height = video.videoHeight || 540;
+    const wctx = work.getContext("2d");
+    wctx.save();
+    wctx.filter = FILTERS[state.selectedFilter] || "";
+    // mirror to match the preview the user sees
+    wctx.translate(work.width, 0);
+    wctx.scale(-1, 1);
+    wctx.drawImage(video, 0, 0, work.width, work.height);
+    wctx.restore();
+
+    const dataUrl = work.toDataURL("image/png");
+    state.shots.push(dataUrl);
+
+    const slot = document.querySelector(`.thumb-slot[data-slot="${shot}"]`);
+    const img = document.createElement("img");
+    img.src = dataUrl;
+    slot.appendChild(img);
+
+    counter.textContent = `Foto ${shot + 1} / ${totalShots}`;
+    await sleep(300);
+  }
+
+  startBtn.disabled = false;
+  await composeResult();
+  goToBoothStep(4);
+}
+
+/* ---------- compose final strip ---------- */
+function loadImage(src){
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.src = src;
+  });
+}
+
+/* cover-fit helper: draws img into a w×h box, cropping to fill instead of stretching */
+function drawImageCover(ctx, img, cx, cy, w, h){
+  const ir = img.width / img.height;
+  const cr = w / h;
+  let sw, sh, sx, sy;
+  if (ir > cr){
+    sh = img.height; sw = sh * cr; sx = (img.width - sw) / 2; sy = 0;
+  } else {
+    sw = img.width; sh = sw / cr; sx = 0; sy = (img.height - sh) / 2;
+  }
+  ctx.drawImage(img, sx, sy, sw, sh, cx, cy, w, h);
+}
+
+async function composeResult(){
+  const rawFrame = resolveActiveFrame();
+  const frame = rawFrame.id === "custom" ? rawFrame : getEffectiveFrame(rawFrame);
+  if (state.arrangement === "scatter"){
+    await composeScatterResult(frame);
+  } else {
+    await composeGridResult(frame);
+  }
+}
+
+/* ---------- neat grid strip (original layout) ---------- */
+async function composeGridResult(frame){
+  const layout = currentLayout();
+  const cols = layout.cols;
+  const rows = Math.ceil(layout.poses / cols);
+
+  const canvas = document.getElementById("resultCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const pad = 26;
+  const cellW = cols > 1 ? 300 : 360;
+  const cellH = Math.round(cellW * STRIP_CELL_RATIO);
+  const gap = 16;
+  const headerH = frame.badge ? 106 : 74;
+  const footerH = 56;
+
+  const w = cellW * cols + gap * (cols - 1) + pad * 2;
+  const h = pad * 2 + headerH + rows * cellH + (rows - 1) * gap + footerH;
+
+  canvas.width = w;
+  canvas.height = h;
+
+  paintStripGeneric(ctx, w, h, frame);
+
+  // header
+  ctx.fillStyle = frame.textOnDark ? "#F4EEFB" : "#3A2E42";
+  ctx.font = `600 30px 'Fredoka', sans-serif`;
+  ctx.textAlign = "center";
+  ctx.fillText("Memorable Frames", w / 2, pad + 40);
+
+  if (frame.badge) drawBadgeRibbon(ctx, w, pad + 58, frame.badge);
+
+  const images = await Promise.all(state.shots.map(loadImage));
+
+  for (let i = 0; i < layout.poses; i++){
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+    const cx = pad + col * (cellW + gap);
+    const cy = pad + headerH + row * (cellH + gap);
+
+    const pb = getCellPhotoBounds(cx, cy, cellW, cellH, frame);
+    frameCellPath(ctx, pb.x, pb.y, pb.w, pb.h, frame);
+    ctx.save();
+    ctx.clip();
+    drawImageCover(ctx, images[i], pb.x, pb.y, pb.w, pb.h);
+    ctx.restore();
+
+    decorateCellGeneric(ctx, cx, cy, cellW, cellH, i, frame, col, cols);
+  }
+
+  // footer date stamp
+  const now = new Date();
+  const stamp = now.toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" });
+  ctx.font = `14px 'Space Mono', monospace`;
+  ctx.fillStyle = frame.textOnDark ? "#C9B6E4" : "#7A6B82";
+  ctx.textAlign = "center";
+  ctx.fillText(`✦ ${stamp} ✦`, w / 2, h - pad - 18);
+
+  // the chosen sticker-set pack, already auto-placed across the WHOLE strip
+  // (not repeated inside every photo) for that "already decorated" look,
+  // no manual dragging needed.
+  (frame.stripStickers || []).forEach((s) => {
+    stickerAt(ctx, s.emoji, s.rx * w, s.ry * h, s.size || 24, s.rotate || 0);
+  });
+}
+
+/* ---------- scattered / abstract scrapbook collage ---------- */
+/* Hand-tuned polaroid placements per pose count, à la moodboard references:
+   each photo sits inside its own tilted "polaroid" card with a white border
+   and thicker bottom caption strip, loosely arranged rather than gridded. */
+const SCATTER_TEMPLATES = {
+  2: { aspect: 1.35, cards: [
+    { x: 0.12, y: 0.04, w: 0.60, h: 0.42, rot: -5 },
+    { x: 0.28, y: 0.50, w: 0.60, h: 0.42, rot: 4 }
+  ]},
+  // 3 poses: a clean cascading zigzag — each card sits right under the last
+  // with only a hairline gap, alternating left/right so nothing overlaps
+  // and there's no big empty gap left over at the bottom of the strip.
+  3: { aspect: 1.5, cards: [
+    { x: 0.08, y: 0.03, w: 0.58, h: 0.30, rot: -5 },
+    { x: 0.34, y: 0.35, w: 0.58, h: 0.30, rot: 5 },
+    { x: 0.08, y: 0.67, w: 0.58, h: 0.30, rot: -4 }
+  ]},
+  // 4 poses: same cascading idea, four evenly-sized steps that tile the
+  // whole strip top to bottom with no gap and no overlap.
+  4: { aspect: 1.55, cards: [
+    { x: 0.06, y: 0.02, w: 0.56, h: 0.23, rot: -5 },
+    { x: 0.36, y: 0.25, w: 0.56, h: 0.23, rot: 5 },
+    { x: 0.06, y: 0.48, w: 0.56, h: 0.23, rot: -4 },
+    { x: 0.36, y: 0.71, w: 0.56, h: 0.23, rot: 4 }
+  ]},
+  6: { aspect: 1.55, cards: [
+    { x: 0.04, y: 0.02, w: 0.46, h: 0.28, rot: -6 },
+    { x: 0.52, y: 0.05, w: 0.46, h: 0.28, rot: 4 },
+    { x: 0.06, y: 0.35, w: 0.46, h: 0.28, rot: 5 },
+    { x: 0.50, y: 0.33, w: 0.46, h: 0.28, rot: -4 },
+    { x: 0.04, y: 0.66, w: 0.46, h: 0.28, rot: -3 },
+    { x: 0.52, y: 0.68, w: 0.46, h: 0.28, rot: 3 }
+  ]}
+};
+
+function drawPolaroidCard(ctx, px, py, pw, ph, rotDeg, img, frame, index){
+  const border = Math.max(10, pw * 0.05);
+  const captionH = pw * 0.16;
+
+  ctx.save();
+  ctx.translate(px + pw / 2, py + ph / 2);
+  ctx.rotate((rotDeg * Math.PI) / 180);
+  ctx.translate(-pw / 2, -ph / 2);
+
+  // drop shadow behind the whole card — its mat is now the full chosen
+  // color (falls back to white for the built-in frames that don't set one)
+  ctx.save();
+  ctx.shadowColor = "rgba(50,35,25,0.35)";
+  ctx.shadowBlur = 18;
+  ctx.shadowOffsetY = 8;
+  ctx.fillStyle = frame.cardFill || "#fff";
+  roundRectPath(ctx, 0, 0, pw, ph, 6);
+  ctx.fill();
+  ctx.restore();
+
+  // photo area (cover-fit), inset by the colored polaroid mat — oval crop
+  // for the preset theme packs, otherwise a gently rounded rectangle
+  const photoW = pw - border * 2;
+  const photoH = ph - border * 2 - captionH;
+  ctx.save();
+  frameCellPath(ctx, border, border, photoW, photoH, frame);
+  ctx.clip();
+  drawImageCover(ctx, img, border, border, photoW, photoH);
+  ctx.restore();
+
+  // soft inner border between the photo and its colored mat
+  const accent = (frame.cellBorder && frame.cellBorder.color) || "#C97B5E";
+  ctx.strokeStyle = frame.photoBorderColor || accent;
+  ctx.lineWidth = frame.photoBorderColor ? 4 : 2;
+  frameCellPath(ctx, border, border, photoW, photoH, frame);
+  ctx.stroke();
+
+  // little heart/emoji accent in the caption strip, like the reference boards
+  ctx.fillStyle = frame.photoBorderColor || accent;
+  ctx.font = `${Math.max(12, pw * 0.07)}px sans-serif`;
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  ctx.fillText("♡", pw - border - 4, ph - captionH / 2);
+
+  // washi tape on alternating cards, like the reference scrapbook boards
+  if (index % 2 === 0 && frame.tape){
+    drawTape(ctx, pw / 2, 2, frame.tape, index % 4 === 0 ? -6 : 6);
+  }
+
+  // abundant theme packs (Slayer Spirit, Titan Hunter, etc.) — same corner
+  // stickers used on the "rapi" grid layout, positioned relative to this
+  // card so "acak" scatter mode gets them too instead of going sticker-less.
+  // Forest uses the gap-aware placement (kept inside the card's white mat so
+  // it never sits on top of the photo); every other pack uses the original
+  // fixed rx/ry/size placement.
+  (frame.cellStickers || []).forEach((s) => {
+    const emoji = Array.isArray(s.emoji) ? (index % s.emoji.length === 0 ? s.emoji[0] : s.emoji[index % s.emoji.length]) : s.emoji;
+
+    if (s.mode === "gap"){
+      if (s.alt !== (index % 2)) return;
+      const size = Math.max(14, Math.min(24, border * 1.1));
+      const offX = border * 0.55;
+      const offY = border * 0.55;
+      const cx = (s.corner === "tl" || s.corner === "bl") ? offX : pw - offX;
+      const cy = (s.corner === "tl" || s.corner === "tr") ? offY : ph - offY;
+      stickerAt(ctx, emoji, cx, cy, size, s.rotate || 0);
+      return;
+    }
+
+    stickerAt(ctx, emoji, s.rx * pw, s.ry * ph, s.size || 18, s.rotate || 0);
+  });
+
+  ctx.restore();
+}
+
+async function composeScatterResult(frame){
+  const layout = currentLayout();
+  const template = SCATTER_TEMPLATES[layout.poses] || SCATTER_TEMPLATES[4];
+
+  const canvas = document.getElementById("resultCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const w = 1000;
+  const headerH = 130;
+  const bodyH = Math.round(w * template.aspect);
+  const footerH = 60;
+  const h = headerH + bodyH + footerH;
+
+  canvas.width = w;
+  canvas.height = h;
+
+  paintStripGeneric(ctx, w, h, frame);
+
+  // header
+  ctx.fillStyle = frame.textOnDark ? "#F4EEFB" : "#3A2E42";
+  ctx.font = `600 34px 'Fredoka', sans-serif`;
+  ctx.textAlign = "center";
+  ctx.fillText("Memorable Frames", w / 2, 56);
+  if (frame.badge) drawBadgeRibbon(ctx, w, 74, frame.badge);
+
+  const images = await Promise.all(state.shots.map(loadImage));
+
+  template.cards.forEach((card, i) => {
+    if (!images[i]) return;
+    const px = card.x * w;
+    const py = headerH + card.y * bodyH;
+    const pw = card.w * w;
+    const ph = card.h * bodyH;
+    drawPolaroidCard(ctx, px, py, pw, ph, card.rot, images[i], frame, i);
+  });
+
+  // the chosen sticker-set pack, already auto-placed across the WHOLE strip
+  // (not repeated inside every photo) for that "already decorated" scrapbook
+  // look, no manual dragging needed.
+  (frame.stripStickers || []).forEach((s) => {
+    stickerAt(ctx, s.emoji, s.rx * w, headerH + s.ry * bodyH, s.size || 24, s.rotate || 0);
+  });
+
+  // footer date stamp
+  const now = new Date();
+  const stamp = now.toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" });
+  ctx.font = `14px 'Space Mono', monospace`;
+  ctx.fillStyle = frame.textOnDark ? "#C9B6E4" : "#7A6B82";
+  ctx.textAlign = "center";
+  ctx.fillText(`✦ ${stamp} ✦`, w / 2, h - 20);
+}
+
+/* ---------- download ---------- */
+function downloadResult(){
+  const canvas = document.getElementById("resultCanvas");
+  if (!canvas || !canvas.width){
+    alert("Foto belum siap — pastikan sudah selesai memilih foto & frame dulu ya.");
+    return;
+  }
+  const filename = `memorable-frames-${Date.now()}.png`;
+  const triggerDownload = (href) => {
+    const link = document.createElement("a");
+    link.href = href;
+    link.download = filename;
+    // appending to the DOM before clicking (and removing right after) is
+    // needed for the download to fire reliably in some sandboxed preview
+    // iframes, unlike calling .click() on a detached element
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.mascotSayRandom?.(["Yeay, kenangannya tersimpan!", "Hasilnya lucu banget!", "Sip, udah kesimpan ✦"]);
+  };
+
+  if (canvas.toBlob){
+    canvas.toBlob((blob) => {
+      if (!blob){ triggerDownload(canvas.toDataURL("image/png")); return; }
+      const url = URL.createObjectURL(blob);
+      triggerDownload(url);
+      setTimeout(() => URL.revokeObjectURL(url), 30000);
+    }, "image/png");
+  } else {
+    triggerDownload(canvas.toDataURL("image/png"));
+  }
+}
+
+/* Manual fallback for sandboxed preview environments that silently block a
+   programmatic download click — opens the strip in a new tab so the user
+   can just right-click → "Save image as..." instead. */
+function openResultInNewTab(){
+  const canvas = document.getElementById("resultCanvas");
+  if (!canvas || !canvas.width){
+    alert("Foto belum siap — pastikan sudah selesai memilih foto & frame dulu ya.");
+    return;
+  }
+  const url = canvas.toDataURL("image/png");
+  const win = window.open();
+  if (!win){
+    alert("Popup diblokir browser. Izinkan popup untuk situs ini, lalu coba lagi.");
+    return;
+  }
+  win.document.write(`<title>Memorable Frames</title><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh;"><img src="${url}" style="max-width:100%;height:auto;" alt="Memorable Frames strip"></body>`);
+}
+
+/* ===========================================================
+   ALBUM — scrapbook page. Strips the user has generated get
+   "pasted" here as polaroid-ish cards with an editable, handwritten
+   caption. Kept in memory only (no backend/localStorage), same as
+   the rest of this single-session app.
+=========================================================== */
+let albumEntries = [];
+let albumIdSeq = 1;
+
+function addCurrentStripToAlbum(){
+  const canvas = document.getElementById("resultCanvas");
+  if (!canvas || !canvas.width){
+    alert("Foto belum siap — pastikan sudah selesai memilih foto & frame dulu ya.");
+    return;
+  }
+  const dataUrl = canvas.toDataURL("image/png");
+  const now = new Date();
+  albumEntries.push({
+    id: albumIdSeq++,
+    dataUrl,
+    caption: "",
+    dateLabel: now.toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" }),
+  });
+  const confirmMsg = document.getElementById("addToAlbumConfirm");
+  if (confirmMsg){
+    confirmMsg.classList.remove("hidden");
+    clearTimeout(confirmMsg._hideTimer);
+    confirmMsg._hideTimer = setTimeout(() => confirmMsg.classList.add("hidden"), 3200);
+  }
+  window.mascotSayRandom?.(["Tertempel manis di album!", "Album kenanganmu makin penuh ✦", "Scrapbook-nya makin lucu!"]);
+}
+
+function deleteAlbumEntry(id){
+  albumEntries = albumEntries.filter((e) => e.id !== id);
+  renderAlbum();
+}
+
+function renderAlbum(){
+  const empty = document.getElementById("albumEmpty");
+  const board = document.getElementById("albumBoard");
+  const grid = document.getElementById("albumGrid");
+  if (!empty || !board || !grid) return;
+
+  if (albumEntries.length === 0){
+    empty.classList.remove("hidden");
+    board.classList.add("hidden");
+    return;
+  }
+  empty.classList.add("hidden");
+  board.classList.remove("hidden");
+
+  grid.innerHTML = "";
+  albumEntries.forEach((entry) => {
+    const card = document.createElement("div");
+    card.className = "album-card";
+
+    const img = document.createElement("img");
+    img.src = entry.dataUrl;
+    img.alt = "Strip foto Memorable Frames";
+    card.appendChild(img);
+
+    const caption = document.createElement("textarea");
+    caption.className = "album-caption";
+    caption.placeholder = "tulis kata-katamu di sini...";
+    caption.value = entry.caption;
+    caption.rows = 2;
+    caption.addEventListener("input", () => { entry.caption = caption.value; });
+    card.appendChild(caption);
+
+    const meta = document.createElement("div");
+    meta.className = "album-card-meta";
+    const date = document.createElement("span");
+    date.className = "album-date";
+    date.textContent = entry.dateLabel;
+    meta.appendChild(date);
+
+    const actions = document.createElement("div");
+    actions.className = "album-card-actions";
+    const dl = document.createElement("button");
+    dl.type = "button";
+    dl.title = "Unduh strip ini";
+    dl.textContent = "⬇️";
+    dl.addEventListener("click", () => {
+      const link = document.createElement("a");
+      link.href = entry.dataUrl;
+      link.download = `memorable-frames-album-${entry.id}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+    const del = document.createElement("button");
+    del.type = "button";
+    del.title = "Hapus dari album";
+    del.textContent = "✕";
+    del.addEventListener("click", () => deleteAlbumEntry(entry.id));
+    actions.appendChild(dl);
+    actions.appendChild(del);
+    meta.appendChild(actions);
+    card.appendChild(meta);
+
+    grid.appendChild(card);
+  });
+}
+
+/* ---------- wire up events ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  renderGrids();
+
+  // page navigation (Home / Layout / Frame / Share behave like separate pages)
+  document.querySelectorAll("[data-page]").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      navigateTo(link.dataset.page);
+    });
+  });
+
+  document.getElementById("heroCta").addEventListener("click", showBooth);
+  document.getElementById("shareCta").addEventListener("click", showBooth);
+  document.getElementById("backToLanding").addEventListener("click", showLanding);
+
+  document.querySelectorAll("[data-action='booth']").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      showBooth();
+    });
+  });
+
+  document.getElementById("toStep2").addEventListener("click", () => goToBoothStep(2));
+  document.getElementById("toStep3").addEventListener("click", () => goToBoothStep(3));
+  document.getElementById("boothBackToLayout").addEventListener("click", () => goToBoothStep(1));
+
+  document.getElementById("filterChips").addEventListener("click", (e) => {
+    const chip = e.target.closest(".chip");
+    if (!chip) return;
+    applyFilterUI(chip.dataset.filter);
+  });
+  document.getElementById("filterChipsGallery").addEventListener("click", (e) => {
+    const chip = e.target.closest(".chip");
+    if (!chip) return;
+    applyFilterUI(chip.dataset.filter);
+    // re-bake already-picked gallery photos with the newly chosen filter
+    if (state.galleryFiles.length) {
+      const cached = galleryInputFilesCache;
+      if (cached && cached.length) handleGalleryFiles(cached);
+    }
+  });
+
+  document.getElementById("startCapture").addEventListener("click", runCaptureSequence);
+
+  // --- frame step 2: rapi/acak → customize (color + stickers, booth only) ---
+  document.getElementById("boothBackToStyle").addEventListener("click", () => goToBoothStep(1));
+  document.getElementById("boothCustomColor").addEventListener("input", (e) => selectThemeColor(e.target.value));
+  document.getElementById("landingFrameCta").addEventListener("click", () => {
+    if (!state.selectedLayout) state.selectedLayout = LAYOUTS[0].id;
+    syncAllLayoutSelections();
+    // layout + gaya are already both chosen from the landing page, so jump
+    // straight past those two booth steps to the camera
+    goToBoothStep(3);
+  });
+
+  // --- photo source toggle (camera vs gallery) ---
+  document.getElementById("sourceTabs").addEventListener("click", (e) => {
+    const tab = e.target.closest(".source-tab");
+    if (!tab) return;
+    selectPhotoSource(tab.dataset.source);
+  });
+
+  const galleryInput = document.getElementById("galleryInput");
+  document.getElementById("galleryPickBtn").addEventListener("click", () => galleryInput.click());
+  document.getElementById("galleryPickAgainBtn").addEventListener("click", () => galleryInput.click());
+  galleryInput.addEventListener("change", (e) => {
+    galleryInputFilesCache = Array.from(e.target.files);
+    handleGalleryFiles(e.target.files);
+  });
+
+  const dropzone = document.getElementById("galleryDropzone");
+  ["dragenter", "dragover"].forEach((evt) => {
+    dropzone.addEventListener(evt, (e) => { e.preventDefault(); dropzone.classList.add("drag-over"); });
+  });
+  ["dragleave", "drop"].forEach((evt) => {
+    dropzone.addEventListener(evt, (e) => { e.preventDefault(); dropzone.classList.remove("drag-over"); });
+  });
+  dropzone.addEventListener("drop", (e) => {
+    if (!e.dataTransfer || !e.dataTransfer.files.length) return;
+    galleryInputFilesCache = Array.from(e.dataTransfer.files);
+    handleGalleryFiles(e.dataTransfer.files);
+  });
+
+  document.getElementById("galleryUseBtn").addEventListener("click", useGalleryPhotos);
+
+  document.getElementById("downloadBtn").addEventListener("click", downloadResult);
+  document.getElementById("addToAlbumBtn").addEventListener("click", addCurrentStripToAlbum);
+  document.getElementById("albumEmptyCta").addEventListener("click", showBooth);
+  document.getElementById("albumAddMoreBtn").addEventListener("click", showBooth);
+  document.getElementById("openTabFallback").addEventListener("click", (e) => {
+    e.preventDefault();
+    openResultInNewTab();
+  });
+  document.getElementById("retakeBtn").addEventListener("click", () => {
+    // starting a fresh photo session — let them pick layout & rapi/acak
+    // again too, instead of silently reusing whatever was chosen last time
+    state.selectedFrame = null;
+    syncAllLayoutSelections();
+    goToBoothStep(1);
+  });
+  document.getElementById("changeLayoutBtn").addEventListener("click", () => {
+    // only the pose-count layout (2/3/4/6 poses) needs re-picking here —
+    // the rapi/acak style was already chosen earlier and shouldn't be
+    // asked again, so state.selectedFrame stays as "custom".
+    syncAllLayoutSelections();
+    goToBoothStep(1);
+  });
+
+  window.addEventListener("hashchange", applyRoute);
+  applyRoute();
+});
+
+</script>
+</body>
+</html>
